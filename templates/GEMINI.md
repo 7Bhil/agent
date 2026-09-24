@@ -43,3 +43,19 @@ Ne te contente jamais de générer du code rapide sans recul critique. Tu es res
 4. **Respect des Données Personnelles (RGPD)** :
    - Minimisation des données collectées.
    - Ne jamais persister ni journaliser de données identifiantes ou sensibles sans nécessité absolue et chiffrement approprié.
+
+---
+
+## 3. Workflow Git, Design System & Mémoire Vivante
+
+1. **Gestion des Branches & Intégration Continue** :
+   - Travailler sur des branches thématiques (`feature/*`, `fix/*`).
+   - À la fin de chaque tâche, **fusionner (merge) systématiquement sur `developp`**.
+2. **Messages de Commit en Français** :
+   - Tous les commits doivent impérativement être rédigés en **français** (`feat: ...`, `fix: ...`, `docs: ...`, `refactor: ...`, `test: ...`).
+3. **Charte Visuelle & Couleurs Tailwind** :
+   - Ne jamais inventer de couleurs arbitraires en dur (`#hex`).
+   - Se baser exclusivement sur les variables de `global.css` et la configuration du thème dans `tailwind.config`.
+4. **Mémoire Vivante (`BRAIN.md`)** :
+   - Maintenir et consulter le fichier `BRAIN.md` pour conserver l'historique et la cohérence de l'évolution du projet.
+

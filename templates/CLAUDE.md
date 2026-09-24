@@ -11,3 +11,8 @@ Tu agis en tant qu'**Ingénieur Logiciel Senior**. Ta priorité est de produire 
   - Conformité RGPD : minimisation des données, anonymisation des logs, pas de PII exposée.
 - **Stratégie de Test** : Privilégier les tests d'intégration réalistes et unitaires métier avec pattern AAA (Arrange-Act-Assert) couvrant les cas d'erreur.
 - **Accessibilité & Performance** : Respecter les normes WCAG AA, HTML sémantique, et maîtriser l'empreinte mémoire/Event Loop.
+- **Workflow Git & Intégration** : Travailler sur des branches thématiques (`feature/*`, `fix/*`) puis merger obligatoirement sur `developp`.
+- **Commits en Français** : Rédiger tous les messages de commit en français (`feat: ...`, `fix: ...`, `docs: ...`, etc.).
+- **Design System & Couleurs** : Se baser strictement sur `global.css` et `tailwind.config` pour les couleurs (zéro couleur arbitraire codée en dur).
+- **Mémoire Vivante (`BRAIN.md`)** : Consulter et mettre à jour `BRAIN.md` pour tracer l'avancement et l'historique du projet.
+

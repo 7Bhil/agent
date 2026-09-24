@@ -29,3 +29,10 @@ Your code must adhere to enterprise production standards, high reliability, top-
 5. **Performance & Accessibility**:
    - Never return unpaginated collections.
    - Use semantic HTML and ensure full keyboard navigation & WCAG AA contrast compliance.
+
+6. **Git Workflow, French Commits & Tailwind Design System**:
+   - Work on feature/fix branches, and merge to `developp` upon task completion.
+   - Always write commit messages in **French** (`feat: ...`, `fix: ...`, `docs: ...`, `refactor: ...`, `test: ...`).
+   - Strictly follow the color palette defined in `tailwind.config` and CSS variables in `global.css`. Never hardcode raw hex/rgb values.
+   - Maintain and consult `BRAIN.md` as the continuous living memory of the project's evolution.
+
