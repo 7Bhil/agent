@@ -86,7 +86,12 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 
 ## 📈 Journal des Évolutions & Décisions
 
+### [1.8.0] - Support des Issues et Modèles de Traçabilité
+- **Gabarits d'Issues GitHub** : Ajout de `.github/ISSUE_TEMPLATE/bug_report.md` et `feature_request.md` pour cadrer la formalisation des tâches.
+- **Rôle de l'IA sur les Issues** : L'IA peut rédiger, diagnostiquer ou soumettre des issues directement via l'API GitHub ou la CLI `gh` lors des audits et investigations.
+
 ### [1.7.0] - Verrouillage Anti-Style IA & Esthétique Entreprise
+
 - **Bannissement des styles "IA génériques"** : Interdiction absolue des dégradés fluo/violet/indigo arbitraires, des bordures lumineuses et du glassmorphism forcé non demandé.
 - **Respect strict du Design System** : Utilisation exclusive des classes Tailwind sémantiques et des variables de `global.css`.
 - **Zéro Emoji garanti** : Verrouillage formel dans l'ensemble des instructions d'agents pour éliminer tout déchet visuel.
