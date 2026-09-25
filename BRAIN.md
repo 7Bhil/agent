@@ -79,7 +79,13 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 
 ## 📈 Journal des Évolutions & Décisions
 
+### [1.3.0] - Protocole d'Auto-Discipline & Autonomie Totale de l'Agent
+- **Clause de Proactivité Autonome** : L'agent a l'interdiction d'attendre que l'utilisateur lui rappelle les règles. Il doit s'auto-discipliner dès la première seconde.
+- **Règle du Premier Réflexe** : Consultation obligatoire de `BRAIN.md`, diagnostic de la cause racine avant d'écrire du code, zéro dette, commits en français, merge sur `developp` et mise à jour finale de `BRAIN.md` sans intervention de l'utilisateur.
+- **Propagation universelle** : Règle injectée dans `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `.cursorrules` et `copilot-instructions.md`.
+
 ### [1.2.0] - Garde-fous Anti-Hallucination, Refus de Dette Technique & Pipelines CI (GitHub Actions / GitLab CI)
+
 - **Pipelines CI automatiques** :
   - Création de `.github/workflows/ci.yml` (lint, tsc strict, tests unitaires, audit npm, contrôle de présence obligatoire de `BRAIN.md`).
   - Création de `templates/.gitlab-ci.yml` pour les projets hébergés sur GitLab.
