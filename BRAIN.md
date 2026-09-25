@@ -65,6 +65,11 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
   - `rgpd-developer.md` : Privacy by design, minimisation, logs et purge.
 - **Module `checklists/`** : Fiches synthétiques prêtes pour l'auto-revue.
 - **Module `templates/`** : Fichiers modèles d'intégration pour chaque IDE/Agent.
+- **Module `stacks/`** : Règles d'ingénierie ciblées par langage et framework :
+  - `react-nextjs.md` : Server Components, TanStack Query, découpage feature-based.
+  - `nodejs-backend.md` : Architecture en couches, Zod/DTO, gestion des erreurs asynchrones.
+  - `python-fastapi-django.md` : Typage strict mypy, Pydantic, optimisation des requêtes ORM (N+1).
+
 
 ---
 
@@ -79,7 +84,15 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 
 ## 📈 Journal des Évolutions & Décisions
 
+### [1.5.0] - Modules d'Ingénierie par Stack Technique (`stacks/`)
+- **Création du module `stacks/`** : Règles ciblées pour les frameworks majeurs afin d'éviter les idiomes obsolètes :
+  - `stacks/react-nextjs.md` : RSC vs Client components, TanStack Query, découpage feature-based.
+  - `stacks/nodejs-backend.md` : Découplage Controllers/Services/DAL, Graceful shutdown.
+  - `stacks/python-fastapi-django.md` : Typage strict, prévention du N+1 ORM, Pydantic v2.
+- **Principe d'auto-adaptation** : L'agent audite les fichiers de config du projet (`package.json`, `requirements.txt`) et applique spontanément les règles de la stack correspondante.
+
 ### [1.4.0] - Template de Sécurité des Secrets (`.env.example`)
+
 - **Protection des Secrets & Zero Leak** : Ajout du gabarit `templates/.env.example` pour cadrer la configuration d'environnement dès le démarrage d'un projet et empêcher les fuites de secrets dans Git.
 - **Intégration dans `install.sh`** : Déploiement automatique du modèle `.env.example` lors de l'initialisation d'un projet s'il n'existe pas déjà.
 
