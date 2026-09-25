@@ -49,10 +49,17 @@ download_file "checklists/04-conformite-rgpd-et-vie-privee.md" ".agent/checklist
 download_file "checklists/05-tests-et-resilience.md" ".agent/checklists/05-tests.md"
 download_file "checklists/06-performance-et-accessibilite.md" ".agent/checklists/06-performance-a11y.md"
 
+# 7. Intégration Continue (GitHub Actions & GitLab CI)
+download_file ".github/workflows/ci.yml" ".github/workflows/ci.yml"
+download_file "templates/.gitlab-ci.yml" ".gitlab-ci.yml"
+
 echo ""
-echo -e "${GREEN}${BOLD}✅ Terminé avec succès ! Vos assistants sont maintenant configurés en Senior :${RESET}"
+echo -e "${GREEN}${BOLD}✅ Terminé avec succès ! Vos assistants et pipelines CI sont configurés :${RESET}"
 echo -e "   - Google Gemini / Antigravity : ${BOLD}GEMINI.md${RESET}"
 echo -e "   - GitHub Copilot / Codex      : ${BOLD}.github/copilot-instructions.md${RESET}"
 echo -e "   - Agent Universel             : ${BOLD}AGENTS.md${RESET}"
 echo -e "   - Cursor IDE                  : ${BOLD}.cursorrules${RESET}"
 echo -e "   - Claude / Anthropic          : ${BOLD}CLAUDE.md${RESET}"
+echo -e "   - Pipeline GitHub Actions     : ${BOLD}.github/workflows/ci.yml${RESET}"
+echo -e "   - Pipeline GitLab CI          : ${BOLD}.gitlab-ci.yml${RESET}"
+

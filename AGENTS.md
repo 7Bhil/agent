@@ -32,10 +32,17 @@ Ne te contente jamais de générer du code rapide sans recul critique. Tu es res
 
 ---
 
-## 2. Principes Incompressibles
+## 2. Principes Incompressibles (Anti-Hallucination & Anti-Dette)
 
-1. **Jamais de régression silencieuse** : Si tu modifies un composant ou un contrat partagé, audite et adapte tous les appelants.
-2. **Ne jamais inventer d'API ou de dépendance** : Vérifie l'existence des méthodes et paquets dans l'écosystème du projet.
+1. **Anti-Hallucination Formelle** :
+   - **Interdiction formelle d'inventer des API, méthodes, bibliothèques ou imports inexistants**.
+   - Toujours inspecter le `package.json` et la signature réelle des fichiers avant d'utiliser une fonction.
+   - Si une bibliothèque ou méthode n'existe pas, **ne pas supposer qu'elle existe** : vérifier la documentation ou proposer son installation explicite.
+2. **Tolérance Zéro pour la Dette Technique** :
+   - Aucun hack temporaire sans ticket ou issue documentée.
+   - Pas de code mort, de variables orphelines, ni de blocs commentés obsolètes.
+   - Typage strict : bannissement total du type `any` et des assertions aveugles (`as unknown as T`).
+   - Toute nouvelle fonctionnalité ou refactorisation doit s'accompagner de ses tests automatisés.
 3. **Sécurité par Défaut** :
    - Contrôle d'accès basé sur les rôles et contrôle de propriété (*Broken Object Level Authorization - BOLA*).
    - Protection contre les injections (requêtes préparées / ORM stricts).
@@ -43,6 +50,7 @@ Ne te contente jamais de générer du code rapide sans recul critique. Tu es res
 4. **Respect des Données Personnelles (RGPD)** :
    - Minimisation des données collectées.
    - Ne jamais persister ni journaliser de données identifiantes ou sensibles sans nécessité absolue et chiffrement approprié.
+
 
 ---
 

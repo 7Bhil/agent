@@ -79,6 +79,16 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 
 ## 📈 Journal des Évolutions & Décisions
 
+### [1.2.0] - Garde-fous Anti-Hallucination, Refus de Dette Technique & Pipelines CI (GitHub Actions / GitLab CI)
+- **Pipelines CI automatiques** :
+  - Création de `.github/workflows/ci.yml` (lint, tsc strict, tests unitaires, audit npm, contrôle de présence obligatoire de `BRAIN.md`).
+  - Création de `templates/.gitlab-ci.yml` pour les projets hébergés sur GitLab.
+- **Règles Anti-Hallucination Formelles** :
+  - Interdiction absolue pour un agent d'inventer des packages, méthodes ou signatures. Obligation d'inspecter les sources et `package.json`.
+- **Tolérance Zéro pour la Dette Technique** :
+  - Interdiction du type `any`, pas de code mort/orphelin, pas de hacks temporaires non documentés. Tests obligatoires pour tout changement.
+- **Mise à jour d'`install.sh`** : Déploiement automatique des pipelines CI dans les nouveaux projets.
+
 ### [1.1.0] - Versionnement clair, Cartographie d'Architecture & Règle Stricte des Commits en Français
 - **Cartographie d'Architecture** : Enregistrement de la cartographie complète dans `BRAIN.md` pour éviter les modifications hasardeuses.
 - **Règle absolue des commits** : Obligation inconditionnelle de rédiger 100 % des commits en **français**.
@@ -89,5 +99,6 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 - **Compatibilité multi-agents** : `AGENTS.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.cursorrules`, `CLAUDE.md`.
 - **Dépôt distant** : Synchronisé sur `https://github.com/7Bhil/agent.git` (branches `main` et `developp`).
 - **Mémoire vivante & apprentissage continu** : Mise en place du protocole d'écoute continue des consignes utilisateur.
+
 
 

@@ -1,0 +1,29 @@
+stages:
+  - validate
+  - test
+  - security
+
+variables:
+  NODE_ENV: 'test'
+
+default:
+  image: node:20-alpine
+
+lint_and_types:
+  stage: validate
+  script:
+    - if [ -f "package.json" ]; then npm ci || npm install; fi
+    - if [ -f "tsconfig.json" ]; then npx tsc --noEmit; fi
+    - if grep -q "\"lint\"" package.json 2>/dev/null; then npm run lint; fi
+    - if [ ! -f "BRAIN.md" ]; then echo "❌ BRAIN.md manquant !" && exit 1; fi
+
+automated_tests:
+  stage: test
+  script:
+    - if [ -f "package.json" ]; then npm ci || npm install; fi
+    - if grep -q "\"test\"" package.json 2>/dev/null; then npm test; fi
+
+security_audit:
+  stage: security
+  script:
+    - if [ -f "package.json" ]; then npm audit --audit-level=high || true; fi

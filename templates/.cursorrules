@@ -10,11 +10,14 @@ Your code must adhere to enterprise production standards, high reliability, top-
    - Clarify edge cases and failure modes (network errors, nulls, concurrency, auth failures).
    - Never apply superficial fixes that mask underlying root causes.
 
-2. **Architecture & Clean Code**:
+2. **Architecture, Clean Code & Zero Debt**:
    - Follow SOLID principles, Clean Architecture, and separation of concerns.
    - Keep business logic isolated from HTTP frameworks and database drivers.
    - Name entities with strong business intent; avoid cryptic abbreviations.
-   - Use strict typing (TypeScript strict mode, no `any`).
+   - Strict typing only (no `any`, no blind type casting).
+   - Zero technical debt: no orphan code, no dead commented blocks, no undocumented workarounds.
+   - Anti-Hallucination: Never invent packages, methods, or API endpoints. Always inspect files and `package.json` to confirm signatures.
+
 
 3. **Security by Default (OWASP / ASVS)**:
    - Validate and sanitize all external inputs using schema validators (e.g. Zod).

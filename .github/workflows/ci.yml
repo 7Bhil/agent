@@ -1,0 +1,57 @@
+name: CI - Senior Quality & Security Checks
+
+on:
+  push:
+    branches: [main, developp, 'feature/**', 'fix/**']
+  pull_request:
+    branches: [main, developp]
+
+jobs:
+  validate-and-test:
+    name: Lint, Test, Security & Integrity Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Récupération du dépôt
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Configuration de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: ${{ hashFiles('package-lock.json') != '' && 'npm' || '' }}
+
+      - name: 📦 Installation des dépendances (si applicable)
+        run: |
+          if [ -f "package.json" ]; then
+            npm ci || npm install
+          fi
+
+      - name: 🔍 Vérification du Typage Strict & Linting
+        run: |
+          if [ -f "tsconfig.json" ]; then
+            npx tsc --noEmit
+          fi
+          if grep -q "\"lint\"" package.json 2>/dev/null; then
+            npm run lint
+          fi
+
+      - name: 🧪 Exécution des Tests Automatisés
+        run: |
+          if grep -q "\"test\"" package.json 2>/dev/null; then
+            npm test -- --coverage
+          fi
+
+      - name: 🛡️ Audit de Sécurité des Dépendances
+        run: |
+          if [ -f "package.json" ]; then
+            npm audit --audit-level=high || true
+          fi
+
+      - name: 🧠 Vérification de la présence de la Mémoire Vivante (BRAIN.md)
+        run: |
+          if [ ! -f "BRAIN.md" ]; then
+            echo "❌ ERREUR: Le fichier BRAIN.md est manquant à la racine du projet."
+            exit 1
+          fi
+          echo "✅ BRAIN.md présent et conforme."
