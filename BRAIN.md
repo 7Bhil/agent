@@ -79,7 +79,12 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 
 ## 📈 Journal des Évolutions & Décisions
 
+### [1.4.0] - Template de Sécurité des Secrets (`.env.example`)
+- **Protection des Secrets & Zero Leak** : Ajout du gabarit `templates/.env.example` pour cadrer la configuration d'environnement dès le démarrage d'un projet et empêcher les fuites de secrets dans Git.
+- **Intégration dans `install.sh`** : Déploiement automatique du modèle `.env.example` lors de l'initialisation d'un projet s'il n'existe pas déjà.
+
 ### [1.3.0] - Protocole d'Auto-Discipline & Autonomie Totale de l'Agent
+
 - **Clause de Proactivité Autonome** : L'agent a l'interdiction d'attendre que l'utilisateur lui rappelle les règles. Il doit s'auto-discipliner dès la première seconde.
 - **Règle du Premier Réflexe** : Consultation obligatoire de `BRAIN.md`, diagnostic de la cause racine avant d'écrire du code, zéro dette, commits en français, merge sur `developp` et mise à jour finale de `BRAIN.md` sans intervention de l'utilisateur.
 - **Propagation universelle** : Règle injectée dans `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `.cursorrules` et `copilot-instructions.md`.

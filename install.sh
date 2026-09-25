@@ -53,6 +53,11 @@ download_file "checklists/06-performance-et-accessibilite.md" ".agent/checklists
 download_file ".github/workflows/ci.yml" ".github/workflows/ci.yml"
 download_file "templates/.gitlab-ci.yml" ".gitlab-ci.yml"
 
+# 8. Template de Sécurité des Variables d'Environnement
+if [ ! -f ".env.example" ]; then
+  download_file "templates/.env.example" ".env.example"
+fi
+
 echo ""
 echo -e "${GREEN}${BOLD}✅ Terminé avec succès ! Vos assistants et pipelines CI sont configurés :${RESET}"
 echo -e "   - Google Gemini / Antigravity : ${BOLD}GEMINI.md${RESET}"
@@ -62,4 +67,6 @@ echo -e "   - Cursor IDE                  : ${BOLD}.cursorrules${RESET}"
 echo -e "   - Claude / Anthropic          : ${BOLD}CLAUDE.md${RESET}"
 echo -e "   - Pipeline GitHub Actions     : ${BOLD}.github/workflows/ci.yml${RESET}"
 echo -e "   - Pipeline GitLab CI          : ${BOLD}.gitlab-ci.yml${RESET}"
+echo -e "   - Template Secrets            : ${BOLD}.env.example${RESET}"
+
 
