@@ -35,6 +35,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 
 *Cette section est alimentée en continu par l'agent au fil des échanges. Tout retour critique, choix imposé, habitude ou consigne formulée par l'utilisateur doit être consigné ici pour être respecté dans toutes les sessions suivantes.*
 
+- **Utilisateur & Contexte** : Développeur principal : Jolidon Houngue.
 - **Légèreté & Portabilité** : L'utilisateur veut un kit très léger (< 150 Ko), facilement intégrable dans tout nouveau projet sans alourdir le repo (ignorer les dossiers volumineux bruts).
 - **Architecture Git** :
   - Un socle propre publié sur `main`.
@@ -45,6 +46,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 - **Interdiction Stricte des Emojis** : Zéro emoji dans le code, les commentaires, les messages de commit, la documentation et les réponses. Privilégier un ton professionnel, sobre et épuré.
 - **Support Multi-Assistants** : Prise en charge native de Google Gemini (`GEMINI.md`), GitHub Copilot / OpenAI Codex (`.github/copilot-instructions.md`), Cursor (`.cursorrules`), Claude (`CLAUDE.md`) et agents autonomes (`AGENTS.md`).
 - **Protocole Mémoire Vivante** : L'agent doit écouter attentivement l'utilisateur et actualiser immédiatement ce fichier `BRAIN.md` dès qu'une information structurante ou un arbitrage est formulé.
+
 
 ---
 
