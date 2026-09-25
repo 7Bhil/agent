@@ -86,7 +86,14 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 
 ## Journal des Évolutions & Décisions
 
+### [2.0.0] - Publication Majeure du Senior Agent Core & Clôture de la Roadmap
+- **Achèvement intégral des 7 étapes de la Roadmap** : Tous les livrables d'ingénierie senior sont produits, testés et vérifiés.
+- **Documentation et commande d'installation** : `README.md` et `install.sh` finalisés pour permettre un déploiement universel depuis la branche stable `main`.
+- **Zéro émoji et esthétique sobre validés** : Vérification binaire automatisée de pureté textuelle.
+- **Fusion et synchronisation** : Intégration globale de `developp` vers `main`.
+
 ### [1.9.0] - Purge et Éradication Totale des Émojis
+
 - **Assainissement complet du dépôt** : Suppression de chaque émoji présent dans les fichiers Markdown, scripts bash, configurations CI et templates.
 - **Vérification binaire automatisée** : Exécution d'un script de scan Unicode validant zéro émoji détecté sur l'intégralité du projet.
 

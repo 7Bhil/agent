@@ -16,7 +16,7 @@ echo -e "${BLUE}${BOLD}=====================================================${RE
 echo -e "${BLUE}${BOLD}    Installation du Senior Agent Core             ${RESET}"
 echo -e "${BLUE}${BOLD}=====================================================${RESET}"
 
-REPO_RAW_URL="https://raw.githubusercontent.com/7Bhil/agent/developp"
+REPO_RAW_URL="https://raw.githubusercontent.com/7Bhil/agent/main"
 
 download_file() {
   local source_path="$1"

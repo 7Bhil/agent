@@ -15,26 +15,46 @@ Ce kit synthétise l'essentiel des meilleures références mondiales en ingénie
 
 ---
 
-## Utilisation Rapide dans Vos Projets
+## Installation Ultra-Rapide en 1 Commande
 
-Pour équiper un projet d'un agent senior, copiez simplement l'un des fichiers suivants à la racine de votre projet :
+Dans n'importe quel nouveau projet, ouvrez votre terminal a la racine et lancez :
 
-1. **Pour tout agent IA universel** : Copiez [`AGENTS.md`](./AGENTS.md)
-2. **Pour Cursor** : Copiez [`templates/.cursorrules`](./templates/.cursorrules) sous `.cursorrules`
-3. **Pour Claude / Anthropic** : Copiez [`templates/CLAUDE.md`](./templates/CLAUDE.md)
+```bash
+curl -sSL https://raw.githubusercontent.com/7Bhil/agent/main/install.sh | bash
+```
+
+Le script installe automatiquement en moins d'une seconde :
+- `AGENTS.md` (Agent Universel / Windsurf / Cline / Aider)
+- `GEMINI.md` (Google Gemini / Antigravity)
+- `.github/copilot-instructions.md` (GitHub Copilot / OpenAI Codex)
+- `.cursorrules` (Cursor IDE)
+- `CLAUDE.md` (Anthropic Claude)
+- `.agent/checklists/` (Architecture, Clean Code, Securite, RGPD, Tests, Performance/a11y)
+- `.github/workflows/ci.yml` (Pipeline CI de tests et verification d'integrite)
+- `.env.example` (Gabarit securise des variables d'environnement)
 
 ---
 
-## Le Cœur : Les 4 Piliers Senior
+## Le Cœur : Les 4 Piliers Senior Autonomes
 
-1. **Investigation d'abord** : Identifier la cause racine avant d'écrire la moindre ligne de code. Zéro régression.
-2. **Clean Architecture & SOLID** : Séparation stricte domaine / transport / persistance.
-3. **Sécurité par Défaut** : Protection BOLA/IDOR systématique, validation Zod, zéro secret dans les logs.
-4. **Tests Comportementaux** : Pattern Arrange-Act-Assert, priorité aux tests d'intégration et tests aux limites.
+1. **Investigation d'abord** : Identifier la cause racine avant d'ecrire la moindre ligne de code. Zero regression.
+2. **Clean Architecture & SOLID** : Separation stricte domaine / transport / persistance.
+3. **Securite par Defaut** : Protection BOLA/IDOR systematique, validation Zod stricte, zero secret dans les logs.
+4. **Tests Comportementaux** : Pattern Arrange-Act-Assert, priorite aux tests d'integration et tests aux limites.
+
+---
+
+## Directives et Rigueur Non Negociables
+
+- **Memoire Vivante (`BRAIN.md`)** : L'agent ecoute et enregistre en continu vos directives, l'architecture et l'avancement.
+- **Workflow Git & Commits** : Branches thematiques (`feature/*`, `fix/*`), merge final systematique sur `developp`, et **100 % des messages de commit en francais**.
+- **Design System & Anti-Style IA** : Zero degrade fluo violet/indigo arbitraire. Couleurs pilotees strictement par `tailwind.config` et `global.css`.
+- **Zero Emoji Garanti** : Bannissement absolu de tout emoji dans le code, les commentaires, les commits et la documentation.
 
 ---
 
 ## Branches Git
 
-- `main` : Socle stable et léger prêt à l'emploi.
-- `developp` : Enrichissement progressif des modules et synthèses détaillées.
+- `main` : Version stable, legere et production-ready avec le script d'installation en 1 ligne.
+- `developp` : Branche d'integration active pour tous les developpements.
+
