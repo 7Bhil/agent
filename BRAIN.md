@@ -47,16 +47,47 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 
 ---
 
+## 🏛️ Cartographie d'Architecture & Périmètres Modulaires
+
+*Cette cartographie est maintenue à jour à chaque modification architecturale pour éviter de modifier du code à l'aveugle ou d'introduire des effets de bord.*
+
+- **Racine du projet** :
+  - `README.md` : Présentation synthétique du projet.
+  - `BRAIN.md` : Mémoire vivante, architecture, directives et journal d'évolution.
+  - `AGENTS.md` / `GEMINI.md` / `CLAUDE.md` / `.cursorrules` / `.github/copilot-instructions.md` : Contrats d'instructions pour les différents agents IA.
+  - `install.sh` : Script d'installation autonome et portable en 1 commande.
+- **Module `guides/`** :
+  - `security-handbook.md` : Défense OWASP Top 10, ASVS, anti-BOLA/IDOR, injections et SSRF.
+  - `clean-code-node.md` : Gestion typée des erreurs, SOLID, cycle de vie du process Node.
+  - `architecture-and-design.md` : Modularité feature-based, clés d'idempotence, caching Redis.
+  - `testing-strategy.md` : Pyramide de tests, pattern AAA, boîte noire.
+  - `performance-a11y.md` : Web Vitals, HTML sémantique, WCAG 2.2 AA.
+  - `rgpd-developer.md` : Privacy by design, minimisation, logs et purge.
+- **Module `checklists/`** : Fiches synthétiques prêtes pour l'auto-revue.
+- **Module `templates/`** : Fichiers modèles d'intégration pour chaque IDE/Agent.
+
+---
+
+## 🏷️ Méthodologie de Versionnement (SemVer)
+
+Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)** :
+- **MAJOR (`X.0.0`)** : Rupture de compatibilité ou refonte majeure d'architecture.
+- **MINOR (`0.X.0`)** : Ajout d'une nouvelle fonctionnalité rétrocompatible (nouveau guide, nouveau template d'agent).
+- **PATCH (`0.0.X`)** : Correction de bug, mise à jour de documentation ou ajustement mineur de configuration.
+
+---
+
 ## 📈 Journal des Évolutions & Décisions
 
-### Session 1 - Initialisation du Framework Senior
+### [1.1.0] - Versionnement clair, Cartographie d'Architecture & Règle Stricte des Commits en Français
+- **Cartographie d'Architecture** : Enregistrement de la cartographie complète dans `BRAIN.md` pour éviter les modifications hasardeuses.
+- **Règle absolue des commits** : Obligation inconditionnelle de rédiger 100 % des commits en **français**.
+- **Méthodologie SemVer** : Formalisation du versionnement pour chaque étape du travail.
+
+### [1.0.0] - Initialisation du Framework Senior
 - **Structure créée** : Modèle ultra-léger (< 100 Ko) avec guides spécifiques, checklists, templates multi-agents et script `install.sh`.
-- **Compatibilité multi-agents** :
-  - `AGENTS.md` (Universel / Windsurf / Cline)
-  - `GEMINI.md` (Google Gemini / Antigravity)
-  - `.github/copilot-instructions.md` (GitHub Copilot / OpenAI Codex)
-  - `.cursorrules` (Cursor IDE)
-  - `CLAUDE.md` (Anthropic Claude)
+- **Compatibilité multi-agents** : `AGENTS.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.cursorrules`, `CLAUDE.md`.
 - **Dépôt distant** : Synchronisé sur `https://github.com/7Bhil/agent.git` (branches `main` et `developp`).
-- **Ajout de la mémoire vivante & apprentissage continu** : Création du présent fichier `BRAIN.md` avec écoute active des consignes utilisateur.
+- **Mémoire vivante & apprentissage continu** : Mise en place du protocole d'écoute continue des consignes utilisateur.
+
 
