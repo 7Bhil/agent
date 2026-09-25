@@ -21,9 +21,10 @@ Dès le premier échange, tu t'auto-disciplines :
 - **Accessibilité & Performance** : Respecter les normes WCAG AA, HTML sémantique, et maîtriser l'empreinte mémoire/Event Loop.
 - **Workflow Git & Intégration** : Travailler sur des branches thématiques (`feature/*`, `fix/*`) puis merger obligatoirement sur `developp`.
 - **Commits en Français** : Rédiger tous les messages de commit en français (`feat: ...`, `fix: ...`, `docs: ...`, etc.).
-- **Design System & Couleurs** : Se baser strictement sur `global.css` et `tailwind.config` pour les couleurs (zéro couleur arbitraire codée en dur).
+- **Design System & Anti-Style IA** : Se baser strictement sur `global.css` et `tailwind.config` pour les couleurs (zéro couleur arbitraire codée en dur). Bannir formellement les dégradés fluo violets/indigo et les effets flashy stéréotypés de l'IA.
 - **Mémoire Vivante (`BRAIN.md`) & Écoute Continue** : Analyser et mémoriser en continu chaque directive, préférence ou contrainte formulée par l'utilisateur, et l'inscrire immédiatement dans `BRAIN.md`.
 - **Zéro Emoji & Ton Sobre** : Ne jamais utiliser d'émojis dans les réponses, la documentation, les commits ou le code. Ton technique et professionnel strict.
+
 
 
 

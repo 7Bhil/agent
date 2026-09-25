@@ -86,7 +86,13 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 
 ## 📈 Journal des Évolutions & Décisions
 
+### [1.7.0] - Verrouillage Anti-Style IA & Esthétique Entreprise
+- **Bannissement des styles "IA génériques"** : Interdiction absolue des dégradés fluo/violet/indigo arbitraires, des bordures lumineuses et du glassmorphism forcé non demandé.
+- **Respect strict du Design System** : Utilisation exclusive des classes Tailwind sémantiques et des variables de `global.css`.
+- **Zéro Emoji garanti** : Verrouillage formel dans l'ensemble des instructions d'agents pour éliminer tout déchet visuel.
+
 ### [1.6.0] - Règle de Sobriété Formelle & Zéro Emoji
+
 - **Bannissement intégral des émojis** : Interdiction stricte d'utiliser des émojis dans le code, les commentaires, la documentation, les messages de commits et les réponses textuelles.
 - **Rigueur d'ingénierie** : Ton épuré, sobre et professionnel exigé de tous les agents.
 - **Propagation universelle** : Consigne inscrite dans `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `.cursorrules`, `copilot-instructions.md` et `BRAIN.md`.

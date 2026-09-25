@@ -67,15 +67,17 @@ Tu ne dois **JAMAIS** attendre que l'utilisateur te rappelle tes devoirs de mét
    - À la fin de chaque tâche, **fusionner (merge) systématiquement sur `developp`**.
 2. **Messages de Commit en Français** :
    - Tous les commits doivent impérativement être rédigés en **français** (`feat: ...`, `fix: ...`, `docs: ...`, `refactor: ...`, `test: ...`).
-3. **Charte Visuelle & Couleurs Tailwind** :
+3. **Charte Visuelle, Couleurs Tailwind & Anti-Style IA** :
+   - Interdiction des dégradés flashy violets/indigo stéréotypés de l'IA et des effets glassmorphism fluo.
    - Ne jamais inventer de couleurs arbitraires en dur (`#hex`).
    - Se baser exclusivement sur les variables de `global.css` et la configuration du thème dans `tailwind.config`.
 4. **Mémoire Vivante (`BRAIN.md`) & Écoute Continue** :
    - L'agent analyse en continu tout ce que l'utilisateur exprime (habitudes, contraintes, arbitrages, refus).
    - Enregistrer systématiquement ces informations dans `BRAIN.md` pour en faire une règle persistante.
    - Consulter `BRAIN.md` au début de chaque intervention.
-5. **Zéro Emoji & Rigueur Textuelle** :
-   - Aucun émoji dans le code, les commentaires, la documentation, les commits ou les réponses. Rigueur technique et ton neutre obligatoires.
+5. **Zéro Emoji & Rigueur Textuelle Absolue** :
+   - Aucun émoji dans le code (variables, logs), commentaires, documentation, commits ou réponses textuelles.
+
 
 
 

@@ -70,16 +70,19 @@ Tu ne dois **JAMAIS** attendre que l'utilisateur te rappelle tes devoirs de mét
    - À la fin de chaque tâche ou fonctionnalité, **toujours fusionner (merge) sur la branche `developp`**.
 2. **Messages de Commit en Français** :
    - Rédiger systématiquement les commits en **français** avec conventions claires (`feat: ...`, `fix: ...`, `docs: ...`, `refactor: ...`, `test: ...`).
-3. **Charte Visuelle, Couleurs & Design System** :
+3. **Charte Visuelle, Couleurs & Design System (Anti-Style IA)** :
+   - **Interdiction formelle des styles "IA génériques"** : Pas de dégradés fluo/violet/indigo arbitraires, pas d'effets de cartes en glassmorphism néon non demandés.
    - Interdiction d'ajouter des couleurs arbitraires en dur (`#hex`, `rgb`) dans les composants.
    - Toujours se référer et réutiliser scrupuleusement la palette de couleurs configurée dans `tailwind.config.js` / `tailwind.config.ts` et les variables CSS de `global.css` (ou `globals.css`).
+   - Concevoir des interfaces sobres, épurées et professionnelles répondant aux exigences des logiciels d'entreprise.
 4. **Fichier Mémoire Vivante (`BRAIN.md`) & Écoute Continue** :
    - L'agent doit **analyser en continu** les retours, préférences, choix techniques et corrections exprimés par l'utilisateur au cours du travail.
    - Dès qu'une information structurante est donnée, l'agent doit **immédiatement l'enregistrer dans `BRAIN.md`** afin de ne jamais l'oublier d'une session à l'autre.
    - Consulter systématiquement `BRAIN.md` avant toute tâche pour respecter l'historique et les directives utilisateur.
-5. **Sobriété Formelle & Zéro Emoji** :
-   - Interdiction formelle d'inclure des émojis dans le code, les commentaires, les messages de commit, la documentation ou les réponses textuelles.
+5. **Sobriété Formelle & Zéro Emoji (Zéro Déchet Visuel)** :
+   - **Bannissement intégral et absolu des émojis** : Zéro emoji dans le code (noms de variables, constantes, logs), zéro dans les commentaires, zéro dans les messages de commit, zéro dans la documentation Markdown et zéro dans les réponses conversationnelles.
    - Maintenir un ton d'ingénierie sobre, net et professionnel.
+
 
 
 
