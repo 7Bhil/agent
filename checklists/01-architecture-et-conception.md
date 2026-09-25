@@ -6,7 +6,7 @@ Cette checklist permet de s'assurer que chaque décision de conception respecte 
 
 ---
 
-## 🏗️ 1. Découpage et Séparation des Responsabilités (SoC)
+## 1. Découpage et Séparation des Responsabilités (SoC)
 
 - [ ] **Couche Métier / Domaine isolée** :
   - La logique métier centrale ne dépend ni du framework web (Express, Fastify, Next.js), ni du système de persistance (Prisma, TypeORM, Mongoose).
@@ -20,7 +20,7 @@ Cette checklist permet de s'assurer que chaque décision de conception respecte 
 
 ---
 
-## 🔄 2. Inversion de Dépendances & Découplage
+## 2. Inversion de Dépendances & Découplage
 
 - [ ] **Dépendre des abstractions, pas des concrétions** :
   - Les services externes (passerelles de paiement, envoi d'emails, stockage S3) sont encapsulés derrière des interfaces/ports.
@@ -31,7 +31,7 @@ Cette checklist permet de s'assurer que chaque décision de conception respecte 
 
 ---
 
-## 🛡️ 3. Résilience et Tolérance aux Pannes (System Design)
+## 3. Résilience et Tolérance aux Pannes (System Design)
 
 - [ ] **Idempotence des opérations critiques** :
   - Les opérations d'écriture/modification (notamment paiements, commandes) supportent les réessais grâce à une clé d'idempotence (`Idempotency-Key`).

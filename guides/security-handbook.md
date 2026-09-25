@@ -1,4 +1,4 @@
-# 🛡️ Guide de Sécurité Offensive & Défensive pour Agents
+# Guide de Sécurité Offensive & Défensive pour Agents
 
 > **Sources de référence condensées** : `references/Top10`, `references/API-Security`, `references/ASVS`, `references/CheatSheetSeries`.
 
@@ -8,12 +8,12 @@ Ce guide regroupe les règles non négociables qu'un agent senior doit appliquer
 
 ## 1. Top Vulnérabilités & Patrons de Défense (Do & Don't)
 
-### 🚨 API1:2023 / A01:2021 - BOLA / IDOR (Broken Object Level Authorization)
+### API1:2023 / A01:2021 - BOLA / IDOR (Broken Object Level Authorization)
 L'attaquant manipule l'ID d'un objet dans une requête (`/api/invoices/1042`) pour accéder aux données d'un tiers.
 
 * **DON'T (Vulnérable)** :
 ```typescript
-// ❌ FAUX : Vérifie que l'utilisateur est connecté, mais pas propriétaire de la facture !
+//  FAUX : Vérifie que l'utilisateur est connecté, mais pas propriétaire de la facture !
 app.get('/api/invoices/:id', authenticateToken, async (req, res) => {
   const invoice = await prisma.invoice.findUnique({ where: { id: req.params.id } });
   if (!invoice) return res.status(404).json({ error: 'Not found' });
@@ -23,7 +23,7 @@ app.get('/api/invoices/:id', authenticateToken, async (req, res) => {
 
 * **DO (Sécurisé - Scoping obligatoire)** :
 ```typescript
-// ✅ VRAI : L'accès est restreint par l'organisation ou l'identifiant du token authentifié
+//  VRAI : L'accès est restreint par l'organisation ou l'identifiant du token authentifié
 app.get('/api/invoices/:id', authenticateToken, async (req, res) => {
   const invoice = await prisma.invoice.findFirst({
     where: {
@@ -38,35 +38,35 @@ app.get('/api/invoices/:id', authenticateToken, async (req, res) => {
 
 ---
 
-### 🚨 A03:2021 - Injection (SQL, NoSQL, Commande OS)
+### A03:2021 - Injection (SQL, NoSQL, Commande OS)
 Concaténer ou interpoler des variables non fiables dans une requête ou une commande système.
 
 * **DON'T (Vulnérable)** :
 ```typescript
-// ❌ FAUX : Injection SQL triviale
+//  FAUX : Injection SQL triviale
 const users = await db.query(`SELECT * FROM users WHERE email = '${req.body.email}'`);
 
-// ❌ FAUX : Exécution shell avec entrée non assainie
+//  FAUX : Exécution shell avec entrée non assainie
 exec(`convert ${req.body.filename} output.png`);
 ```
 
 * **DO (Sécurisé - Paramétrage strict & APIs sans shell)** :
 ```typescript
-// ✅ VRAI : Requête paramétrée préparée
+//  VRAI : Requête paramétrée préparée
 const users = await db.query('SELECT * FROM users WHERE email = $1', [req.body.email]);
 
-// ✅ VRAI : Pas de sous-shell bash, passage d'arguments isolés
+//  VRAI : Pas de sous-shell bash, passage d'arguments isolés
 execFile('convert', [validatedFilename, 'output.png']);
 ```
 
 ---
 
-### 🚨 API3:2023 - Broken Object Property Level Authorization (Mass Assignment)
+### API3:2023 - Broken Object Property Level Authorization (Mass Assignment)
 Permettre à un client de modifier des champs internes sensibles (`isAdmin`, `role`, `balance`, `verified`).
 
 * **DON'T (Vulnérable)** :
 ```typescript
-// ❌ FAUX : Injection directe du body sans whitelist
+//  FAUX : Injection directe du body sans whitelist
 await prisma.user.update({
   where: { id: req.user.id },
   data: req.body, // L'attaquant injecte { role: 'ADMIN' }
@@ -75,7 +75,7 @@ await prisma.user.update({
 
 * **DO (Sécurisé - Validation stricte par schéma DTO)** :
 ```typescript
-// ✅ VRAI : Seuls les champs explicitement autorisés sont extraits
+//  VRAI : Seuls les champs explicitement autorisés sont extraits
 const UpdateProfileSchema = z.object({
   displayName: z.string().trim().min(2).max(50),
   bio: z.string().max(280).optional(),
@@ -90,12 +90,12 @@ await prisma.user.update({
 
 ---
 
-### 🚨 A10:2021 / API7:2023 - SSRF (Server-Side Request Forgery)
+### A10:2021 / API7:2023 - SSRF (Server-Side Request Forgery)
 Le serveur effectue un appel HTTP vers une URL fournie par l'utilisateur sans validation d'IP interne (accès possible aux métadonnées cloud `169.254.169.254` ou réseaux internes `10.0.0.0/8`, `127.0.0.1`).
 
 * **DO (Sécurisé)** :
 ```typescript
-// ✅ VRAI : Valider le protocole et bannir les plages IP privées/locales
+//  VRAI : Valider le protocole et bannir les plages IP privées/locales
 import ipaddr from 'ipaddr.js';
 import dns from 'node:dns/promises';
 

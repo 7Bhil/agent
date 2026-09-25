@@ -15,7 +15,7 @@ Ce kit synthétise l'essentiel des meilleures références mondiales en ingénie
 
 ---
 
-## 🚀 Utilisation Rapide dans Vos Projets
+## Utilisation Rapide dans Vos Projets
 
 Pour équiper un projet d'un agent senior, copiez simplement l'un des fichiers suivants à la racine de votre projet :
 
@@ -25,7 +25,7 @@ Pour équiper un projet d'un agent senior, copiez simplement l'un des fichiers s
 
 ---
 
-## 🧭 Le Cœur : Les 4 Piliers Senior
+## Le Cœur : Les 4 Piliers Senior
 
 1. **Investigation d'abord** : Identifier la cause racine avant d'écrire la moindre ligne de code. Zéro régression.
 2. **Clean Architecture & SOLID** : Séparation stricte domaine / transport / persistance.
@@ -34,7 +34,7 @@ Pour équiper un projet d'un agent senior, copiez simplement l'un des fichiers s
 
 ---
 
-## 🌿 Branches Git
+## Branches Git
 
 - `main` : Socle stable et léger prêt à l'emploi.
 - `developp` : Enrichissement progressif des modules et synthèses détaillées.

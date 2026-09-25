@@ -4,7 +4,7 @@
 
 ---
 
-## ⚡ 1. Performance Web & Core Web Vitals
+## 1. Performance Web & Core Web Vitals
 
 - [ ] **LCP (Largest Contentful Paint)** :
   - Préchargement des ressources critiques (`rel="preload"` sur polices critiques ou hero image).
@@ -19,7 +19,7 @@
 
 ---
 
-## ♿ 2. Accessibilité Numérique (WCAG 2.2 & ARIA)
+## 2. Accessibilité Numérique (WCAG 2.2 & ARIA)
 
 - [ ] **HTML Sémantique d'abord** :
   - Préférer systématiquement les éléments natifs (`<button>`, `<dialog>`, `<nav>`, `<main>`, `<article>`) plutôt que des `<div>` ou `<span>` avec des listeners `onClick`.

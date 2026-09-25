@@ -1,4 +1,4 @@
-# ⚡ Guide Performance Web & Accessibilité Numérique (a11y)
+# Guide Performance Web & Accessibilité Numérique (a11y)
 
 > **Sources de référence condensées** : `references/Front-End-Performance-Checklist`, `references/wcag`, `references/aria`.
 
@@ -20,16 +20,16 @@
 ## 2. Accessibilité Numérique (WCAG 2.2 AA & WAI-ARIA)
 
 ### 2.1 HTML Sémantique : Le Premier Principe de l'Accessibilité
-- ❌ Pas de `<div onClick={handleClick}>` : Ne supporte ni le focus clavier natif, ni la vocalisation écran, ni la touche `Enter`/`Espace`.
-- ✅ Toujours utiliser un vrai élément `<button type="button">`.
+-  Pas de `<div onClick={handleClick}>` : Ne supporte ni le focus clavier natif, ni la vocalisation écran, ni la touche `Enter`/`Espace`.
+-  Toujours utiliser un vrai élément `<button type="button">`.
 
 ### 2.2 Navigation Clavier & Visibilité du Focus
 - **Ne jamais supprimer le contour de focus sans alternative visible** :
 ```css
-/* ❌ INTERDIT */
+/*  INTERDIT */
 *:focus { outline: none; }
 
-/* ✅ AUTORISÉ : Focus ring visible et contrasté */
+/*  AUTORISÉ : Focus ring visible et contrasté */
 *:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;

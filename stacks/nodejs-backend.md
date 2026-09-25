@@ -1,4 +1,4 @@
-# 🟩 Règles Senior : Node.js, Express & NestJS Backend
+# Règles Senior : Node.js, Express & NestJS Backend
 
 > **Sources de référence** : `references/nodebestpractices`, `references/API-Security`, `references/ASVS`.
 

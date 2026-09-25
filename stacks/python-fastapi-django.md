@@ -1,4 +1,4 @@
-# 🐍 Règles Senior : Python, FastAPI & Django
+# Règles Senior : Python, FastAPI & Django
 
 ---
 

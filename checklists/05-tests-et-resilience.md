@@ -4,7 +4,7 @@
 
 ---
 
-## 📐 1. Pyramide des Tests & Choix Stratégique
+## 1. Pyramide des Tests & Choix Stratégique
 
 - [ ] **Tests Unitaires ciblés sur le domaine métier pur** :
   - Rapides, isolés, sans I/O ni réseau.
@@ -17,7 +17,7 @@
 
 ---
 
-## 🎯 2. Anatomie d'un Bon Test (Pattern AAA)
+## 2. Anatomie d'un Bon Test (Pattern AAA)
 
 - [ ] **Arrange - Act - Assert clair** :
   - **Arrange** : Préparer les données de test minimales nécessaires.
@@ -31,7 +31,7 @@
 
 ---
 
-## 🛡️ 3. Maintenabilité des Tests
+## 3. Maintenabilité des Tests
 
 - [ ] **Tests boîtes noires (Black-box testing)** :
   - Tester le comportement public et le résultat final, jamais les méthodes privées ou variables internes.

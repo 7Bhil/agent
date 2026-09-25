@@ -1,4 +1,4 @@
-# ⚛️ Règles Senior : React, Next.js (App Router) & TypeScript
+# Règles Senior : React, Next.js (App Router) & TypeScript
 
 > **Sources de référence** : `references/bulletproof-react`, `references/clean-code-javascript`.
 

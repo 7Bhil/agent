@@ -1,4 +1,4 @@
-# 🧼 Guide Clean Code & Production Node.js
+# Guide Clean Code & Production Node.js
 
 > **Sources de référence condensées** : `references/clean-code-javascript`, `references/nodebestpractices`, `references/javascript`.
 
@@ -12,7 +12,7 @@ Ce guide condense les règles fondamentales pour garantir un code propre, lisibl
 *Ne jamais renvoyer ou throw de simples chaînes ou objets anonymes.*
 
 ```typescript
-// ✅ VRAI : Hiérarchie d'erreurs applicatives
+//  VRAI : Hiérarchie d'erreurs applicatives
 export class AppError extends Error {
   constructor(
     public readonly message: string,
@@ -65,7 +65,7 @@ process.on('uncaughtException', (error: Error) => {
 *Une fonction ou classe ne doit avoir qu'une seule raison de changer.*
 
 ```typescript
-// ❌ FAUX : La fonction fait de la validation, de la persistance, et de l'envoi d'email
+//  FAUX : La fonction fait de la validation, de la persistance, et de l'envoi d'email
 async function registerUser(data: any) {
   if (!data.email.includes('@')) throw new Error('Invalid');
   const user = await db.user.create({ data });
@@ -73,7 +73,7 @@ async function registerUser(data: any) {
   return user;
 }
 
-// ✅ VRAI : Séparation en cas d'usage orchestrant des dépendances injectées
+//  VRAI : Séparation en cas d'usage orchestrant des dépendances injectées
 export class RegisterUserUseCase {
   constructor(
     private readonly userRepository: UserRepository,
@@ -93,13 +93,13 @@ export class RegisterUserUseCase {
 ### 2.2 Préférer les fonctions pures et l'immutabilité
 Éviter d'altérer les tableaux et objets passés en arguments.
 ```typescript
-// ❌ FAUX : Mutation de l'argument d'origine
+//  FAUX : Mutation de l'argument d'origine
 function applyDiscount(cart: Cart, discount: number) {
   cart.items.forEach(item => { item.price -= discount; });
   return cart;
 }
 
-// ✅ VRAI : Nouvelle instance retournée sans effet de bord
+//  VRAI : Nouvelle instance retournée sans effet de bord
 function applyDiscount(cart: Cart, discount: number): Cart {
   return {
     ...cart,

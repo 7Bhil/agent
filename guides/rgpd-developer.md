@@ -1,4 +1,4 @@
-# 🔒 Guide RGPD & Protection des Données Personnelles pour Développeurs
+# Guide RGPD & Protection des Données Personnelles pour Développeurs
 
 > **Sources de référence condensées** : `Guide-RGPD-du-developpeur`, `references/Guide-RGPD-du-developpeur`.
 
@@ -23,7 +23,7 @@ Interdiction absolue de traiter sans consentement explicite et mesures de chiffr
 Ne **jamais** inscrire de Données à Caractère Personnel (PII) en clair dans les logs serveurs ou fichiers d'erreurs.
 
 ```typescript
-// ✅ VRAI : Configuration d'un logger (Pino / Winston) avec masquage automatique
+//  VRAI : Configuration d'un logger (Pino / Winston) avec masquage automatique
 import pino from 'pino';
 
 export const logger = pino({

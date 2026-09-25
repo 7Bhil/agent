@@ -1,4 +1,4 @@
-# 🏛️ Guide d'Architecture Système & Scalabilité
+# Guide d'Architecture Système & Scalabilité
 
 > **Sources de référence condensées** : `references/system-design-primer`, `references/bulletproof-react`.
 
@@ -28,10 +28,10 @@ src/
 ### Règle d'or de dépendance
 Les modules internes d'une *feature* ne doivent jamais importer directement les entrailles privées d'une autre *feature*. Tout import inter-modules passe impérativement par le `index.ts` public :
 ```typescript
-// ✅ VRAI : Consommation propre de l'API publique
+//  VRAI : Consommation propre de l'API publique
 import { useCurrentUser } from '@/features/auth';
 
-// ❌ FAUX : Dépendance couplée sur un fichier interne privé
+//  FAUX : Dépendance couplée sur un fichier interne privé
 import { useCurrentUser } from '@/features/auth/hooks/internal/useCurrentUserPrivate';
 ```
 

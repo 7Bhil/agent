@@ -1,4 +1,4 @@
-# 🧪 Guide de Stratégie de Test Moderne
+# Guide de Stratégie de Test Moderne
 
 > **Sources de référence condensées** : `references/javascript-testing-best-practices`.
 
@@ -56,10 +56,10 @@ describe('OrderService.createOrder', () => {
 ## 3. Bonnes Pratiques de Nommage et Robustesse
 
 ### 3.1 Nommage explicite selon le pattern Given-When-Then
-- ❌ `it('test error', ...)`
-- ❌ `it('create order works', ...)`
-- ✅ `it('should return 400 with VALIDATION_ERROR when email is malformed', ...)`
-- ✅ `it('should throw InsufficientStockError when quantity exceeds inventory', ...)`
+-  `it('test error', ...)`
+-  `it('create order works', ...)`
+-  `it('should return 400 with VALIDATION_ERROR when email is malformed', ...)`
+-  `it('should throw InsufficientStockError when quantity exceeds inventory', ...)`
 
 ### 3.2 Indépendance absolue des tests
 - Chaque test doit pouvoir être exécuté seul, dans n'importe quel ordre.

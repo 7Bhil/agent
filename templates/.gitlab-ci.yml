@@ -15,7 +15,7 @@ lint_and_types:
     - if [ -f "package.json" ]; then npm ci || npm install; fi
     - if [ -f "tsconfig.json" ]; then npx tsc --noEmit; fi
     - if grep -q "\"lint\"" package.json 2>/dev/null; then npm run lint; fi
-    - if [ ! -f "BRAIN.md" ]; then echo "❌ BRAIN.md manquant !" && exit 1; fi
+    - if [ ! -f "BRAIN.md" ]; then echo " BRAIN.md manquant !" && exit 1; fi
 
 automated_tests:
   stage: test

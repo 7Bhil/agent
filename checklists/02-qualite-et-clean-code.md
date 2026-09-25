@@ -4,7 +4,7 @@
 
 ---
 
-## 🔤 1. Nommage et Clarté Intentionnelle
+## 1. Nommage et Clarté Intentionnelle
 
 - [ ] **Noms révélateurs d'intention** :
   - Variables : `activeUserAccounts` plutôt que `data`, `list` ou `users`.
@@ -16,7 +16,7 @@
 
 ---
 
-## 🧩 2. Conception des Fonctions & Principes SOLID
+## 2. Conception des Fonctions & Principes SOLID
 
 - [ ] **Single Responsibility Principle (SRP)** :
   - Une fonction ne fait qu'une seule chose et la fait bien.
@@ -29,7 +29,7 @@
 
 ---
 
-## 🚨 3. Gestion Robuste des Erreurs
+## 3. Gestion Robuste des Erreurs
 
 - [ ] **Erreurs typées et hiérarchisées** :
   - Créer des classes d'erreurs applicatives (`NotFoundError`, `UnauthorizedError`, `ValidationError`) héritant de `Error`.

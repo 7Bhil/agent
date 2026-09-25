@@ -1,10 +1,10 @@
-# 🧠 BRAIN : Suivi de l'Évolution et Mémoire du Projet
+# BRAIN : Suivi de l'Évolution et Mémoire du Projet
 
 Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'avancement, les décisions d'architecture prises, la gestion des branches et l'évolution globale du système.
 
 ---
 
-## 🧭 Stratégie de Branches & Workflow Git
+## Stratégie de Branches & Workflow Git
 
 - **`main`** : Branche de production / version stable finale.
 - **`developp`** : Branche principale d'intégration. Tout travail terminé est mergé sur `developp`.
@@ -22,7 +22,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 
 ---
 
-## 🎨 Charte Graphique & UI (Tailwind & Global CSS)
+## Charte Graphique & UI (Tailwind & Global CSS)
 
 - **Source unique de vérité visuelle** :
   - Ne jamais inventer de couleurs arbitraires en ligne ou "en dur" (`#1e293b`, `rgb(...)` dispersés dans les balises).
@@ -31,7 +31,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 
 ---
 
-## 🗣️ Directives & Préférences Utilisateur Retenues
+## Directives & Préférences Utilisateur Retenues
 
 *Cette section est alimentée en continu par l'agent au fil des échanges. Tout retour critique, choix imposé, habitude ou consigne formulée par l'utilisateur doit être consigné ici pour être respecté dans toutes les sessions suivantes.*
 
@@ -49,7 +49,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 ---
 
 
-## 🏛️ Cartographie d'Architecture & Périmètres Modulaires
+## Cartographie d'Architecture & Périmètres Modulaires
 
 *Cette cartographie est maintenue à jour à chaque modification architecturale pour éviter de modifier du code à l'aveugle ou d'introduire des effets de bord.*
 
@@ -75,7 +75,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 
 ---
 
-## 🏷️ Méthodologie de Versionnement (SemVer)
+## Méthodologie de Versionnement (SemVer)
 
 Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)** :
 - **MAJOR (`X.0.0`)** : Rupture de compatibilité ou refonte majeure d'architecture.
@@ -84,9 +84,14 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 
 ---
 
-## 📈 Journal des Évolutions & Décisions
+## Journal des Évolutions & Décisions
+
+### [1.9.0] - Purge et Éradication Totale des Émojis
+- **Assainissement complet du dépôt** : Suppression de chaque émoji présent dans les fichiers Markdown, scripts bash, configurations CI et templates.
+- **Vérification binaire automatisée** : Exécution d'un script de scan Unicode validant zéro émoji détecté sur l'intégralité du projet.
 
 ### [1.8.0] - Support des Issues et Modèles de Traçabilité
+
 - **Gabarits d'Issues GitHub** : Ajout de `.github/ISSUE_TEMPLATE/bug_report.md` et `feature_request.md` pour cadrer la formalisation des tâches.
 - **Rôle de l'IA sur les Issues** : L'IA peut rédiger, diagnostiquer ou soumettre des issues directement via l'API GitHub ou la CLI `gh` lors des audits et investigations.
 

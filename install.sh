@@ -13,7 +13,7 @@ YELLOW="\033[33m"
 RESET="\033[0m"
 
 echo -e "${BLUE}${BOLD}=====================================================${RESET}"
-echo -e "${BLUE}${BOLD}   🚀 Installation du Senior Agent Core             ${RESET}"
+echo -e "${BLUE}${BOLD}    Installation du Senior Agent Core             ${RESET}"
 echo -e "${BLUE}${BOLD}=====================================================${RESET}"
 
 REPO_RAW_URL="https://raw.githubusercontent.com/7Bhil/agent/developp"
@@ -21,7 +21,7 @@ REPO_RAW_URL="https://raw.githubusercontent.com/7Bhil/agent/developp"
 download_file() {
   local source_path="$1"
   local target_path="$2"
-  echo -e "  📥 Déploiement de ${YELLOW}${target_path}${RESET}..."
+  echo -e "   Déploiement de ${YELLOW}${target_path}${RESET}..."
   mkdir -p "$(dirname "$target_path")"
   curl -sSL "${REPO_RAW_URL}/${source_path}" -o "$target_path"
 }
@@ -59,7 +59,7 @@ if [ ! -f ".env.example" ]; then
 fi
 
 echo ""
-echo -e "${GREEN}${BOLD}✅ Terminé avec succès ! Vos assistants et pipelines CI sont configurés :${RESET}"
+echo -e "${GREEN}${BOLD} Terminé avec succès ! Vos assistants et pipelines CI sont configurés :${RESET}"
 echo -e "   - Google Gemini / Antigravity : ${BOLD}GEMINI.md${RESET}"
 echo -e "   - GitHub Copilot / Codex      : ${BOLD}.github/copilot-instructions.md${RESET}"
 echo -e "   - Agent Universel             : ${BOLD}AGENTS.md${RESET}"

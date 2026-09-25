@@ -4,7 +4,7 @@
 
 ---
 
-## 🔒 1. Contrôle d'Accès & Autorisations (BOLA / BFLA)
+## 1. Contrôle d'Accès & Autorisations (BOLA / BFLA)
 
 - [ ] **Vérification d'appartenance de la ressource (Anti-BOLA / IDOR)** :
   - Ne jamais faire confiance à un ID fourni en URL ou payload (`/api/documents/:id`).
@@ -15,7 +15,7 @@
 
 ---
 
-## 🛡️ 2. Validation & Assainissement des Entrées (Anti-Injection & XSS)
+## 2. Validation & Assainissement des Entrées (Anti-Injection & XSS)
 
 - [ ] **Schéma de validation strict (Fail Closed)** :
   - Validation exhaustive des corps de requêtes, paramètres de query et headers via un schéma strict (ex: Zod, Valibot).
@@ -29,7 +29,7 @@
 
 ---
 
-## 🔑 3. Authentification & Gestion des Secrets
+## 3. Authentification & Gestion des Secrets
 
 - [ ] **Stockage des mots de passe et hashage** :
   - Algorithmes modernes et lents : Argon2id ou Bcrypt (avec cost factor adapté).

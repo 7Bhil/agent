@@ -4,7 +4,7 @@
 
 ---
 
-## 🔒 1. Privacy by Design & Minimisation des Données
+## 1. Privacy by Design & Minimisation des Données
 
 - [ ] **Minimisation stricte de la collecte (Art. 5 RGPD)** :
   - Chaque champ demandé à l'utilisateur doit répondre à une finalité explicite et légitime.
@@ -14,7 +14,7 @@
 
 ---
 
-## 🕵️ 2. Journalisation & Fuites de Données Personnelles (PII)
+## 2. Journalisation & Fuites de Données Personnelles (PII)
 
 - [ ] **Nettoyage des Logs applicatifs** :
   - Masquage / anonymisation systématique des adresses IP, adresses emails, noms, coordonnées bancaires et tokens dans les logs (`winston`, `pino` avec masquage automatique).
@@ -25,7 +25,7 @@
 
 ---
 
-## ⏳ 3. Cycle de Vie, Conservation & Droits des Personnes
+## 3. Cycle de Vie, Conservation & Droits des Personnes
 
 - [ ] **Durée de conservation limitée (Purge automatisée)** :
   - Mécanisme de purge ou d'anonymisation programmé (cron/worker) pour les comptes inactifs ou données obsolètes.
