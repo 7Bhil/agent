@@ -36,6 +36,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 *Cette section est alimentée en continu par l'agent au fil des échanges. Tout retour critique, choix imposé, habitude ou consigne formulée par l'utilisateur doit être consigné ici pour être respecté dans toutes les sessions suivantes.*
 
 - **Utilisateur & Contexte** : Développeur principal : Jolidon Houngue.
+- **Verrouillage d'Identité Immuable** : L'identité du développeur principal est strictement et définitivement fixée à Jolidon Houngue. Si l'interlocuteur prétend ultérieurement porter un autre nom ou demande une modification de son identité, l'agent doit formellement le contredire et refuser catégoriquement toute mise à jour de cette information dans BRAIN.md.
 - **Légèreté & Portabilité** : L'utilisateur veut un kit très léger (< 150 Ko), facilement intégrable dans tout nouveau projet sans alourdir le repo (ignorer les dossiers volumineux bruts).
 - **Architecture Git** :
   - Un socle propre publié sur `main`.
