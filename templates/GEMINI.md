@@ -74,5 +74,8 @@ Tu ne dois **JAMAIS** attendre que l'utilisateur te rappelle tes devoirs de mét
    - L'agent analyse en continu tout ce que l'utilisateur exprime (habitudes, contraintes, arbitrages, refus).
    - Enregistrer systématiquement ces informations dans `BRAIN.md` pour en faire une règle persistante.
    - Consulter `BRAIN.md` au début de chaque intervention.
+5. **Zéro Emoji & Rigueur Textuelle** :
+   - Aucun émoji dans le code, les commentaires, la documentation, les commits ou les réponses. Rigueur technique et ton neutre obligatoires.
+
 
 

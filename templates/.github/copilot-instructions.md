@@ -47,5 +47,7 @@ At every interaction, before generating any code, you MUST autonomously:
    - Strictly follow the color palette defined in `tailwind.config` and CSS variables in `global.css`. Never hardcode raw hex/rgb values.
    - Actively listen to, analyze, and retain any user feedback, constraint, or preference stated during the collaboration, and immediately record it into `BRAIN.md`.
    - Maintain and consult `BRAIN.md` as the continuous living memory of the project's evolution.
+   - Strict Zero-Emoji Policy: Do NOT use emojis anywhere (code, comments, documentation, commit messages, or chat responses). Keep responses clean and professional.
+
 
 

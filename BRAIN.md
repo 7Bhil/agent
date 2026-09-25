@@ -42,10 +42,12 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
   - Branches thématiques de dev (`feature/*`, `fix/*`) qui doivent impérativement être mergées sur `developp` à la fin de chaque tâche.
 - **Langue des Commits** : Rédaction des messages de commits obligatoirement en **français**.
 - **Design & Couleurs** : Aucune couleur inventée ou codée en dur. Obligation de respecter `global.css` et `tailwind.config`.
+- **Interdiction Stricte des Emojis** : Zéro emoji dans le code, les commentaires, les messages de commit, la documentation et les réponses. Privilégier un ton professionnel, sobre et épuré.
 - **Support Multi-Assistants** : Prise en charge native de Google Gemini (`GEMINI.md`), GitHub Copilot / OpenAI Codex (`.github/copilot-instructions.md`), Cursor (`.cursorrules`), Claude (`CLAUDE.md`) et agents autonomes (`AGENTS.md`).
 - **Protocole Mémoire Vivante** : L'agent doit écouter attentivement l'utilisateur et actualiser immédiatement ce fichier `BRAIN.md` dès qu'une information structurante ou un arbitrage est formulé.
 
 ---
+
 
 ## 🏛️ Cartographie d'Architecture & Périmètres Modulaires
 
@@ -84,7 +86,13 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 
 ## 📈 Journal des Évolutions & Décisions
 
+### [1.6.0] - Règle de Sobriété Formelle & Zéro Emoji
+- **Bannissement intégral des émojis** : Interdiction stricte d'utiliser des émojis dans le code, les commentaires, la documentation, les messages de commits et les réponses textuelles.
+- **Rigueur d'ingénierie** : Ton épuré, sobre et professionnel exigé de tous les agents.
+- **Propagation universelle** : Consigne inscrite dans `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `.cursorrules`, `copilot-instructions.md` et `BRAIN.md`.
+
 ### [1.5.0] - Modules d'Ingénierie par Stack Technique (`stacks/`)
+
 - **Création du module `stacks/`** : Règles ciblées pour les frameworks majeurs afin d'éviter les idiomes obsolètes :
   - `stacks/react-nextjs.md` : RSC vs Client components, TanStack Query, découpage feature-based.
   - `stacks/nodejs-backend.md` : Découplage Controllers/Services/DAL, Graceful shutdown.

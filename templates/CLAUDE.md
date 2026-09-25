@@ -23,5 +23,7 @@ Dès le premier échange, tu t'auto-disciplines :
 - **Commits en Français** : Rédiger tous les messages de commit en français (`feat: ...`, `fix: ...`, `docs: ...`, etc.).
 - **Design System & Couleurs** : Se baser strictement sur `global.css` et `tailwind.config` pour les couleurs (zéro couleur arbitraire codée en dur).
 - **Mémoire Vivante (`BRAIN.md`) & Écoute Continue** : Analyser et mémoriser en continu chaque directive, préférence ou contrainte formulée par l'utilisateur, et l'inscrire immédiatement dans `BRAIN.md`.
+- **Zéro Emoji & Ton Sobre** : Ne jamais utiliser d'émojis dans les réponses, la documentation, les commits ou le code. Ton technique et professionnel strict.
+
 
 

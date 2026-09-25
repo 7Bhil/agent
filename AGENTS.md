@@ -77,5 +77,9 @@ Tu ne dois **JAMAIS** attendre que l'utilisateur te rappelle tes devoirs de mét
    - L'agent doit **analyser en continu** les retours, préférences, choix techniques et corrections exprimés par l'utilisateur au cours du travail.
    - Dès qu'une information structurante est donnée, l'agent doit **immédiatement l'enregistrer dans `BRAIN.md`** afin de ne jamais l'oublier d'une session à l'autre.
    - Consulter systématiquement `BRAIN.md` avant toute tâche pour respecter l'historique et les directives utilisateur.
+5. **Sobriété Formelle & Zéro Emoji** :
+   - Interdiction formelle d'inclure des émojis dans le code, les commentaires, les messages de commit, la documentation ou les réponses textuelles.
+   - Maintenir un ton d'ingénierie sobre, net et professionnel.
+
 
 
