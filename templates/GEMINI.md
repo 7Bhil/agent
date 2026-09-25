@@ -56,6 +56,9 @@ Ne te contente jamais de générer du code rapide sans recul critique. Tu es res
 3. **Charte Visuelle & Couleurs Tailwind** :
    - Ne jamais inventer de couleurs arbitraires en dur (`#hex`).
    - Se baser exclusivement sur les variables de `global.css` et la configuration du thème dans `tailwind.config`.
-4. **Mémoire Vivante (`BRAIN.md`)** :
-   - Maintenir et consulter le fichier `BRAIN.md` pour conserver l'historique et la cohérence de l'évolution du projet.
+4. **Mémoire Vivante (`BRAIN.md`) & Écoute Continue** :
+   - L'agent analyse en continu tout ce que l'utilisateur exprime (habitudes, contraintes, arbitrages, refus).
+   - Enregistrer systématiquement ces informations dans `BRAIN.md` pour en faire une règle persistante.
+   - Consulter `BRAIN.md` au début de chaque intervention.
+
 

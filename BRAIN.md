@@ -31,6 +31,22 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 
 ---
 
+## 🗣️ Directives & Préférences Utilisateur Retenues
+
+*Cette section est alimentée en continu par l'agent au fil des échanges. Tout retour critique, choix imposé, habitude ou consigne formulée par l'utilisateur doit être consigné ici pour être respecté dans toutes les sessions suivantes.*
+
+- **Légèreté & Portabilité** : L'utilisateur veut un kit très léger (< 150 Ko), facilement intégrable dans tout nouveau projet sans alourdir le repo (ignorer les dossiers volumineux bruts).
+- **Architecture Git** :
+  - Un socle propre publié sur `main`.
+  - Branche d'intégration active : `developp`.
+  - Branches thématiques de dev (`feature/*`, `fix/*`) qui doivent impérativement être mergées sur `developp` à la fin de chaque tâche.
+- **Langue des Commits** : Rédaction des messages de commits obligatoirement en **français**.
+- **Design & Couleurs** : Aucune couleur inventée ou codée en dur. Obligation de respecter `global.css` et `tailwind.config`.
+- **Support Multi-Assistants** : Prise en charge native de Google Gemini (`GEMINI.md`), GitHub Copilot / OpenAI Codex (`.github/copilot-instructions.md`), Cursor (`.cursorrules`), Claude (`CLAUDE.md`) et agents autonomes (`AGENTS.md`).
+- **Protocole Mémoire Vivante** : L'agent doit écouter attentivement l'utilisateur et actualiser immédiatement ce fichier `BRAIN.md` dès qu'une information structurante ou un arbitrage est formulé.
+
+---
+
 ## 📈 Journal des Évolutions & Décisions
 
 ### Session 1 - Initialisation du Framework Senior
@@ -42,4 +58,5 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
   - `.cursorrules` (Cursor IDE)
   - `CLAUDE.md` (Anthropic Claude)
 - **Dépôt distant** : Synchronisé sur `https://github.com/7Bhil/agent.git` (branches `main` et `developp`).
-- **Ajout de la mémoire vivante** : Création du présent fichier `BRAIN.md`.
+- **Ajout de la mémoire vivante & apprentissage continu** : Création du présent fichier `BRAIN.md` avec écoute active des consignes utilisateur.
+

@@ -14,5 +14,6 @@ Tu agis en tant qu'**Ingénieur Logiciel Senior**. Ta priorité est de produire 
 - **Workflow Git & Intégration** : Travailler sur des branches thématiques (`feature/*`, `fix/*`) puis merger obligatoirement sur `developp`.
 - **Commits en Français** : Rédiger tous les messages de commit en français (`feat: ...`, `fix: ...`, `docs: ...`, etc.).
 - **Design System & Couleurs** : Se baser strictement sur `global.css` et `tailwind.config` pour les couleurs (zéro couleur arbitraire codée en dur).
-- **Mémoire Vivante (`BRAIN.md`)** : Consulter et mettre à jour `BRAIN.md` pour tracer l'avancement et l'historique du projet.
+- **Mémoire Vivante (`BRAIN.md`) & Écoute Continue** : Analyser et mémoriser en continu chaque directive, préférence ou contrainte formulée par l'utilisateur, et l'inscrire immédiatement dans `BRAIN.md`.
+
 

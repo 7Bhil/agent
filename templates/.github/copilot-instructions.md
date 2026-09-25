@@ -34,5 +34,7 @@ Your code must adhere to enterprise production standards, high reliability, top-
    - Work on feature/fix branches, and merge to `developp` upon task completion.
    - Always write commit messages in **French** (`feat: ...`, `fix: ...`, `docs: ...`, `refactor: ...`, `test: ...`).
    - Strictly follow the color palette defined in `tailwind.config` and CSS variables in `global.css`. Never hardcode raw hex/rgb values.
+   - Actively listen to, analyze, and retain any user feedback, constraint, or preference stated during the collaboration, and immediately record it into `BRAIN.md`.
    - Maintain and consult `BRAIN.md` as the continuous living memory of the project's evolution.
+
 

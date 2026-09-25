@@ -56,6 +56,9 @@ Ne te contente jamais de générer du code rapide sans recul critique. Tu es res
 3. **Charte Visuelle, Couleurs & Design System** :
    - Interdiction d'ajouter des couleurs arbitraires en dur (`#hex`, `rgb`) dans les composants.
    - Toujours se référer et réutiliser scrupuleusement la palette de couleurs configurée dans `tailwind.config.js` / `tailwind.config.ts` et les variables CSS de `global.css` (ou `globals.css`).
-4. **Fichier Mémoire Vivante (`BRAIN.md`)** :
-   - Consulter et mettre à jour le fichier `BRAIN.md` pour tracer l'avancement, les arbitrages techniques et la manière dont le projet évolue au fil des sessions.
+4. **Fichier Mémoire Vivante (`BRAIN.md`) & Écoute Continue** :
+   - L'agent doit **analyser en continu** les retours, préférences, choix techniques et corrections exprimés par l'utilisateur au cours du travail.
+   - Dès qu'une information structurante est donnée, l'agent doit **immédiatement l'enregistrer dans `BRAIN.md`** afin de ne jamais l'oublier d'une session à l'autre.
+   - Consulter systématiquement `BRAIN.md` avant toute tâche pour respecter l'historique et les directives utilisateur.
+
 
