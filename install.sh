@@ -48,12 +48,17 @@ download_file "checklists/03-securite-applicative-et-api.md" ".agent/checklists/
 download_file "checklists/04-conformite-rgpd-et-vie-privee.md" ".agent/checklists/04-rgpd.md"
 download_file "checklists/05-tests-et-resilience.md" ".agent/checklists/05-tests.md"
 download_file "checklists/06-performance-et-accessibilite.md" ".agent/checklists/06-performance-a11y.md"
+download_file "checklists/07-redaction-technique-anti-slop.md" ".agent/checklists/07-redaction-anti-slop.md"
 
-# 7. Intégration Continue (GitHub Actions & GitLab CI)
+# 7. Outillage Déterministe d'Ingénierie & Anti-Slop IA
+download_file "scripts/audit-slop.py" "scripts/audit-slop.py"
+chmod +x "scripts/audit-slop.py" 2>/dev/null || true
+
+# 8. Intégration Continue (GitHub Actions & GitLab CI)
 download_file ".github/workflows/ci.yml" ".github/workflows/ci.yml"
 download_file "templates/.gitlab-ci.yml" ".gitlab-ci.yml"
 
-# 8. Template de Sécurité des Variables d'Environnement
+# 9. Template de Sécurité des Variables d'Environnement
 if [ ! -f ".env.example" ]; then
   download_file "templates/.env.example" ".env.example"
 fi
@@ -65,6 +70,7 @@ echo -e "   - GitHub Copilot / Codex      : ${BOLD}.github/copilot-instructions.
 echo -e "   - Agent Universel             : ${BOLD}AGENTS.md${RESET}"
 echo -e "   - Cursor IDE                  : ${BOLD}.cursorrules${RESET}"
 echo -e "   - Claude / Anthropic          : ${BOLD}CLAUDE.md${RESET}"
+echo -e "   - Script Anti-Slop IA         : ${BOLD}scripts/audit-slop.py${RESET}"
 echo -e "   - Pipeline GitHub Actions     : ${BOLD}.github/workflows/ci.yml${RESET}"
 echo -e "   - Pipeline GitLab CI          : ${BOLD}.gitlab-ci.yml${RESET}"
 echo -e "   - Template Secrets            : ${BOLD}.env.example${RESET}"

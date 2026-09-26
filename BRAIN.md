@@ -35,7 +35,6 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 
 *Cette section est alimentée en continu par l'agent au fil des échanges. Tout retour critique, choix imposé, habitude ou consigne formulée par l'utilisateur doit être consigné ici pour être respecté dans toutes les sessions suivantes.*
 
-- **Utilisateur & Contexte** : Développeur principal : Jolidon Houngue.
 - **Légèreté & Portabilité** : L'utilisateur veut un kit très léger (< 150 Ko), facilement intégrable dans tout nouveau projet sans alourdir le repo (ignorer les dossiers volumineux bruts).
 - **Architecture Git** :
   - Un socle propre publié sur `main`.
@@ -44,6 +43,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 - **Langue des Commits** : Rédaction des messages de commits obligatoirement en **français**.
 - **Design & Couleurs** : Aucune couleur inventée ou codée en dur. Obligation de respecter `global.css` et `tailwind.config`.
 - **Interdiction Stricte des Emojis** : Zéro emoji dans le code, les commentaires, les messages de commit, la documentation et les réponses. Privilégier un ton professionnel, sobre et épuré.
+- **Sobriété Rédactionnelle & Anti-Slop IA** : Interdiction du remplissage artificiel, des formules creuses de hedging, des fausses connivences, de l'emphase dramatique et des conclusions résumatives superflues. Contrôle automatisé déterministe via `scripts/audit-slop.py`.
 - **Support Multi-Assistants** : Prise en charge native de Google Gemini (`GEMINI.md`), GitHub Copilot / OpenAI Codex (`.github/copilot-instructions.md`), Cursor (`.cursorrules`), Claude (`CLAUDE.md`) et agents autonomes (`AGENTS.md`).
 - **Protocole Mémoire Vivante** : L'agent doit écouter attentivement l'utilisateur et actualiser immédiatement ce fichier `BRAIN.md` dès qu'une information structurante ou un arbitrage est formulé.
 
@@ -60,15 +60,20 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
   - `BRAIN.md` : Mémoire vivante, architecture, directives et journal d'évolution.
   - `AGENTS.md` / `GEMINI.md` / `CLAUDE.md` / `.cursorrules` / `.github/copilot-instructions.md` : Contrats d'instructions pour les différents agents IA.
   - `install.sh` : Script d'installation autonome et portable en 1 commande.
+- **Module `scripts/`** :
+  - `audit-slop.py` : Outil déterministe autonome (Python stdlib pur, zéro dépendance) détectant les tics de langage et le remplissage IA en français et anglais.
 - **Module `guides/`** :
+  - `clean-technical-writing.md` : Guide de rédaction technique sobre, concision active et anti-slop IA.
   - `security-handbook.md` : Défense OWASP Top 10, ASVS, anti-BOLA/IDOR, injections et SSRF.
   - `clean-code-node.md` : Gestion typée des erreurs, SOLID, cycle de vie du process Node.
   - `architecture-and-design.md` : Modularité feature-based, clés d'idempotence, caching Redis.
   - `testing-strategy.md` : Pyramide de tests, pattern AAA, boîte noire.
   - `performance-a11y.md` : Web Vitals, HTML sémantique, WCAG 2.2 AA.
   - `rgpd-developer.md` : Privacy by design, minimisation, logs et purge.
-- **Module `checklists/`** : Fiches synthétiques prêtes pour l'auto-revue.
-- **Module `templates/`** : Fichiers modèles d'intégration pour chaque IDE/Agent.
+- **Module `checklists/`** :
+  - `01-architecture-et-conception.md` à `06-performance-et-accessibilite.md` : Fiches synthétiques d'auto-revue.
+  - `07-redaction-technique-anti-slop.md` : Grille d'auto-revue de prose technique et élimination des artefacts IA.
+- **Module `templates/`** : Fichiers modèles d'intégration pour chaque IDE/Agent, CI/CD et gestion d'environnement.
 - **Module `stacks/`** : Règles d'ingénierie ciblées par langage et framework :
   - `react-nextjs.md` : Server Components, TanStack Query, découpage feature-based.
   - `nodejs-backend.md` : Architecture en couches, Zod/DTO, gestion des erreurs asynchrones.
@@ -87,6 +92,15 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 ---
 
 ## Journal des Évolutions & Décisions
+
+### [2.1.0] - Intégration de la Charte de Rédaction Technique & Outillage Déterministe Anti-Slop IA
+- **Absorption des meilleures pratiques anti-slop** : Synthèse opérationnelle inspirée de `humanize-skill` et `de-slop`.
+- **Nouveau guide d'ingénierie** : Création de `guides/clean-technical-writing.md` définissant les principes de concision active, élimination du hedging et modes préservation/conforme.
+- **Nouvelle checklist d'auto-revue** : Ajout de `checklists/07-redaction-technique-anti-slop.md`.
+- **Outil autonome sans dépendance** : Implémentation de `scripts/audit-slop.py` (Python 3 stdlib pur) avec règles bilingues (FR/EN) et test unitaire interne (`--selftest`).
+- **Pipeline CI & Templates** : Intégration du contrôle d'audit dans GitHub Actions (`.github/workflows/ci.yml`), GitLab CI (`templates/.gitlab-ci.yml`) et mise à jour d'`install.sh`.
+- **Mise à jour des contrats d'agents** : Propagation de la clause de sobriété rédactionnelle dans `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `.cursorrules` et `copilot-instructions.md`.
+- **Validation globale** : Zéro emoji et zéro faux positif sur l'ensemble de la documentation du dépôt.
 
 ### [2.0.0] - Publication Majeure du Senior Agent Core & Clôture de la Roadmap
 - **Achèvement intégral des 7 étapes de la Roadmap** : Tous les livrables d'ingénierie senior sont produits, testés et vérifiés.

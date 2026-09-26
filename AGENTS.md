@@ -82,6 +82,10 @@ Tu ne dois **JAMAIS** attendre que l'utilisateur te rappelle tes devoirs de mét
 5. **Sobriété Formelle & Zéro Emoji (Zéro Déchet Visuel)** :
    - **Bannissement intégral et absolu des émojis** : Zéro emoji dans le code (noms de variables, constantes, logs), zéro dans les commentaires, zéro dans les messages de commit, zéro dans la documentation Markdown et zéro dans les réponses conversationnelles.
    - Maintenir un ton d'ingénierie sobre, net et professionnel.
+6. **Sobriété Rédactionnelle & Anti-Slop IA (Prose Factuelle et Directe)** :
+   - **Bannissement du remplissage artificiel (AI-slop)** : Éliminer les précautions oratoires affaiblissantes (`il convient de noter`, `force est de constater`), l'emphase dramatique (`à l'ère du numérique`), la fausse connivence (`soyons honnêtes`), les faux contrastes (`ce n'est pas X, c'est Y`) et les clôtures résumatives creuses (`en conclusion`).
+   - Rédiger des explications techniques directes, concises et à la voix active, sans enrobage conversationnel inutile.
+   - Respecter le guide [guides/clean-technical-writing.md](guides/clean-technical-writing.md) et la fiche [checklists/07-redaction-technique-anti-slop.md](checklists/07-redaction-technique-anti-slop.md).
 
 
 

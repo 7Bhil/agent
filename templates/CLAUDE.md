@@ -24,6 +24,7 @@ Dès le premier échange, tu t'auto-disciplines :
 - **Design System & Anti-Style IA** : Se baser strictement sur `global.css` et `tailwind.config` pour les couleurs (zéro couleur arbitraire codée en dur). Bannir formellement les dégradés fluo violets/indigo et les effets flashy stéréotypés de l'IA.
 - **Mémoire Vivante (`BRAIN.md`) & Écoute Continue** : Analyser et mémoriser en continu chaque directive, préférence ou contrainte formulée par l'utilisateur, et l'inscrire immédiatement dans `BRAIN.md`.
 - **Zéro Emoji & Ton Sobre** : Ne jamais utiliser d'émojis dans les réponses, la documentation, les commits ou le code. Ton technique et professionnel strict.
+- **Sobriété Rédactionnelle & Anti-Slop IA** : Éliminer les tics d'écriture de l'IA (hedging, fausse connivence, faux contrastes, emphase d'époque, conclusions creuses). Rédiger une prose technique factuelle, directe et concise ([guides/clean-technical-writing.md](guides/clean-technical-writing.md)).
 
 
 

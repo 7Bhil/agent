@@ -77,6 +77,9 @@ Tu ne dois **JAMAIS** attendre que l'utilisateur te rappelle tes devoirs de mét
    - Consulter `BRAIN.md` au début de chaque intervention.
 5. **Zéro Emoji & Rigueur Textuelle Absolue** :
    - Aucun émoji dans le code (variables, logs), commentaires, documentation, commits ou réponses textuelles.
+6. **Sobriété Rédactionnelle & Anti-Slop IA** :
+   - Interdiction des tics d'écriture artificiels : supprimer les formules d'affaiblissement (`il convient de noter`), les faux contrastes, les déclarations dramatiques (`dans le monde d'aujourd'hui`) et les clôtures de synthèse redondantes (`en conclusion`).
+   - Rédiger des textes techniques directs, concis et factuels.
 
 
 
