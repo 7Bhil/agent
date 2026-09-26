@@ -53,6 +53,11 @@ download_file "checklists/07-redaction-technique-anti-slop.md" ".agent/checklist
 # 7. Outillage Déterministe d'Ingénierie & Anti-Slop IA
 download_file "scripts/audit-slop.py" "scripts/audit-slop.py"
 chmod +x "scripts/audit-slop.py" 2>/dev/null || true
+download_file "scripts/setup-git-hooks.sh" "scripts/setup-git-hooks.sh"
+chmod +x "scripts/setup-git-hooks.sh" 2>/dev/null || true
+
+# Configuration automatique des Git hooks locaux
+./scripts/setup-git-hooks.sh 2>/dev/null || true
 
 # 8. Intégration Continue (GitHub Actions & GitLab CI)
 download_file ".github/workflows/ci.yml" ".github/workflows/ci.yml"
@@ -71,6 +76,7 @@ echo -e "   - Agent Universel             : ${BOLD}AGENTS.md${RESET}"
 echo -e "   - Cursor IDE                  : ${BOLD}.cursorrules${RESET}"
 echo -e "   - Claude / Anthropic          : ${BOLD}CLAUDE.md${RESET}"
 echo -e "   - Script Anti-Slop IA         : ${BOLD}scripts/audit-slop.py${RESET}"
+echo -e "   - Hooks Git Locaux            : ${BOLD}scripts/setup-git-hooks.sh${RESET}"
 echo -e "   - Pipeline GitHub Actions     : ${BOLD}.github/workflows/ci.yml${RESET}"
 echo -e "   - Pipeline GitLab CI          : ${BOLD}.gitlab-ci.yml${RESET}"
 echo -e "   - Template Secrets            : ${BOLD}.env.example${RESET}"

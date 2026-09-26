@@ -62,8 +62,10 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
   - `install.sh` : Script d'installation autonome et portable en 1 commande.
 - **Module `scripts/`** :
   - `audit-slop.py` : Outil déterministe autonome (Python stdlib pur, zéro dépendance) détectant les tics de langage et le remplissage IA en français et anglais.
+  - `setup-git-hooks.sh` : Script d'installation automatique des hooks Git locaux (`commit-msg` conventionnel et `pre-commit` anti-slop).
 - **Module `guides/`** :
   - `clean-technical-writing.md` : Guide de rédaction technique sobre, concision active et anti-slop IA.
+  - `observability-and-logging.md` : Observabilité, format JSON structuré, OpenTelemetry, Google SRE Golden Signals et sondes liveness/readiness.
   - `security-handbook.md` : Défense OWASP Top 10, ASVS, anti-BOLA/IDOR, injections et SSRF.
   - `clean-code-node.md` : Gestion typée des erreurs, SOLID, cycle de vie du process Node.
   - `architecture-and-design.md` : Modularité feature-based, clés d'idempotence, caching Redis.
@@ -73,8 +75,9 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 - **Module `checklists/`** :
   - `01-architecture-et-conception.md` à `06-performance-et-accessibilite.md` : Fiches synthétiques d'auto-revue.
   - `07-redaction-technique-anti-slop.md` : Grille d'auto-revue de prose technique et élimination des artefacts IA.
-- **Module `templates/`** : Fichiers modèles d'intégration pour chaque IDE/Agent, CI/CD et gestion d'environnement.
+- **Module `templates/`** : Fichiers modèles d'intégration pour chaque IDE/Agent, CI/CD et gestion d'environnement (synchronisation stricte testée en CI).
 - **Module `stacks/`** : Règles d'ingénierie ciblées par langage et framework :
+  - `docker-containerization.md` : Durcissement Docker, multi-stage builds, utilisateur non-root et gestion du PID 1.
   - `react-nextjs.md` : Server Components, Next.js Edge Runtime, Caching, Middleware, TanStack Query.
   - `nodejs-backend.md` : Architecture en couches, NestJS (Modules, Decorators, Scopes), Express et gestion d'erreurs asynchrones.
   - `python-fastapi-django.md` : Typage strict mypy, Pydantic V2, FastAPI (Depends), Django (Middlewares, ORM N+1).
@@ -96,6 +99,13 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 ---
 
 ## Journal des Évolutions & Décisions
+
+### [2.3.0] - Observabilité Industrielle, Durcissement Docker & Automatisation des Git Hooks
+- **Observabilité & Télémétrie** : Création de `guides/observability-and-logging.md` (logs JSON structurés, corrélation distribuée, signaux SRE et découplage liveness/readiness/startup).
+- **Conteneurisation sécurisée** : Création de `stacks/docker-containerization.md` (multi-stage builds, non-root par défaut, gestion PID 1 avec tini, read-only rootfs).
+- **Automatisation Git Hooks** : Création de `scripts/setup-git-hooks.sh` installant `commit-msg` (format conventionnel strict en français + interdiction des émojis) et `pre-commit` (audit automatique anti-slop sur les fichiers indexés).
+- **Résolution de la redondance `templates/`** : Synchronisation stricte et ajout d'un test automatisé de parité (`cmp`) dans `.github/workflows/ci.yml` et `.gitlab-ci.yml`.
+- **Intégration dans `install.sh`** : Déploiement et activation automatique des hooks Git lors de l'installation du kit.
 
 ### [2.2.0] - Expansion Universelle des Stacks Techniques & Harmonisation Racine
 - **Harmonisation structurelle racine** : Déploiement direct de `GEMINI.md`, `CLAUDE.md` et `.cursorrules` à la racine du projet pour une auto-documentation immédiate dans tous les environnements d'IA.

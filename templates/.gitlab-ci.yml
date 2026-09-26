@@ -16,7 +16,8 @@ lint_and_types:
     - if [ -f "tsconfig.json" ]; then npx tsc --noEmit; fi
     - if grep -q "\"lint\"" package.json 2>/dev/null; then npm run lint; fi
     - if [ ! -f "BRAIN.md" ]; then echo "BRAIN.md manquant !" && exit 1; fi
-    - if [ -f "scripts/audit-slop.py" ]; then python3 scripts/audit-slop.py README.md guides/*.md checklists/*.md; fi
+    - if [ -f "scripts/audit-slop.py" ]; then python3 scripts/audit-slop.py README.md guides/*.md checklists/*.md stacks/*.md; fi
+    - if [ -f "templates/GEMINI.md" ]; then cmp GEMINI.md templates/GEMINI.md && cmp CLAUDE.md templates/CLAUDE.md && cmp .cursorrules templates/.cursorrules; fi
 
 automated_tests:
   stage: test

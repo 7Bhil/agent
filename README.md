@@ -31,6 +31,7 @@ Le script installe automatiquement en moins d'une seconde :
 - `CLAUDE.md` (Anthropic Claude)
 - `.agent/checklists/` (Architecture, Clean Code, Securite, RGPD, Tests, Performance/a11y, Redaction Anti-Slop)
 - `scripts/audit-slop.py` (Audit deterministe anti-slop IA, zero dependance)
+- `scripts/setup-git-hooks.sh` (Installation automatique des hooks Git de qualite)
 - `.github/workflows/ci.yml` (Pipeline CI de tests et verification d'integrite)
 - `.env.example` (Gabarit securise des variables d'environnement)
 
