@@ -75,9 +75,13 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
   - `07-redaction-technique-anti-slop.md` : Grille d'auto-revue de prose technique et élimination des artefacts IA.
 - **Module `templates/`** : Fichiers modèles d'intégration pour chaque IDE/Agent, CI/CD et gestion d'environnement.
 - **Module `stacks/`** : Règles d'ingénierie ciblées par langage et framework :
-  - `react-nextjs.md` : Server Components, TanStack Query, découpage feature-based.
-  - `nodejs-backend.md` : Architecture en couches, Zod/DTO, gestion des erreurs asynchrones.
-  - `python-fastapi-django.md` : Typage strict mypy, Pydantic, optimisation des requêtes ORM (N+1).
+  - `react-nextjs.md` : Server Components, Next.js Edge Runtime, Caching, Middleware, TanStack Query.
+  - `nodejs-backend.md` : Architecture en couches, NestJS (Modules, Decorators, Scopes), Express et gestion d'erreurs asynchrones.
+  - `python-fastapi-django.md` : Typage strict mypy, Pydantic V2, FastAPI (Depends), Django (Middlewares, ORM N+1).
+  - `cpp.md` : C & C++ moderne, RAII, smart pointers, C++20 concepts, CMake moderne (Target-based).
+  - `java-spring.md` : Java 17/21 LTS, Spring Boot 3, IoC par constructeur, JPA/Hibernate (anti N+1), DTO records, JUnit 5.
+  - `laravel-php.md` : PHP 8.2+, Laravel 10/11, Form Requests, Service Container, Eloquent scopes, queues asynchrones.
+  - `database-management.md` : Modélisation SQL/NoSQL transverse, normalisation 3NF, indexation sélective, ACID, pattern Expand/Contract.
 
 
 ---
@@ -92,6 +96,22 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 ---
 
 ## Journal des Évolutions & Décisions
+
+### [2.2.0] - Expansion Universelle des Stacks Techniques & Harmonisation Racine
+- **Harmonisation structurelle racine** : Déploiement direct de `GEMINI.md`, `CLAUDE.md` et `.cursorrules` à la racine du projet pour une auto-documentation immédiate dans tous les environnements d'IA.
+- **Nouvelles stacks techniques** :
+  - `stacks/cpp.md` : C/C++ moderne, RAII, gestion mémoire smart pointers et CMake target-based.
+  - `stacks/java-spring.md` : Java 17/21, Spring Boot 3, IoC constructeur, JPA sans N+1, records immutables et tests réels.
+  - `stacks/laravel-php.md` : Laravel 10/11, Form Requests, injection de dépendances, Eloquent sans requêtes paresseuses.
+  - `stacks/database-management.md` : Guide transverse SQL/NoSQL (indexation, ACID, migrations sans interruption de service).
+- **Enrichissement des stacks existantes** :
+  - `stacks/nodejs-backend.md` : NestJS approfondi (modules, injection, pipes, guards) et Express.
+  - `stacks/python-fastapi-django.md` : FastAPI (`Depends`, async vs sync) et Django (middlewares, optimisation ORM).
+  - `stacks/react-nextjs.md` : Next.js App Router, Edge runtime, revalidation de cache et middlewares.
+- **Amélioration de l'outillage** :
+  - `scripts/audit-slop.py` enrichi avec détection des tournures passives lourdes et répétitions mécaniques.
+  - `install.sh` réaligné pour télécharger les fichiers d'agents directement depuis la racine.
+- **Feuille de route** : Validation et clôture de l'Étape 8 dans `ROADMAP.md`.
 
 ### [2.1.0] - Intégration de la Charte de Rédaction Technique & Outillage Déterministe Anti-Slop IA
 - **Absorption des meilleures pratiques anti-slop** : Synthèse opérationnelle inspirée de `humanize-skill` et `de-slop`.

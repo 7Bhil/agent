@@ -78,3 +78,14 @@ Créer un kit ultra-léger (< 150 Ko) intégrable dans n'importe quel nouveau pr
 - [x] Test complet de déploiement.
 - [x] Merge final de `developp` vers `main`.
 
+---
+
+## Étape 8 : Expansion Universelle & Harmonisation (Terminé)
+- [x] Harmoniser les instructions d'agents à la racine du projet (`GEMINI.md`, `CLAUDE.md`, `.cursorrules`).
+- [x] Rédiger les guides de stacks techniques pour C/C++ (`stacks/cpp.md`), Java (`stacks/java-spring.md`) et PHP (`stacks/laravel-php.md`).
+- [x] Créer un guide transverse de gestion de bases de données SQL/NoSQL (`stacks/database-management.md`).
+- [x] Enrichir les guides existants : Node.js (NestJS / Express), Python (FastAPI / Django) et React (Next.js Edge / Cache / Middleware).
+- [x] Améliorer l'outil d'audit anti-slop (`scripts/audit-slop.py`) avec règles passives et répétitions.
+- [x] Mettre à jour le script d'installation (`install.sh`) avec les sources racine.
+- [x] Validation finale et mise à jour de `BRAIN.md`.
+

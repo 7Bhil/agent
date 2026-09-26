@@ -30,16 +30,16 @@ download_file() {
 download_file "AGENTS.md" "AGENTS.md"
 
 # 2. Google Gemini & Antigravity
-download_file "templates/GEMINI.md" "GEMINI.md"
+download_file "GEMINI.md" "GEMINI.md"
 
 # 3. GitHub Copilot & OpenAI Codex (VS Code & Web)
 download_file "templates/.github/copilot-instructions.md" ".github/copilot-instructions.md"
 
 # 4. Cursor IDE
-download_file "templates/.cursorrules" ".cursorrules"
+download_file ".cursorrules" ".cursorrules"
 
 # 5. Claude / Anthropic
-download_file "templates/CLAUDE.md" "CLAUDE.md"
+download_file "CLAUDE.md" "CLAUDE.md"
 
 # 6. Checklists de référence indispensables
 download_file "checklists/01-architecture-et-conception.md" ".agent/checklists/01-architecture.md"
