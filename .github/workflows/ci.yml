@@ -48,10 +48,16 @@ jobs:
             npm audit --audit-level=high || true
           fi
 
-      - name:  Vérification de la présence de la Mémoire Vivante (BRAIN.md)
+      - name: Vérification de la présence de la Mémoire Vivante (BRAIN.md)
         run: |
           if [ ! -f "BRAIN.md" ]; then
-            echo " ERREUR: Le fichier BRAIN.md est manquant à la racine du projet."
+            echo "ERREUR: Le fichier BRAIN.md est manquant à la racine du projet."
             exit 1
           fi
-          echo " BRAIN.md présent et conforme."
+          echo "BRAIN.md présent et conforme."
+
+      - name: Audit de Rédaction Technique & Détection Anti-Slop IA
+        run: |
+          if [ -f "scripts/audit-slop.py" ]; then
+            python3 scripts/audit-slop.py README.md guides/*.md checklists/*.md
+          fi

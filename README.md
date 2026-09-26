@@ -29,7 +29,8 @@ Le script installe automatiquement en moins d'une seconde :
 - `.github/copilot-instructions.md` (GitHub Copilot / OpenAI Codex)
 - `.cursorrules` (Cursor IDE)
 - `CLAUDE.md` (Anthropic Claude)
-- `.agent/checklists/` (Architecture, Clean Code, Securite, RGPD, Tests, Performance/a11y)
+- `.agent/checklists/` (Architecture, Clean Code, Securite, RGPD, Tests, Performance/a11y, Redaction Anti-Slop)
+- `scripts/audit-slop.py` (Audit deterministe anti-slop IA, zero dependance)
 - `.github/workflows/ci.yml` (Pipeline CI de tests et verification d'integrite)
 - `.env.example` (Gabarit securise des variables d'environnement)
 
@@ -50,6 +51,7 @@ Le script installe automatiquement en moins d'une seconde :
 - **Workflow Git & Commits** : Branches thematiques (`feature/*`, `fix/*`), merge final systematique sur `developp`, et **100 % des messages de commit en francais**.
 - **Design System & Anti-Style IA** : Zero degrade fluo violet/indigo arbitraire. Couleurs pilotees strictement par `tailwind.config` et `global.css`.
 - **Zero Emoji Garanti** : Bannissement absolu de tout emoji dans le code, les commentaires, les commits et la documentation.
+- **Sobriete Redactionnelle & Anti-Slop IA** : Eradication du remplissage artificiel, des faux contrastes, du hedging et des conclusions creuses. Verification automatisee via `scripts/audit-slop.py`.
 
 ---
 
