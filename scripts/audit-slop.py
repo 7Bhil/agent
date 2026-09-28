@@ -167,6 +167,44 @@ _RULES = [
             re.IGNORECASE,
         ),
     ),
+    # --- Formules passives lourdes et tournures évasives ---
+    (
+        "passive_fr",
+        "Formule passive lourde ou déresponsabilisante (FR)",
+        re.compile(
+            r"\b(il a été décidé que|il doit être gardé à l'esprit que|"
+            r"il est généralement admis que|il est préconisé d'utiliser)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "passive_en",
+        "Heavy passive or impersonal evasion (EN)",
+        re.compile(
+            r"\b(it has been determined that|it should be noted that|"
+            r"it is widely acknowledged that|it is recommended to be used)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    # --- Répétitions et échos mécaniques de l'IA ---
+    (
+        "repetition_fr",
+        "Répétition mécanique ou écho IA (FR)",
+        re.compile(
+            r"\b(non seulement cela permet de\b.*\bmais cela assure également\b|"
+            r"en d['’]autres termes\b\s*,?|comme mentionné précédemment\b\s*,?)",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "repetition_en",
+        "Mechanical repetition or echo tell (EN)",
+        re.compile(
+            r"\b(in other words\b\s*,?|as previously mentioned\b\s*,?|"
+            r"not only does this allow\b.*\bbut it also ensures\b)",
+            re.IGNORECASE,
+        ),
+    ),
 ]
 
 
@@ -241,6 +279,10 @@ def run_selftest() -> bool:
         ("There is a wide variety of tools.", "weasel_en"),
         ("It's not just a cache, it's a proxy.", "negparallel_en"),
         ("Let's delve into the architecture.", "cliche_en"),
+        ("Il a été décidé que la base serait migrée.", "passive_fr"),
+        ("It has been determined that the server failed.", "passive_en"),
+        ("En d'autres termes, l'architecture est robuste.", "repetition_fr"),
+        ("In other words, the architecture is decoupled.", "repetition_en"),
     ]
 
     for text, expected_rule in samples:

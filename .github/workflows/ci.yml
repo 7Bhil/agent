@@ -59,5 +59,12 @@ jobs:
       - name: Audit de Rédaction Technique & Détection Anti-Slop IA
         run: |
           if [ -f "scripts/audit-slop.py" ]; then
-            python3 scripts/audit-slop.py README.md guides/*.md checklists/*.md
+            python3 scripts/audit-slop.py README.md guides/*.md checklists/*.md stacks/*.md
           fi
+
+      - name: Contrôle de Parité des Instructions d'Agents (Racine vs Templates)
+        run: |
+          cmp GEMINI.md templates/GEMINI.md
+          cmp CLAUDE.md templates/CLAUDE.md
+          cmp .cursorrules templates/.cursorrules
+          echo "Parité stricte validée entre les configurations racine et templates."

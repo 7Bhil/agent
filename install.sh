@@ -30,16 +30,16 @@ download_file() {
 download_file "AGENTS.md" "AGENTS.md"
 
 # 2. Google Gemini & Antigravity
-download_file "templates/GEMINI.md" "GEMINI.md"
+download_file "GEMINI.md" "GEMINI.md"
 
 # 3. GitHub Copilot & OpenAI Codex (VS Code & Web)
 download_file "templates/.github/copilot-instructions.md" ".github/copilot-instructions.md"
 
 # 4. Cursor IDE
-download_file "templates/.cursorrules" ".cursorrules"
+download_file ".cursorrules" ".cursorrules"
 
 # 5. Claude / Anthropic
-download_file "templates/CLAUDE.md" "CLAUDE.md"
+download_file "CLAUDE.md" "CLAUDE.md"
 
 # 6. Checklists de référence indispensables
 download_file "checklists/01-architecture-et-conception.md" ".agent/checklists/01-architecture.md"
@@ -53,6 +53,11 @@ download_file "checklists/07-redaction-technique-anti-slop.md" ".agent/checklist
 # 7. Outillage Déterministe d'Ingénierie & Anti-Slop IA
 download_file "scripts/audit-slop.py" "scripts/audit-slop.py"
 chmod +x "scripts/audit-slop.py" 2>/dev/null || true
+download_file "scripts/setup-git-hooks.sh" "scripts/setup-git-hooks.sh"
+chmod +x "scripts/setup-git-hooks.sh" 2>/dev/null || true
+
+# Configuration automatique des Git hooks locaux
+./scripts/setup-git-hooks.sh 2>/dev/null || true
 
 # 8. Intégration Continue (GitHub Actions & GitLab CI)
 download_file ".github/workflows/ci.yml" ".github/workflows/ci.yml"
@@ -71,6 +76,7 @@ echo -e "   - Agent Universel             : ${BOLD}AGENTS.md${RESET}"
 echo -e "   - Cursor IDE                  : ${BOLD}.cursorrules${RESET}"
 echo -e "   - Claude / Anthropic          : ${BOLD}CLAUDE.md${RESET}"
 echo -e "   - Script Anti-Slop IA         : ${BOLD}scripts/audit-slop.py${RESET}"
+echo -e "   - Hooks Git Locaux            : ${BOLD}scripts/setup-git-hooks.sh${RESET}"
 echo -e "   - Pipeline GitHub Actions     : ${BOLD}.github/workflows/ci.yml${RESET}"
 echo -e "   - Pipeline GitLab CI          : ${BOLD}.gitlab-ci.yml${RESET}"
 echo -e "   - Template Secrets            : ${BOLD}.env.example${RESET}"
