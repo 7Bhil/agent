@@ -61,6 +61,8 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
   - `CONTRIBUTING.md` : Guide des normes de contribution d'équipe et standards seniors.
   - `BRAIN.md` : Mémoire vivante, architecture, directives et journal d'évolution.
   - `AGENTS.md` / `GEMINI.md` / `CLAUDE.md` / `.cursorrules` / `.github/copilot-instructions.md` : Contrats d'instructions pour les différents agents IA.
+  - `.semgrep.yml` : Règles d'analyse statique de sécurité (injections SQL, secrets en dur, logs production).
+  - `.agent/config.yml` : Configuration paramétrable et débrayable des règles du kit.
   - `install.sh` : Script d'installation autonome et portable en 1 commande.
 - **Module `docs/decisions/` (ADR)** :
   - `README.md` : Modèle et standardisation des Architecture Decision Records.
@@ -110,6 +112,12 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 ---
 
 ## Journal des Évolutions & Décisions
+
+### [2.7.0] - Outillage de Sécurité Statique (Semgrep, Gitleaks) & Configuration Débrayable
+- **Configuration Débrayable Universelle** : Création de `.agent/config.yml` permettant d'ajuster les conventions d'équipe (langue des commits, branches d'intégration, niveau d'audit de sécurité, contrôle anti-slop).
+- **Analyse Statique Automatisée (Semgrep)** : Création de `.semgrep.yml` avec règles ciblées pour JavaScript/TypeScript (détection des secrets JWT en dur, concaténation de requêtes SQL non sécurisées, `console.log` en production).
+- **Protection Anti-Fuite de Secrets** : Intégration de `gitleaks protect --staged` dans le hook `pre-commit` automatisé via `scripts/setup-git-hooks.sh`.
+- **Mise à Jour du Déploiement** : Intégration de `.agent/config.yml` et `.semgrep.yml` dans `install.sh`.
 
 ### [2.6.0] - Direction Artistique Positive (DESIGN.md) & Stack Spécialisée Fintech
 - **Direction Artistique & Design System** :
