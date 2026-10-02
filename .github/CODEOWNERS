@@ -1,0 +1,23 @@
+# Propriétaires et Responsables de Modules
+
+# Configuration par défaut
+*       @7Bhil
+
+# Architecture et Contrats d'Agents
+/AGENTS.md                              @7Bhil
+/GEMINI.md                              @7Bhil
+/CLAUDE.md                              @7Bhil
+/.cursorrules                           @7Bhil
+/.github/copilot-instructions.md        @7Bhil
+/BRAIN.md                               @7Bhil
+/docs/decisions/                        @7Bhil
+
+# Guides d'Ingénierie & Stacks
+/guides/                                @7Bhil
+/stacks/                                @7Bhil
+/checklists/                            @7Bhil
+
+# Scripts d'Outillage & CI/CD
+/scripts/                               @7Bhil
+/.github/workflows/                     @7Bhil
+/install.sh                             @7Bhil

@@ -12,8 +12,12 @@ Tu ne dois **JAMAIS** attendre que l'utilisateur te rappelle tes devoirs de mét
 
 ---
 
-## 1. Protocole d'Exécution en 4 Phases
+## 1. Protocole d'Exécution en 5 Phases
 
+### Phase 0 : Exploration & Onboarding (Prise en Main de l'Existant)
+- **Consulter le protocole d'onboarding** : Appliquer [guides/onboard-codebase.md](guides/onboard-codebase.md).
+- **Ligne de base & Caractérisation** : Exécuter la suite de tests existante avant toute modification. Écrire des tests de caractérisation en l'absence de couverture suffisante.
+- **Respect de l'existant** : Se conformer aux conventions locales en place. Inspecter `git log` et `git blame` pour appréhender les raisons d'être historiques.
 
 ### Phase 1 : Investigation & Diagnostic (Avant toute modification)
 - **Comprendre le contexte global** : Inspecte la structure du projet, les conventions de code existantes, les linters et configurations TypeScript/linter.

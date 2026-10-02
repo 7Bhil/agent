@@ -58,10 +58,15 @@ EOF
 
 chmod +x "$HOOKS_DIR/commit-msg"
 
-# 2. Hook pre-commit : Audit déterministe anti-slop IA sur les fichiers modifiés indexés
+# 2. Hook pre-commit : Audit anti-slop et détection de secrets gitleaks
 cat << 'EOF' > "$HOOKS_DIR/pre-commit"
 #!/usr/bin/env bash
 set -e
+
+# Détection de secrets via gitleaks si installé localement
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks protect --staged --verbose --redact
+fi
 
 STAGED_MD_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.md$' || true)
 

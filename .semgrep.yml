@@ -1,0 +1,25 @@
+rules:
+  - id: forbid-console-log-in-production
+    patterns:
+      - pattern: console.log(...)
+    message: "L'utilisation de console.log est déconseillée en production. Utilisez un logger structuré JSON."
+    languages: [javascript, typescript]
+    severity: WARNING
+
+  - id: forbid-hardcoded-jwt-secrets
+    patterns:
+      - pattern-either:
+          - pattern: jwt.sign(..., "...", ...)
+          - pattern: jwt.verify(..., "...", ...)
+    message: "Ne jamais coder un secret JWT en dur. Utilisez une variable d'environnement issue de process.env."
+    languages: [javascript, typescript]
+    severity: ERROR
+
+  - id: forbid-raw-sql-concatenation
+    patterns:
+      - pattern-either:
+          - pattern: $DB.query(`... ${$VAR} ...`)
+          - pattern: $DB.raw(`... ${$VAR} ...`)
+    message: "Risque d'injection SQL via concaténation directe de template string. Utilisez des requêtes préparées avec paramètres typés."
+    languages: [javascript, typescript]
+    severity: ERROR

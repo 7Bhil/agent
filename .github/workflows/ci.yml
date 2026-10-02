@@ -45,7 +45,7 @@ jobs:
       - name:  Audit de Sécurité des Dépendances
         run: |
           if [ -f "package.json" ]; then
-            npm audit --audit-level=high || true
+            npm audit --audit-level=high
           fi
 
       - name: Vérification de la présence de la Mémoire Vivante (BRAIN.md)
