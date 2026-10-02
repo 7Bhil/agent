@@ -57,9 +57,17 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 
 - **Racine du projet** :
   - `README.md` : Présentation synthétique du projet.
+  - `CONTRIBUTING.md` : Guide des normes de contribution d'équipe et standards seniors.
   - `BRAIN.md` : Mémoire vivante, architecture, directives et journal d'évolution.
   - `AGENTS.md` / `GEMINI.md` / `CLAUDE.md` / `.cursorrules` / `.github/copilot-instructions.md` : Contrats d'instructions pour les différents agents IA.
   - `install.sh` : Script d'installation autonome et portable en 1 commande.
+- **Module `docs/decisions/` (ADR)** :
+  - `README.md` : Modèle et standardisation des Architecture Decision Records.
+  - `0001-adoption-du-format-adr-et-decouplage-memoire.md` : Arbitrage formel d'adoption des ADR pour l'équipe.
+- **Module `.github/`** :
+  - `CODEOWNERS` : Définition des responsabilités par module.
+  - `pull_request_template.md` : Gabarit de PR avec checklist d'auto-revue obligatoire.
+  - `workflows/ci.yml` : Pipeline d'intégration continue interne du kit.
 - **Module `scripts/`** :
   - `audit-slop.py` : Outil déterministe autonome (Python stdlib pur, zéro dépendance) détectant les tics de langage et le remplissage IA en français et anglais.
   - `setup-git-hooks.sh` : Script d'installation automatique des hooks Git locaux (`commit-msg` conventionnel et `pre-commit` anti-slop).
@@ -100,6 +108,16 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 ---
 
 ## Journal des Évolutions & Décisions
+
+### [2.5.0] - Standardisation ADR & Outillage Collaboratif d'Équipe
+- **Système d'Architecture Decision Records (ADR)** :
+  - Création de `docs/decisions/README.md` avec formalisation du gabarit d'arbitrage.
+  - Création de `docs/decisions/0001-adoption-du-format-adr-et-decouplage-memoire.md` officialisant le découplage entre mémoire courte et décisions de fond.
+- **Cadre de Contribution & Équipe** :
+  - Création de `CONTRIBUTING.md` (cycle Git, conventions en français, règles incompressibles et checklist).
+  - Création de `.github/CODEOWNERS` pour attribuer la gouvernance technique par module.
+  - Création de `.github/pull_request_template.md` avec grille de contrôle senior (Phase 0, typage, tests, sécurité, design).
+- **Sobriété et Contrôle Déterministe** : Zéro tic IA et validation de `audit-slop.py`.
 
 ### [2.4.1] - Correction Critique du Déploiement et Découplage de la CI
 - **Déploiement Intégral dans `install.sh`** : Installation automatique de tous les guides (`guides/` et `.agent/guides/`), des checklists (`checklists/` et `.agent/checklists/`) et de l'ensemble des stacks techniques (`stacks/` et `.agent/stacks/`).
