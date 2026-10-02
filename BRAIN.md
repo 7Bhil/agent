@@ -101,6 +101,12 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 
 ## Journal des Évolutions & Décisions
 
+### [2.4.1] - Correction Critique du Déploiement et Découplage de la CI
+- **Déploiement Intégral dans `install.sh`** : Installation automatique de tous les guides (`guides/` et `.agent/guides/`), des checklists (`checklists/` et `.agent/checklists/`) et de l'ensemble des stacks techniques (`stacks/` et `.agent/stacks/`).
+- **Initialisation Automatique de la Mémoire** : Déploiement d'un modèle propre `templates/BRAIN.md` si aucun `BRAIN.md` n'existe dans le projet cible.
+- **Découplage de la CI Déployée** : Création de `templates/.github/workflows/ci.yml` et fiabilisation de `templates/.gitlab-ci.yml` (suppression de l'attente de `templates/` inexistant chez le client, vérification de `package.json` avant `setup-node`, scan dynamique des dossiers documentaires).
+- **Rigueur Sécurité Dépendances** : Suppression du contournement `|| true` sur `npm audit --audit-level=high` dans `.github/workflows/ci.yml` et `templates/.github/workflows/ci.yml`.
+
 ### [2.4.0] - Intégration du Protocole Phase 0 Onboarding & Exploration de l'Existant
 - **Protocole d'Onboarding & Exploration** : Création de `guides/onboard-codebase.md` définissant les 5 étapes d'investigation préalable (génération de `CODEMAP.md`, baseline test run, traçage de flux bout en bout, archéologie Git via `git blame`/`log`, tests de caractérisation).
 - **Enrichissement du Contrat d'Agent (5 Phases)** : Insertion formelle de la Phase 0 dans `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `.cursorrules` et `templates/.github/copilot-instructions.md`.

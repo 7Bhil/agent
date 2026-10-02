@@ -12,22 +12,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name:  Récupération du dépôt
+      - name: Récupération du dépôt
         uses: actions/checkout@v4
 
-      - name:  Configuration de Node.js
+      - name: Configuration de Node.js
+        if: hashFiles('package.json') != ''
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: ${{ hashFiles('package-lock.json') != '' && 'npm' || '' }}
 
-      - name:  Installation des dépendances (si applicable)
+      - name: Installation des dépendances (si applicable)
+        if: hashFiles('package.json') != ''
         run: |
-          if [ -f "package.json" ]; then
-            npm ci || npm install
-          fi
+          npm ci || npm install
 
-      - name:  Vérification du Typage Strict & Linting
+      - name: Vérification du Typage Strict & Linting
         run: |
           if [ -f "tsconfig.json" ]; then
             npx tsc --noEmit
@@ -36,13 +36,13 @@ jobs:
             npm run lint
           fi
 
-      - name:  Exécution des Tests Automatisés
+      - name: Exécution des Tests Automatisés
         run: |
           if grep -q "\"test\"" package.json 2>/dev/null; then
             npm test -- --coverage
           fi
 
-      - name:  Audit de Sécurité des Dépendances
+      - name: Audit de Sécurité des Dépendances
         run: |
           if [ -f "package.json" ]; then
             npm audit --audit-level=high
@@ -59,12 +59,5 @@ jobs:
       - name: Audit de Rédaction Technique & Détection Anti-Slop IA
         run: |
           if [ -f "scripts/audit-slop.py" ]; then
-            python3 scripts/audit-slop.py README.md guides/*.md checklists/*.md stacks/*.md
+            python3 scripts/audit-slop.py README.md $(find .agent/guides .agent/checklists .agent/stacks guides checklists stacks -maxdepth 1 -name "*.md" 2>/dev/null)
           fi
-
-      - name: Contrôle de Parité des Instructions d'Agents (Racine vs Templates)
-        run: |
-          cmp GEMINI.md templates/GEMINI.md
-          cmp CLAUDE.md templates/CLAUDE.md
-          cmp .cursorrules templates/.cursorrules
-          echo "Parité stricte validée entre les configurations racine et templates."
