@@ -12,16 +12,17 @@ Ce document régit les règles de contribution applicables aux développeurs et 
 ---
 
 ## 2. Cycle de Travail Git
+Les conventions de branches et de commits sont définies dans `.agent/config.yml` (paramétrable par projet).
 1. **Création de Branche** :
-   - Branche d'intégration : `developp`.
+   - Branche d'intégration : configurée via `git.integration_branch` (par défaut `developp`).
    - Branche de travail : `feature/<nom-fonctionnalite>`, `fix/<nom-correctif>`, `refactor/<nom-refactoring>`.
 2. **Messages de Commit** :
-   - Rédigés obligatoirement en **français**.
+   - Rédigés selon la configuration active (`git.enforce_french_commits` et `git.convention`).
    - Format conventionnel : `feat: ...`, `fix: ...`, `docs: ...`, `refactor: ...`, `test: ...`, `chore: ...`.
    - Zéro émoji dans les messages de commit.
 3. **Revue et Intégration** :
-   - Validation de l'ensemble des tests automatisés et des audits de sécurité en local avant ouverture de pull request.
-   - Fusion systématique sur `developp`.
+   - Validation locale préalable : `./scripts/test-kit.sh` et `python3 scripts/run-evals.py`.
+   - Fusion systématique sur la branche d'intégration définie.
 
 ---
 

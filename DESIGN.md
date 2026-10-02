@@ -1,119 +1,107 @@
-# Cadre et Système de Design (DESIGN.md)
+# Architecture Globale du Senior Agent Engineering OS
 
-Ce document établit la direction artistique, la palette sémantique, la typographie et les états d'interface obligatoires du projet. Il sert de source unique de vérité visuelle pour l'équipe et les agents d'ingénierie.
-
----
-
-## 1. Principes Visuels Fondamentaux
-- **Sobriété d'Entreprise** : Interfaces nettes, lisibles, professionnelles et axées sur l'efficacité métier.
-- **Interdiction Formelle des Styles IA Stéréotypés** :
-  - Zéro dégradé fluo (violet/indigo arbitraire non justifié).
-  - Zéro glassmorphism kitsch ou cartes lumineuses non demandées.
-  - Zéro couleur brute injectée en dur (`#hex`, `rgb(...)`) dans les balises JSX ou HTML.
-- **Accessibilité Native (WCAG 2.2 AA)** :
-  - Ratio de contraste minimal de 4.5:1 pour le texte standard et 3:1 pour le texte large et les éléments interactifs.
-  - Indicateur de focus visible sur chaque composant interactif (`focus-visible:ring-2 focus-visible:ring-primary`).
+Ce document présente l'architecture système, les flux d'exécution et les responsabilités des composants du **Senior Agent Engineering OS**.
 
 ---
 
-## 2. Palette Sémantique et Tokens (Tailwind / CSS Variables)
+## 1. Vue d'Ensemble & Découpage Système
 
-Toute couleur utilisée dans l'interface doit correspondre à l'un des rôles sémantiques ci-dessous :
+Le système est articulé autour d'un **Core universel déterministe**, isolé des préférences subjectives et des contraintes d'environnements spécifiques.
 
-```css
-:root {
-  /* Arrière-plans et Surfaces */
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-
-  /* Actions Principales & Accents */
-  --primary: 221.2 83.2% 53.3%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-
-  /* Éléments Neutres et Bordures */
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-
-  /* Feedback & Statuts Métier */
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --success: 142.1 76.2% 36.3%;
-  --success-foreground: 355.7 100% 97.3%;
-  --warning: 38 92% 50%;
-  --warning-foreground: 48 96% 89%;
-}
-
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-}
+```
+                               Core Universel (core/RULES.md)
+                                             |
+                   +-------------------------+-------------------------+
+                   |                                                   |
+                   v                                                   v
+   Générateur d'Adapters (scripts/build-adapters.py)       Presets Utilisateur (presets/)
+                   |                                                   |
+                   +-------------------------+-------------------------+
+                                             |
+                                             v
+               Instructions Multi-Agents (AGENTS, GEMINI, CLAUDE, Cursor...)
+                                             |
+                                             v
+                                  Agent IA en Session
+                                             |
+                   +-------------------------+-------------------------+
+                   |                                                   |
+                   v                                                   v
+      Mémoire Modulaire (.agent/memory/)                     Code & Architecture Projet
+      - project.md (contexte technique)                      - Implémentation typée
+      - user.md (directives actives)                         - Design System (DESIGN.md)
+      - constraints.md (invariants)                          - Stacks spécialisées (stacks/)
+      - current-state.md (session vive)                      - Décisions structurantes (ADR)
+                                             |
+                                             v
+                           Banc d'Évaluations & Contrôles
+                           - scripts/test-kit.sh (Intégrité)
+                           - scripts/run-evals.py (Scénarios IA)
+                           - .semgrep.yml (Analyse Statique)
+                           - scripts/audit-slop.py (Sobriété)
 ```
 
 ---
 
-## 3. Typographie & Rythme Visuel
-- **Police Principale** : Sans-serif système propre et neutre (`Inter`, `system-ui`, `-apple-system`).
-- **Échelle Typographique** :
-  - Titre de page (`H1`) : `text-2xl font-bold tracking-tight` (desktop: `text-3xl`).
-  - Titre de section (`H2`) : `text-xl font-semibold tracking-tight`.
-  - Sous-titre (`H3`) : `text-lg font-medium`.
-  - Corps de texte (`Body`) : `text-sm font-normal text-muted-foreground` ou `text-foreground`.
-  - Données techniques / codes : `font-mono text-xs`.
-- **Échelle d'Espacement & Grille** :
-  - Espacement horizontal/vertical standardisé : multiples de 4px (`p-2`, `p-4`, `gap-4`, `space-y-6`).
-  - Largeur de conteneur maximale : `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`.
+## 2. Matrice des Responsabilités & Rôles
+
+Le système distingue formellement cinq niveaux d'intervention pour éviter toute ambiguïté :
+
+| Composant | Nature | Emplacement | Fonction & Garantie |
+| :--- | :--- | :--- | :--- |
+| **Core Invariants** | Instruction formelle | `core/RULES.md` | Socle universel d'ingénierie senior (5 phases, OWASP, clean code). |
+| **Presets** | Configuration personnelle | `presets/7bhil.md` | Conventions spécifiques (commits en français, conventions de branches). |
+| **Adapters** | Fichiers dérivés | Racine & `templates/` | Points d'ancrage pour chaque assistant IA (`AGENTS.md`, `CLAUDE.md`, etc.). |
+| **Mémoire Vive** | Contexte dynamique | `.agent/memory/` | Contexte technique, directives, contraintes et état de session. |
+| **Décisions (ADR)** | Historique immuable | `docs/decisions/` | Enregistrements formels d'arbitrages architecturaux majeurs. |
+| **Vérifications Statiques** | Automatisation déterministe | Scripts & CI | `test-kit.sh`, `run-evals.py`, Semgrep, audit anti-slop. |
 
 ---
 
-## 4. Les 4 États Obligatoires de Chaque Composant
+## 3. Ce qui est Garanti par l'Outillage vs ce qui Repose sur le Prompt
 
-Tout composant affichant des données dynamiques doit implémenter formellement les 4 états suivants :
+Une architecture d'agent honnête et rigoureuse doit expliciter ses limites :
 
-```
-[Requête Déclenchée] ---> [1. Loading / Squelette]
-                                |
-          +---------------------+---------------------+
-          |                                           |
-          v                                           v
-[2. Nominal / Données]                 [3. Empty / Liste Vide]
-          |                                           |
-          +---------------------+---------------------+
-                                |
-                                v (En cas d'échec)
-                       [4. Error / Réessai]
-```
+### Garanties Automatisées (Bloquantes en Machine)
+1. **Parité des Fichiers d'Agents** : `scripts/build-adapters.py --check` empêche toute divergence entre le Core et les adapters déployés.
+2. **Pureté Textuelle & Anti-Slop** : `scripts/audit-slop.py` bloque en pré-commit et en CI les tics de langage et le remplissage artificiel.
+3. **Zéro Émoji dans les Fichiers d'Ingénierie** : Contrôle binaire Unicode dans `scripts/test-kit.sh`.
+4. **Numérotation et Format des ADR** : Validation séquentielle stricte par script.
+5. **Injections SQL & Secrets en Dur** : Règles d'analyse statique `.semgrep.yml` et scan de secrets Gitleaks.
+6. **Déploiement Sécurisé Sans Écrasement** : `install.sh` garantit la détection des fichiers existants, le mode `--dry-run` et la création de sauvegardes `.bak`.
 
-1. **État de Chargement (`Loading`)** :
-   - Préférer les squelettes animés (`Skeleton`) plutôt que les spinners bloquants plein écran.
-   - Préserver la disposition spatiale pour éviter les sauts de contenu (*Cumulative Layout Shift - CLS*).
-2. **État Vide (`Empty State`)** :
-   - Message explicite expliquant l'absence d'éléments.
-   - Bouton d'action contextuel clair (ex: *Créer une transaction*, *Inviter un collaborateur*).
-3. **État d'Erreur (`Error State`)** :
-   - Message d'erreur compréhensible par l'utilisateur (sans stack trace ni jargon technique interne).
-   - Possibilité de réessai immédiat (*Bouton Réessayer*) ou guidage vers le support.
-4. **État Nominal (`Data Loaded`)** :
-   - Affichage complet, gestion fluide du dépassement de texte (`truncate`, infobulles).
+### Garanties Portées par les Instructions (Contrat d'Agent)
+1. **Application Rigoureuse de la Phase 0** : Écriture spontanée de tests de caractérisation avant de refactoriser du code patrimonial sans tests.
+2. **Arithmétique Financière & Grand Livre** : Modélisation des transactions financières en unités mineures et écriture en partie double (`stacks/fintech.md`).
+3. **Gestion du Cycle de Vie des Tests** : Décision autonome d'ajouter des tests pour les cas limites ou de purger les tests d'une fonctionnalité dépréciée.
+4. **Respect des Directives Métier** : Consultation autonome de `BRAIN.md` et mise à jour de l'état de session dans `.agent/memory/current-state.md`.
 
 ---
 
-## 5. Primitifs Recommandés & Écosystème
-- **Composants d'Interface Non Stylés** : Radix UI / Headless UI pour garantir l'accessibilité native (gestion focus, attributs ARIA, navigation clavier).
-- **Implémentation Modulaire** : Composants basés sur `shadcn/ui` intégrés directement dans le code source du projet pour conserver la maîtrise complète du code.
-- **Gestion des Classes** : Utiliser la combinaison utilitaire `clsx` et `tailwind-merge` (`cn(...)`) pour éviter les conflits de classes CSS.
+## 4. Flux de Travail et Boucle de Rétroaction (*Agent Feedback Loop*)
+
+```
+[Tâche Utilisateur] 
+         |
+         v
+1. Lecture de BRAIN.md et .agent/memory/
+         |
+         v
+2. Phase 0 : Exécution de la suite de tests existante (Ligne de base)
+         |
+         v
+3. Investigation & Diagnostic de la cause racine
+         |
+         v
+4. Implémentation Clean Code (Zéro any, respect DESIGN.md)
+         |
+         v
+5. Tests Automatisés (Nominal, limites, anti-régression)
+         |
+         v
+6. Contrôle Local : scripts/test-kit.sh & scripts/run-evals.py
+         |
+         +--> [ÉCHEC] : Auto-correction immédiate de l'agent
+         |
+         +--> [SUCCÈS] : Mise à jour de .agent/memory/current-state.md
+```

@@ -38,3 +38,17 @@
 - [ ] **Indépendance des tests** :
   - Chaque test s'exécute de façon autonome.
   - Remise à zéro de l'état (base de données, mocks) avant chaque test (`beforeEach`).
+
+---
+
+## 4. Arbitrage Senior : Quand Ajouter et Quand Soustraire des Tests
+
+- [ ] **Quand ajouter des tests** :
+  - `feat` : Ajout obligatoire d'un test nominal et d'au moins 2 cas limites (null, vide, accès refusé).
+  - `fix` : Reproduction préalable du bug par un test en échec (rouge) avant écriture du correctif (vert).
+  - Refactor sans tests : Écriture de tests de caractérisation préalables (Phase 0).
+- [ ] **Quand soustraire (supprimer) des tests** :
+  - Code déprécié : Toute règle métier ou route retirée doit voir ses tests supprimés immédiatement (jamais commentés).
+  - Couplage interne : Supprimer les tests qui espionnent des méthodes privées ou mockent excessivement l'implémentation.
+  - Doublons redondants : Fusionner les tests sans valeur ajoutée pour maintenir une suite d'exécution rapide.
+  - Tests de caractérisation : Les purger dès que les tests cibles réels sont en place.
