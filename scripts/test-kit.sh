@@ -68,24 +68,42 @@ sys.exit(1 if has_emoji else 0)
 }
 check_test "Absence stricte d'émojis (zéro déchet visuel)" test_zero_emoji
 
-# 4. Test d'Intégrité de install.sh (Syntaxe et déploiement simulé)
+# 4. Test d'Intégrité de install.sh (Syntaxe, Dry-run et Déploiement sécurisé)
 test_install_script() {
-  bash -n install.sh && \
-  mkdir -p /tmp/agent-test-run && \
-  cd /tmp/agent-test-run && \
-  "${OLDPWD}/install.sh" >/dev/null 2>&1 && \
+  bash -n install.sh || return 1
+  # Test Dry-run
+  local dry_out
+  dry_out=$(./install.sh --dry-run)
+  echo "$dry_out" | grep -q "MODE DRY-RUN ACTIF" || return 1
+
+  # Test Déploiement dans dossier vierge
+  mkdir -p /tmp/agent-test-run
+  cd /tmp/agent-test-run
+  "${OLDPWD}/install.sh" >/dev/null 2>&1
   test -f BRAIN.md && \
   test -f DESIGN.md && \
   test -f AGENTS.md && \
+  test -f core/RULES.md && \
+  test -f .agent/memory/project.md && \
   test -d guides && \
   test -d checklists && \
   test -d stacks && \
   test -f .semgrep.yml && \
-  test -f .agent/config.yml && \
-  cd - >/dev/null && \
+  test -f .agent/config.yml || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+
+  # Test détection de conflit existant sans --force
+  local conflict_out
+  conflict_out=$("${OLDPWD}/install.sh")
+  echo "$conflict_out" | grep -q "CONSERVÉ" || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+
+  # Test avec --force et backup
+  "${OLDPWD}/install.sh" --force >/dev/null 2>&1
+  test -f AGENTS.md.bak || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+
+  cd - >/dev/null
   rm -rf /tmp/agent-test-run
 }
-check_test "Déploiement complet autonome via install.sh" test_install_script
+check_test "Déploiement complet, dry-run et gestion des conflits via install.sh" test_install_script
 
 # 5. Test de Numérotation Séquentielle des ADR
 test_adr_sequencing() {
@@ -104,6 +122,18 @@ sys.exit(0)
 "
 }
 check_test "Numérotation séquentielle stricte des ADR" test_adr_sequencing
+
+# 6. Test de Synchronisation des Adapters d'Agents
+test_adapters_sync() {
+  python3 scripts/build-adapters.py --check >/dev/null 2>&1
+}
+check_test "Synchronisation déterministe des adapters IA avec core/RULES.md" test_adapters_sync
+
+# 7. Exécution du Banc d'Évaluation des Agents (Agent Evals Runner)
+test_agent_evals() {
+  python3 scripts/run-evals.py >/dev/null 2>&1
+}
+check_test "Exécution et conformité du banc d'évaluations (run-evals.py)" test_agent_evals
 
 echo "---------------------------------------------------------"
 if [ $FAILED -eq 0 ]; then
