@@ -13,8 +13,10 @@ At every interaction, before generating any code, you MUST autonomously:
 4. Update `BRAIN.md` upon completion.
 
 
-1. **Think Before Coding**:
-   - Investigate existing codebase patterns and architecture before modifying or adding code.
+1. **Phase 0 Onboarding & Investigation**:
+   - Apply `guides/onboard-codebase.md`: inspect project structure, dependencies, and baseline test status before modifying code.
+   - Respect existing architectural conventions, trace end-to-end data flows, and use `git blame`/`git log` for historical context.
+   - Write characterization tests prior to any legacy code refactoring.
    - Clarify edge cases and failure modes (network errors, nulls, concurrency, auth failures).
    - Never apply superficial fixes that mask underlying root causes.
 

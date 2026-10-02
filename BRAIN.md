@@ -64,6 +64,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
   - `audit-slop.py` : Outil déterministe autonome (Python stdlib pur, zéro dépendance) détectant les tics de langage et le remplissage IA en français et anglais.
   - `setup-git-hooks.sh` : Script d'installation automatique des hooks Git locaux (`commit-msg` conventionnel et `pre-commit` anti-slop).
 - **Module `guides/`** :
+  - `onboard-codebase.md` : Protocole Phase 0 de prise en main de l'existant, génération de CODEMAP, traçage de flux et tests de caractérisation.
   - `clean-technical-writing.md` : Guide de rédaction technique sobre, concision active et anti-slop IA.
   - `observability-and-logging.md` : Observabilité, format JSON structuré, OpenTelemetry, Google SRE Golden Signals et sondes liveness/readiness.
   - `security-handbook.md` : Défense OWASP Top 10, ASVS, anti-BOLA/IDOR, injections et SSRF.
@@ -99,6 +100,12 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 ---
 
 ## Journal des Évolutions & Décisions
+
+### [2.4.0] - Intégration du Protocole Phase 0 Onboarding & Exploration de l'Existant
+- **Protocole d'Onboarding & Exploration** : Création de `guides/onboard-codebase.md` définissant les 5 étapes d'investigation préalable (génération de `CODEMAP.md`, baseline test run, traçage de flux bout en bout, archéologie Git via `git blame`/`log`, tests de caractérisation).
+- **Enrichissement du Contrat d'Agent (5 Phases)** : Insertion formelle de la Phase 0 dans `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `.cursorrules` et `templates/.github/copilot-instructions.md`.
+- **Alignement strict des templates** : Synchronisation des fichiers miroirs dans `templates/`.
+- **Audit de style & slop validé** : Zéro tic IA et zéro emoji sur l'ensemble de la documentation.
 
 ### [2.3.0] - Observabilité Industrielle, Durcissement Docker & Automatisation des Git Hooks
 - **Observabilité & Télémétrie** : Création de `guides/observability-and-logging.md` (logs JSON structurés, corrélation distribuée, signaux SRE et découplage liveness/readiness/startup).
