@@ -52,6 +52,11 @@ if [ ! -f "BRAIN.md" ]; then
   download_file "templates/BRAIN.md" "BRAIN.md"
 fi
 
+# 7. Cadre et Direction Artistique (DESIGN.md) - Initialisation si absent
+if [ ! -f "DESIGN.md" ]; then
+  download_file "DESIGN.md" "DESIGN.md"
+fi
+
 # 7. Guides d'Ingénierie Senior
 GUIDES=(
   "architecture-and-design.md"
@@ -92,6 +97,7 @@ STACKS=(
   "cpp.md"
   "database-management.md"
   "docker-containerization.md"
+  "fintech.md"
   "java-spring.md"
   "laravel-php.md"
   "nodejs-backend.md"
