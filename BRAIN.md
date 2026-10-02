@@ -57,13 +57,25 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 
 - **Racine du projet** :
   - `README.md` : Présentation synthétique du projet.
+  - `DESIGN.md` : Cadre du Design System, palette sémantique, typographie, espacements et 4 états d'interface.
+  - `CONTRIBUTING.md` : Guide des normes de contribution d'équipe et standards seniors.
   - `BRAIN.md` : Mémoire vivante, architecture, directives et journal d'évolution.
   - `AGENTS.md` / `GEMINI.md` / `CLAUDE.md` / `.cursorrules` / `.github/copilot-instructions.md` : Contrats d'instructions pour les différents agents IA.
+  - `.semgrep.yml` : Règles d'analyse statique de sécurité (injections SQL, secrets en dur, logs production).
+  - `.agent/config.yml` : Configuration paramétrable et débrayable des règles du kit.
   - `install.sh` : Script d'installation autonome et portable en 1 commande.
+- **Module `docs/decisions/` (ADR)** :
+  - `README.md` : Modèle et standardisation des Architecture Decision Records.
+  - `0001-adoption-du-format-adr-et-decouplage-memoire.md` : Arbitrage formel d'adoption des ADR pour l'équipe.
+- **Module `.github/`** :
+  - `CODEOWNERS` : Définition des responsabilités par module.
+  - `pull_request_template.md` : Gabarit de PR avec checklist d'auto-revue obligatoire.
+  - `workflows/ci.yml` : Pipeline d'intégration continue interne du kit.
 - **Module `scripts/`** :
   - `audit-slop.py` : Outil déterministe autonome (Python stdlib pur, zéro dépendance) détectant les tics de langage et le remplissage IA en français et anglais.
   - `setup-git-hooks.sh` : Script d'installation automatique des hooks Git locaux (`commit-msg` conventionnel et `pre-commit` anti-slop).
 - **Module `guides/`** :
+  - `onboard-codebase.md` : Protocole Phase 0 de prise en main de l'existant, génération de CODEMAP, traçage de flux et tests de caractérisation.
   - `clean-technical-writing.md` : Guide de rédaction technique sobre, concision active et anti-slop IA.
   - `observability-and-logging.md` : Observabilité, format JSON structuré, OpenTelemetry, Google SRE Golden Signals et sondes liveness/readiness.
   - `security-handbook.md` : Défense OWASP Top 10, ASVS, anti-BOLA/IDOR, injections et SSRF.
@@ -85,6 +97,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
   - `java-spring.md` : Java 17/21 LTS, Spring Boot 3, IoC par constructeur, JPA/Hibernate (anti N+1), DTO records, JUnit 5.
   - `laravel-php.md` : PHP 8.2+, Laravel 10/11, Form Requests, Service Container, Eloquent scopes, queues asynchrones.
   - `database-management.md` : Modélisation SQL/NoSQL transverse, normalisation 3NF, indexation sélective, ACID, pattern Expand/Contract.
+  - `fintech.md` : Systèmes financiers et Mobile Money, unités mineures, grand livre à double entrée, idempotence et webhooks signés.
 
 
 ---
@@ -99,6 +112,43 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 ---
 
 ## Journal des Évolutions & Décisions
+
+### [2.7.0] - Outillage de Sécurité Statique (Semgrep, Gitleaks) & Configuration Débrayable
+- **Configuration Débrayable Universelle** : Création de `.agent/config.yml` permettant d'ajuster les conventions d'équipe (langue des commits, branches d'intégration, niveau d'audit de sécurité, contrôle anti-slop).
+- **Analyse Statique Automatisée (Semgrep)** : Création de `.semgrep.yml` avec règles ciblées pour JavaScript/TypeScript (détection des secrets JWT en dur, concaténation de requêtes SQL non sécurisées, `console.log` en production).
+- **Protection Anti-Fuite de Secrets** : Intégration de `gitleaks protect --staged` dans le hook `pre-commit` automatisé via `scripts/setup-git-hooks.sh`.
+- **Mise à Jour du Déploiement** : Intégration de `.agent/config.yml` et `.semgrep.yml` dans `install.sh`.
+
+### [2.6.0] - Direction Artistique Positive (DESIGN.md) & Stack Spécialisée Fintech
+- **Direction Artistique & Design System** :
+  - Création de `DESIGN.md` avec charte sémantique, variables CSS HSL, typographie sans-serif propre, règles WCAG 2.2 AA.
+  - Formalisation des 4 états obligatoires de chaque composant d'interface (Loading avec skeleton, Nominal, Empty state avec action, Error avec retry).
+- **Ingénierie Financière & Fintech** :
+  - Création de `stacks/fintech.md` traitant des contraintes critiques : bannissement des nombres à virgule flottante, manipulation en unités mineures entières, grand livre immuable à double entrée (*Double-Entry Ledger*).
+  - Architecture d'intégration Mobile Money (FedaPay, KKiaPay, MTN, Moov, Orange) : vérification cryptographique HMAC en temps constant, découplage asynchrone des webhooks et réconciliation automatique.
+- **Mise à Jour de l'Installation** : Intégration de `DESIGN.md` et `stacks/fintech.md` dans `install.sh`.
+
+### [2.5.0] - Standardisation ADR & Outillage Collaboratif d'Équipe
+- **Système d'Architecture Decision Records (ADR)** :
+  - Création de `docs/decisions/README.md` avec formalisation du gabarit d'arbitrage.
+  - Création de `docs/decisions/0001-adoption-du-format-adr-et-decouplage-memoire.md` officialisant le découplage entre mémoire courte et décisions de fond.
+- **Cadre de Contribution & Équipe** :
+  - Création de `CONTRIBUTING.md` (cycle Git, conventions en français, règles incompressibles et checklist).
+  - Création de `.github/CODEOWNERS` pour attribuer la gouvernance technique par module.
+  - Création de `.github/pull_request_template.md` avec grille de contrôle senior (Phase 0, typage, tests, sécurité, design).
+- **Sobriété et Contrôle Déterministe** : Zéro tic IA et validation de `audit-slop.py`.
+
+### [2.4.1] - Correction Critique du Déploiement et Découplage de la CI
+- **Déploiement Intégral dans `install.sh`** : Installation automatique de tous les guides (`guides/` et `.agent/guides/`), des checklists (`checklists/` et `.agent/checklists/`) et de l'ensemble des stacks techniques (`stacks/` et `.agent/stacks/`).
+- **Initialisation Automatique de la Mémoire** : Déploiement d'un modèle propre `templates/BRAIN.md` si aucun `BRAIN.md` n'existe dans le projet cible.
+- **Découplage de la CI Déployée** : Création de `templates/.github/workflows/ci.yml` et fiabilisation de `templates/.gitlab-ci.yml` (suppression de l'attente de `templates/` inexistant chez le client, vérification de `package.json` avant `setup-node`, scan dynamique des dossiers documentaires).
+- **Rigueur Sécurité Dépendances** : Suppression du contournement `|| true` sur `npm audit --audit-level=high` dans `.github/workflows/ci.yml` et `templates/.github/workflows/ci.yml`.
+
+### [2.4.0] - Intégration du Protocole Phase 0 Onboarding & Exploration de l'Existant
+- **Protocole d'Onboarding & Exploration** : Création de `guides/onboard-codebase.md` définissant les 5 étapes d'investigation préalable (génération de `CODEMAP.md`, baseline test run, traçage de flux bout en bout, archéologie Git via `git blame`/`log`, tests de caractérisation).
+- **Enrichissement du Contrat d'Agent (5 Phases)** : Insertion formelle de la Phase 0 dans `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `.cursorrules` et `templates/.github/copilot-instructions.md`.
+- **Alignement strict des templates** : Synchronisation des fichiers miroirs dans `templates/`.
+- **Audit de style & slop validé** : Zéro tic IA et zéro emoji sur l'ensemble de la documentation.
 
 ### [2.3.0] - Observabilité Industrielle, Durcissement Docker & Automatisation des Git Hooks
 - **Observabilité & Télémétrie** : Création de `guides/observability-and-logging.md` (logs JSON structurés, corrélation distribuée, signaux SRE et découplage liveness/readiness/startup).

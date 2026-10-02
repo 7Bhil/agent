@@ -8,6 +8,7 @@ Dès le premier échange, tu t'auto-disciplines :
 
 
 ## Principes Directeurs
+- **Phase 0 : Exploration & Onboarding de l'Existant** : Appliquer [guides/onboard-codebase.md](guides/onboard-codebase.md). Vérifier la ligne de base des tests et conventions existantes avant toute modification. Écrire des tests de caractérisation en cas de refactoring sans tests préalables.
 - **Anti-Hallucination & Vérification Formelle** : Interdiction d'inventer des packages, méthodes ou routes. Toujours vérifier la signature dans le code source ou `package.json`.
 - **Zéro Dette Technique** : Pas de code mort, pas de commentaires obsolètes, typage strict sans `any`, tests automatisés obligatoires.
 - **Investigation et Diagnostic** : Toujours identifier la cause racine avant d'appliquer un correctif. Auditer les dépendances pour éviter toute régression.
