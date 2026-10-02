@@ -74,6 +74,9 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 - **Module `scripts/`** :
   - `audit-slop.py` : Outil déterministe autonome (Python stdlib pur, zéro dépendance) détectant les tics de langage et le remplissage IA en français et anglais.
   - `setup-git-hooks.sh` : Script d'installation automatique des hooks Git locaux (`commit-msg` conventionnel et `pre-commit` anti-slop).
+  - `test-kit.sh` : Harnais de tests automatisés validant l'intégrité, la parité des templates et le bon déploiement du kit.
+- **Module `tests/evals/`** :
+  - `agent-scenarios.md` : Banc d'évaluation des agents (scénarios pass/fail de rigueur senior, détection d'anti-patterns).
 - **Module `guides/`** :
   - `onboard-codebase.md` : Protocole Phase 0 de prise en main de l'existant, génération de CODEMAP, traçage de flux et tests de caractérisation.
   - `clean-technical-writing.md` : Guide de rédaction technique sobre, concision active et anti-slop IA.
@@ -112,6 +115,15 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 ---
 
 ## Journal des Évolutions & Décisions
+
+### [2.8.0] - Cycle de Vie des Tests, Harnais Automatisé du Kit & Évaluations d'Agents
+- **Gouvernance & Cycle de Vie des Tests** :
+  - Mise à niveau de `guides/testing-strategy.md` et `checklists/05-tests-et-resilience.md` avec directives explicites : quand ajouter des tests (`feat`, `fix` avec reproduction préalable en rouge, caractérisation Phase 0) et quand en soustraire (fonctionnalités dépréciées, tests couplés à l'implémentation privée, consolidation de doublons redondants, purge des harnais temporaires).
+- **Harnais de Tests Automatisés du Kit** :
+  - Création de `scripts/test-kit.sh` exécutant les vérifications de parité templates, audit anti-slop, contrôle de pureté Unicode (zéro émoji), déploiement complet autonome via `install.sh` et ordonnancement strict des ADR.
+  - Intégration de l'exécution automatique de `test-kit.sh` dans `.github/workflows/ci.yml`.
+- **Banc d'Évaluations d'Agents (Agent Evals)** :
+  - Création de `tests/evals/agent-scenarios.md` définissant 4 scénarios d'évaluation opérationnelle (Design System sans hacks hexadécimaux, arithmétique financière stricte, refactoring patrimonial avec tests de caractérisation, nettoyage actif de tests dépréciés).
 
 ### [2.7.0] - Outillage de Sécurité Statique (Semgrep, Gitleaks) & Configuration Débrayable
 - **Configuration Débrayable Universelle** : Création de `.agent/config.yml` permettant d'ajuster les conventions d'équipe (langue des commits, branches d'intégration, niveau d'audit de sécurité, contrôle anti-slop).
