@@ -69,3 +69,48 @@ beforeEach(async () => {
   await testDb.cleanAllTables();
 });
 ```
+
+---
+
+## 4. Cycle de Vie des Tests : Quand en Ajouter, Quand en Supprimer ?
+
+Un ingénieur senior ne se contente pas d'ajouter des tests à l'aveugle ; il maintient activement la pertinence du harnais de test et élimine le bruit.
+
+```
+                              Événement de Code
+                                      |
+         +----------------------------+----------------------------+
+         |                                                         |
+         v                                                         v
+[Nouvelle Règle / Bugfix]                                [Refactoring / Dépréciation]
+         |                                                         |
+         v                                                         v
+Action : AJOUTER                                         Action : ÉVALUER / SUPPRIMER
+- 1 test nominal (happy path)                            - Le comportement est-il obsolète ?
+- 2 à 3 cas limites (edge cases)                           --> OUI : Supprimer le test.
+- 1 test de reproduction (anti-régression)               - Le test est-il un doublon d'implémentation ?
+                                                           --> OUI : Supprimer ou fusionner.
+                                                         - Le comportement est inchangé ?
+                                                           --> CONSERVER : Le test doit rester vert.
+```
+
+### 4.1 Quand l'Agent DOIT Ajouter un Test
+1. **Nouvelle fonctionnalité (`feat`)** :
+   - Tout nouveau cas d'utilisation métier requiert au minimum son test nominal et la couverture de ses cas limites (valeurs nulles, entrées invalides, droits insuffisants).
+2. **Correction de bug (`fix`)** :
+   - **Règle absolue** : Écrire d'abord le test unitaire ou d'intégration qui reproduit fidèlement le bug (le test doit échouer au rouge).
+   - Appliquer le correctif de code.
+   - Valider que le test passe au vert. Ce test devient le garant anti-régression permanent.
+3. **Refactoring de code sans couverture (Phase 0)** :
+   - Écrire des **tests de caractérisation** préalables pour figer le comportement observé avant de réorganiser l'architecture interne.
+
+### 4.2 Quand l'Agent DOIT Supprimer ou Retirer un Test
+La prolifération de tests inutiles ralentit la CI et produit des faux positifs. Un agent senior doit supprimer un test dans les situations suivantes :
+1. **Fonctionnalité dépréciée ou supprimée** :
+   - Si une route ou une règle métier est retirée du périmètre produit, les tests correspondants doivent être immédiatement supprimés (ne jamais laisser de tests commentés).
+2. **Test couplé à un détail d'implémentation interne (Test fragile)** :
+   - Si un test vérifie l'ordre d'appel d'une fonction privée ou mocke excessivement la structure interne au lieu du comportement externe, il doit être remplacé par un test d'intégration boîte noire ou supprimé.
+3. **Doublons redondants** :
+   - Plusieurs tests testant strictement la même assertion avec des données insignifiantes doivent être consolidés (ex: tester 5 variantes de chaînes valides sans valeur ajoutée de cas limite).
+4. **Tests de caractérisation temporaires** :
+   - Dès qu'un composant patrimonial est refactorisé et que les nouveaux tests unitaires/intégration cibles sont en place, le harnais de caractérisation temporaire doit être purgé.

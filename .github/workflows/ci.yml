@@ -68,3 +68,8 @@ jobs:
           cmp CLAUDE.md templates/CLAUDE.md
           cmp .cursorrules templates/.cursorrules
           echo "Parité stricte validée entre les configurations racine et templates."
+
+      - name: Suite de Tests d'Intégrité Automatisée du Kit
+        run: |
+          chmod +x scripts/test-kit.sh
+          ./scripts/test-kit.sh

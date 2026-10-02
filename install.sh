@@ -114,6 +114,8 @@ download_file "scripts/audit-slop.py" "scripts/audit-slop.py"
 chmod +x "scripts/audit-slop.py" 2>/dev/null || true
 download_file "scripts/setup-git-hooks.sh" "scripts/setup-git-hooks.sh"
 chmod +x "scripts/setup-git-hooks.sh" 2>/dev/null || true
+download_file "scripts/test-kit.sh" "scripts/test-kit.sh"
+chmod +x "scripts/test-kit.sh" 2>/dev/null || true
 
 # Configuration automatique des Git hooks locaux
 ./scripts/setup-git-hooks.sh 2>/dev/null || true
