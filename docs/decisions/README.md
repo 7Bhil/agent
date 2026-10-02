@@ -4,6 +4,22 @@ Les Architecture Decision Records (ADR) consignent les décisions architecturale
 
 ---
 
+## Quand Créer un ADR ?
+Un ADR doit être rédigé **uniquement** pour des arbitrages techniques durables et structurants :
+1. **Changement de paradigme technique** : Choix ou remplacement d'un framework, d'un ORM, d'un moteur de base de données.
+2. **Stratégie de sécurité ou d'authentification** : Adoption d'un protocole d'authentification (OAuth2, JWT asymétrique, WebAuthn), politique de gestion des clés.
+3. **Architecture des données & flux** : Implémentation d'un grand livre à double entrée, partitionnement, bus de messages asynchrones.
+4. **Gouvernance et intégration** : Refonte de la stratégie de branches, standardisation d'outils de CI/CD bloquants.
+
+## Quand NE PAS Créer un ADR ?
+Ne pas créer d'ADR pour :
+- Une correction de bug localisée ou un patch de sécurité ponctuel.
+- L'ajout d'une nouvelle route ou d'un composant respectant l'architecture existante.
+- Des ajustements de mise en page CSS ou de libellés d'interface.
+- Des détails temporaires de session (qui vont dans `.agent/memory/current-state.md`).
+
+---
+
 ## Modèle de Fichier ADR
 
 ```markdown
