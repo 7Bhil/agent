@@ -57,6 +57,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
 
 - **Racine du projet** :
   - `README.md` : Présentation synthétique du projet.
+  - `DESIGN.md` : Cadre du Design System, palette sémantique, typographie, espacements et 4 états d'interface.
   - `CONTRIBUTING.md` : Guide des normes de contribution d'équipe et standards seniors.
   - `BRAIN.md` : Mémoire vivante, architecture, directives et journal d'évolution.
   - `AGENTS.md` / `GEMINI.md` / `CLAUDE.md` / `.cursorrules` / `.github/copilot-instructions.md` : Contrats d'instructions pour les différents agents IA.
@@ -94,6 +95,7 @@ Ce fichier constitue la **mémoire vivante** du projet. Il consigne l'état d'av
   - `java-spring.md` : Java 17/21 LTS, Spring Boot 3, IoC par constructeur, JPA/Hibernate (anti N+1), DTO records, JUnit 5.
   - `laravel-php.md` : PHP 8.2+, Laravel 10/11, Form Requests, Service Container, Eloquent scopes, queues asynchrones.
   - `database-management.md` : Modélisation SQL/NoSQL transverse, normalisation 3NF, indexation sélective, ACID, pattern Expand/Contract.
+  - `fintech.md` : Systèmes financiers et Mobile Money, unités mineures, grand livre à double entrée, idempotence et webhooks signés.
 
 
 ---
@@ -108,6 +110,15 @@ Le projet applique le **Versionnement Sémantique (SemVer : `MAJOR.MINOR.PATCH`)
 ---
 
 ## Journal des Évolutions & Décisions
+
+### [2.6.0] - Direction Artistique Positive (DESIGN.md) & Stack Spécialisée Fintech
+- **Direction Artistique & Design System** :
+  - Création de `DESIGN.md` avec charte sémantique, variables CSS HSL, typographie sans-serif propre, règles WCAG 2.2 AA.
+  - Formalisation des 4 états obligatoires de chaque composant d'interface (Loading avec skeleton, Nominal, Empty state avec action, Error avec retry).
+- **Ingénierie Financière & Fintech** :
+  - Création de `stacks/fintech.md` traitant des contraintes critiques : bannissement des nombres à virgule flottante, manipulation en unités mineures entières, grand livre immuable à double entrée (*Double-Entry Ledger*).
+  - Architecture d'intégration Mobile Money (FedaPay, KKiaPay, MTN, Moov, Orange) : vérification cryptographique HMAC en temps constant, découplage asynchrone des webhooks et réconciliation automatique.
+- **Mise à Jour de l'Installation** : Intégration de `DESIGN.md` et `stacks/fintech.md` dans `install.sh`.
 
 ### [2.5.0] - Standardisation ADR & Outillage Collaboratif d'Équipe
 - **Système d'Architecture Decision Records (ADR)** :
