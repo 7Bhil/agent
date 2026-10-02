@@ -1,0 +1,42 @@
+# Configuration du Senior Agent Core
+# Ce fichier permet de personnaliser les règles d'équipe et les gardes-fous du kit.
+
+version: "1.0"
+
+# Paramètres Git et Intégration
+git:
+  default_branch: "main"
+  integration_branch: "developp"
+  enforce_french_commits: true
+  commit_types:
+    - feat
+    - fix
+    - docs
+    - refactor
+    - test
+    - style
+    - chore
+    - perf
+    - ci
+
+# Style et Qualité de Code
+code:
+  strict_typing: true
+  allow_any: false
+  design_system:
+    enforce_semantic_tokens: true
+    source_css: "global.css"
+    tailwind_config: "tailwind.config.ts"
+
+# Rédaction Technique et Sobriété
+writing:
+  forbid_emojis: true
+  audit_slop: true
+  slop_rules_language: "fr,en"
+
+# Sécurité et Dépendances
+security:
+  dependency_audit_level: "high"
+  block_on_audit_failure: true
+  scan_secrets_with_gitleaks: true
+  static_analysis_with_semgrep: true

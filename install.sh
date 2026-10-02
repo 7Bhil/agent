@@ -127,6 +127,14 @@ if [ ! -f ".env.example" ]; then
   download_file "templates/.env.example" ".env.example"
 fi
 
+# 13. Configuration Débrayable du Kit & Règles d'Analyse Statique Semgrep
+if [ ! -f ".agent/config.yml" ]; then
+  download_file ".agent/config.yml" ".agent/config.yml"
+fi
+if [ ! -f ".semgrep.yml" ]; then
+  download_file ".semgrep.yml" ".semgrep.yml"
+fi
+
 echo ""
 echo -e "${GREEN}${BOLD}Terminé avec succès ! Vos assistants et pipelines CI sont configurés :${RESET}"
 echo -e "   - Google Gemini / Antigravity : ${BOLD}GEMINI.md${RESET}"
