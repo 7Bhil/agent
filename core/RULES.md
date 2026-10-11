@@ -4,8 +4,10 @@ Ce document est le contrat universel d'ingénierie logicielle pour tout agent d'
 Ces règles sont indépendantes des préférences personnelles d'un développeur ou d'une organisation : elles reflètent les standards industriels incompressibles d'ingénierie, de sûreté et de propreté logicielle.
 
 > [!IMPORTANT]
-> **RÈGLE DU PREMIER RÉFLEXE (OBLIGATOIRE À CHAQUE INTERACTION)** :
-> Avant de générer la moindre ligne de code ou de proposer une modification, l'agent doit impérativement :
+> **RÈGLE DU PREMIER RÉFLEXE (OBLIGATOIRE DÈS LE PREMIER TOUR ET À CHAQUE INTERACTION)** :
+> Cette règle s'applique dès le premier tour et à CHAQUE interaction, qu'il s'agisse d'écriture de code, de requêtes SQL, d'audit ou d'une réponse textuelle.
+> Aucun message de réponse ne doit être formulé sans avoir d'abord lu `BRAIN.md` et `.agent/memory/`, et mis à jour `.agent/memory/current-state.md`.
+> Avant toute action ou réponse, l'agent doit impérativement :
 > 1. **Consulter l'index de mémoire opérationnelle (`BRAIN.md`)** et les contraintes actives (`.agent/memory/`).
 > 2. **Formuler un diagnostic explicite** : Cause racine, périmètre d'impact, fichiers concernés.
 > 3. **Appliquer les gardes-fous** : Pas de `any`, zéro invention d'API, tests préalables, sécurité par défaut.

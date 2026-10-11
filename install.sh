@@ -16,6 +16,7 @@ RESET="\033[0m"
 DRY_RUN=false
 FORCE=false
 BACKUP=true
+MEMORY_ONLY=false
 
 for arg in "$@"; do
   case $arg in
@@ -31,12 +32,17 @@ for arg in "$@"; do
       BACKUP=false
       shift
       ;;
+    --memory-only)
+      MEMORY_ONLY=true
+      shift
+      ;;
     -h|--help)
       echo "Usage: ./install.sh [OPTIONS]"
       echo "Options:"
-      echo "  --dry-run    Affiche les actions sans modifier le système de fichiers."
-      echo "  --force      Écrase les fichiers existants sans confirmation (crée un .bak si backup actif)."
-      echo "  --no-backup  Ne crée pas de copie .bak lors du remplacement d'un fichier existant."
+      echo "  --dry-run      Affiche les actions sans modifier le système de fichiers."
+      echo "  --force        Écrase les fichiers existants sans confirmation (crée un .bak si backup actif)."
+      echo "  --no-backup    Ne crée pas de copie .bak lors du remplacement d'un fichier existant."
+      echo "  --memory-only  Met à jour sélectivement la mémoire (.agent/memory/ et BRAIN.md) sans modifier AGENTS.md ni le reste."
       exit 0
       ;;
   esac
@@ -86,6 +92,23 @@ safe_deploy_file() {
     curl -sSL "${REPO_RAW_URL}/${source_path}" -o "$target_path"
   fi
 }
+
+if [ "$MEMORY_ONLY" = true ]; then
+  echo -e "   [MODE SÉLECTIF] Déploiement et mise à jour de la mémoire (.agent/memory/ et BRAIN.md)..."
+  safe_deploy_file "BRAIN.md" "BRAIN.md"
+  safe_deploy_file ".agent/memory/project.md" ".agent/memory/project.md"
+  safe_deploy_file ".agent/memory/user.md" ".agent/memory/user.md"
+  safe_deploy_file ".agent/memory/constraints.md" ".agent/memory/constraints.md"
+  safe_deploy_file ".agent/memory/current-state.md" ".agent/memory/current-state.md"
+
+  echo ""
+  if [ "$DRY_RUN" = true ]; then
+    echo -e "${YELLOW}${BOLD}Simulation de mise à jour mémoire achevée. Aucun fichier n'a été altéré.${RESET}"
+  else
+    echo -e "${GREEN}${BOLD}Mise à jour sélective de la mémoire terminée avec succès ! AGENTS.md et le reste du projet ont été préservés.${RESET}"
+  fi
+  exit 0
+fi
 
 # 1. Règles Universelles du Core & Presets
 safe_deploy_file "core/RULES.md" "core/RULES.md"
