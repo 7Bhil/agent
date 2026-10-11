@@ -100,10 +100,25 @@ test_install_script() {
   "${OLDPWD}/install.sh" --force >/dev/null 2>&1
   test -f AGENTS.md.bak || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
 
+  # Test mise à jour sélective mémoire (--memory-only) sans toucher à un AGENTS.md préexistant
+  echo "CUSTOM AGENTS SPEC" > AGENTS.md
+  rm -f .agent/memory/project.md
+  # Simulation dry-run memory-only
+  local mem_dry
+  mem_dry=$("${OLDPWD}/install.sh" --memory-only --dry-run)
+  echo "$mem_dry" | grep -q "MODE DRY-RUN ACTIF" || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+  test ! -f .agent/memory/project.md || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+
+  # Exécution réelle memory-only
+  "${OLDPWD}/install.sh" --memory-only >/dev/null 2>&1
+  test -f .agent/memory/project.md || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+  test -f BRAIN.md || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+  grep -q "CUSTOM AGENTS SPEC" AGENTS.md || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+
   cd - >/dev/null
   rm -rf /tmp/agent-test-run
 }
-check_test "Déploiement complet, dry-run et gestion des conflits via install.sh" test_install_script
+check_test "Déploiement complet, dry-run, mise à jour mémoire et gestion des conflits via install.sh" test_install_script
 
 # 5. Test de Numérotation Séquentielle des ADR
 test_adr_sequencing() {

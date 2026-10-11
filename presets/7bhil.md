@@ -24,7 +24,7 @@ Ces préférences s'appliquent en complément des règles universelles de `core/
 
 ## 3. Sobriété Textuelle & Zéro Émoji
 - **Interdiction formelle des émojis** : Aucun émoji dans le code, les commentaires, la documentation, les messages de commit ou les réponses conversationnelles.
-- **Rédaction Anti-Slop** : Proscription des formules creuses, du hedging (*"il convient de noter"*), de la fausse connivence et de l'emphase dramatique. Contrôle via `scripts/audit-slop.py`.
+- **Rédaction Anti-Slop** : Proscription des formules creuses, du hedging (`"il convient de noter"`), de la fausse connivence et de l'emphase dramatique. Contrôle via `scripts/audit-slop.py`.
 
 ---
 
