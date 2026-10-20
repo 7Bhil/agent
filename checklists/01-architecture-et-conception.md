@@ -40,3 +40,7 @@ Cette checklist permet de s'assurer que chaque décision de conception respecte 
   - En cas de défaillance répétée d'un tiers, un mécanisme de repli (fallback ou circuit breaker) évite d'épuiser le pool de threads ou connexions.
 - [ ] **Gestion de la concurrence** :
   - Utilisation de verrous optimistes (`version`/`updatedAt`) ou pessimistes pour prévenir les *race conditions* sur les ressources partagées.
+- [ ] **Pattern Outbox Transactionnel** :
+  - Les événements asynchrones liés à une mutation métier sont persistés dans la même transaction SQL que la donnée, jamais émis en direct vers un broker.
+- [ ] **Limitation de Débit (Rate Limiting)** :
+  - Les endpoints sensibles (login, mot de passe oublié, paiement, webhooks) sont protégés par un rate limiter (Redis sliding window / token bucket).
