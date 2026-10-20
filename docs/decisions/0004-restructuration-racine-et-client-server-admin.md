@@ -1,4 +1,4 @@
-# 0005 - Restructuration Propre de la Racine et Standard Client-Server-Admin
+# 0004 - Restructuration Propre de la Racine et Standard Client-Server-Admin
 
 - **Date** : 2026-10-20
 - **Statut** : Accepté
