@@ -161,6 +161,12 @@ with open('.agent/memory/current-state.md', encoding='utf-8') as f:
 }
 check_test "Budget de contexte (adapters et mémoire courante)" test_context_budget
 
+# 6c. Garde-fou d'arbitrage architectural (Decision Gate)
+test_decision_gate() {
+  python3 scripts/check-decision-gate.py >/dev/null 2>&1
+}
+check_test "Garde-fou d'arbitrage architectural (check-decision-gate.py)" test_decision_gate
+
 # 7. Exécution du Banc d'Évaluation des Agents (Agent Evals Runner)
 test_agent_evals() {
   python3 scripts/run-evals.py >/dev/null 2>&1

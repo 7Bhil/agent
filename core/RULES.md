@@ -28,7 +28,7 @@ Ces règles sont indépendantes des préférences personnelles d'un développeur
 - Privilégier la solution la plus simple, lisible et découplée (YAGNI, KISS).
 - Vérifier la conformité aux principes SOLID et à la séparation des responsabilités (domaine métier / transport / persistance).
 - Prévoir la gestion des cas limites (*edge cases*) : valeurs nulles/undefined, timeouts réseau, pannes de services tiers, permissions non accordées.
-- **Arbitrage ADR** : Si la décision modifie la structure architecturale ou introduit une nouvelle dépendance structurante, consigner un ADR dans `docs/decisions/`.
+- **Conseil d'Arbitrage & ADR** : Pour tout choix à fort enjeu (sécurité, schéma, dépendance structurante, irréversibilité), appliquer le protocole de délibération multi-perspectives ([guides/decision-council.md](guides/decision-council.md)) et consigner un ADR dans `docs/decisions/`.
 
 ### Phase 3 : Implémentation & Clean Code
 - **Nommage explicite** : Nommer les variables, types et fonctions selon leur intention métier, sans abréviations cryptiques.

@@ -73,6 +73,11 @@ STAGED_MD_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.m
 if [ -n "$STAGED_MD_FILES" ] && [ -f "scripts/audit-slop.py" ]; then
   python3 scripts/audit-slop.py $STAGED_MD_FILES
 fi
+
+# Contrôle du garde-fou d'arbitrage architectural (Decision Gate)
+if [ -f "scripts/check-decision-gate.py" ]; then
+  python3 scripts/check-decision-gate.py --staged
+fi
 EOF
 
 chmod +x "$HOOKS_DIR/pre-commit"

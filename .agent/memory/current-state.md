@@ -5,17 +5,16 @@
 ---
 
 ## 1. Tâche Actuelle
-- **Objectif** : Réduction du coût en tokens du kit.
-- **Branche Active** : `refactor/economie-tokens`.
+- **Objectif** : Implémentation du conseil d'arbitrage d'architecture et du garde-fou déterministe.
+- **Branche Active** : `feature/conseil-arbitrage-adr`.
 
 ## 2. Actions Complétées
-- [x] `GEMINI.md` et `CLAUDE.md` réduits à des renvois vers `AGENTS.md` (`CLAUDE.md` via import `@AGENTS.md`). Supprime la double injection sous Antigravity (~2 600 tokens par tour).
-- [x] Règle du premier réflexe proportionnée : lecture mémoire une fois par session, écriture de `current-state.md` seulement après modification de fichiers, mémoire bornée à 40 lignes.
-- [x] Test de budget de contexte ajouté à `scripts/test-kit.sh` (AGENTS.md <= 10 Ko, renvois <= 600 o, current-state <= 40 lignes).
+- [x] Guide d'arbitrage rédigé : `guides/decision-council.md` (5 perspectives d'ingénierie, déclencheurs objectifs, modes rapide et complet).
+- [x] Contrat universel mis à jour : `core/RULES.md` (Phase 2 intègre formellement le protocole de conseil) et adapters synchronisés via `build-adapters.py`.
+- [x] Script garde-fou créé : `scripts/check-decision-gate.py` (bloque les modifications critiques sans ADR).
+- [x] Intégration outillage : ajout dans `scripts/test-kit.sh`, `scripts/setup-git-hooks.sh` (pre-commit) et `install.sh`.
+- [x] ADR formalisé : `docs/decisions/0004-protocole-de-conseil-arbitrage-multi-perspectives.md`.
+- [x] Banc complet `./scripts/test-kit.sh` au vert (9/9 tests) et audit anti-slop validé (0 alerte).
 
-## 3. Décisions en Attente
-- Conseil d'arbitrage ADR (inspiré de `aiwithremy/claude-skills-llm-council`, sans licence : réécriture obligatoire). Déclenchement : demande explicite, critères objectifs (irréversible, dépendance structurante, schéma, zone sensible, contrat public, options multiples, >= 3 modules), garde-fou par script sur le diff. Modes rapide et complet.
-- Compression de `AGENTS.md` sous 4 Ko (explications déplacées dans `core/RULES.md`).
-
-## 4. Prochaine Étape
-- Validation utilisateur, merge `--no-ff` sur `developp`, puis branche `feature/conseil-arbitrage-adr`.
+## 3. Prochaine Étape
+- Validation finale, commit sur `feature/conseil-arbitrage-adr` et fusion propre (`--no-ff`) sur `developp`.
