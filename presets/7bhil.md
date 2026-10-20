@@ -7,8 +7,8 @@ Ces préférences s'appliquent en complément des règles universelles de `core/
 
 ## 1. Conventions Git & Intégration
 - **Langue des Commits** : Rédigés obligatoirement en **français**, préfixés par convention (`feat: ...`, `fix: ...`, `docs: ...`, `refactor: ...`, `test: ...`, `style: ...`, `chore: ...`).
-- **Stratégie de Branches** :
-  - Branche principale de publication / production : `main`.
+- **Stratégie de Branches & Push** :
+  - Branche principale de publication / production : `main`. **Seul l'utilisateur fait des pushs sur `main`**. L'agent a l'interdiction formelle de merge ou push sur `main` sans demande explicite.
   - Branche d'intégration continue de développement : `developp`.
   - Branches de travail thématiques : `feature/*`, `fix/*`, `refactor/*`.
   - Toute branche de travail terminée et validée est fusionnée par merge commit (`--no-ff`) sur `developp`.
@@ -24,7 +24,7 @@ Ces préférences s'appliquent en complément des règles universelles de `core/
 
 ## 3. Sobriété Textuelle & Zéro Émoji
 - **Interdiction formelle des émojis** : Aucun émoji dans le code, les commentaires, la documentation, les messages de commit ou les réponses conversationnelles.
-- **Rédaction Anti-Slop** : Proscription des formules creuses, du hedging (*"il convient de noter"*), de la fausse connivence et de l'emphase dramatique. Contrôle via `scripts/audit-slop.py`.
+- **Rédaction Anti-Slop** : Proscription des formules creuses, du hedging (`"il convient de noter"`), de la fausse connivence et de l'emphase dramatique. Contrôle via `scripts/audit-slop.py`.
 
 ---
 
