@@ -1,34 +1,21 @@
 # État Courant de Session & Tâches Actives
 
-Ce document enregistre l'état immédiat de la tâche en cours, les actions récemment exécutées et la prochaine étape prioritaire. Il permet une reprise de contexte instantanée sans saturer la fenêtre de contexte.
+État présent uniquement (40 lignes maximum). L'historique est dans `git log`.
 
 ---
 
 ## 1. Tâche Actuelle
-- **Objectif** : Évolution et renforcement du système Agent Engineering OS : renforcement de la règle du premier réflexe, mise à jour sélective mémoire dans l'installateur, régénération déterministe des adapters et validation des suites de tests.
-- **Branche Active** : `feature/renforcement-premier-reflexe-et-install`.
-
----
+- **Objectif** : Réduction du coût en tokens du kit.
+- **Branche Active** : `refactor/economie-tokens`.
 
 ## 2. Actions Complétées
-- [x] **Renforcement de la Règle du Premier Réflexe (`core/RULES.md`)** :
-  - Élargissement explicite du périmètre : application dès le premier tour et à chaque interaction (code, requêtes SQL, audit ou réponse textuelle).
-  - Obligation de consulter `BRAIN.md` et `.agent/memory/`, et de mettre à jour `.agent/memory/current-state.md` avant toute réponse textuelle.
-- [x] **Évolution de l'Installateur (`install.sh`)** :
-  - Prise en charge du déploiement et de la mise à jour sélective de la mémoire via `--memory-only`.
-  - Préservation intégrale des fichiers propres au projet existant (`AGENTS.md`, adapters, code).
-  - Maintien du support de `--dry-run`, de la détection des conflits et des sauvegardes `.bak`.
-- [x] **Reconstruction Déterministe des Adapters (`scripts/build-adapters.py`)** :
-  - Régénération de l'ensemble des adapters (`AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `.cursorrules`, `templates/`).
-  - Validation de parité absolue vérifiée avec `python3 scripts/build-adapters.py --check`.
-- [x] **Validation Déterministe et Evals** :
-  - Mise à jour et exécution complète de `./scripts/test-kit.sh` (100 % succès).
-  - Exécution du banc d'évaluation `python3 scripts/run-evals.py` (4/4 scénarios validés).
-  - Contrôle anti-slop et zéro émoji via `python3 scripts/audit-slop.py` (0 avertissement).
+- [x] `GEMINI.md` et `CLAUDE.md` réduits à des renvois vers `AGENTS.md` (`CLAUDE.md` via import `@AGENTS.md`). Supprime la double injection sous Antigravity (~2 600 tokens par tour).
+- [x] Règle du premier réflexe proportionnée : lecture mémoire une fois par session, écriture de `current-state.md` seulement après modification de fichiers, mémoire bornée à 40 lignes.
+- [x] Test de budget de contexte ajouté à `scripts/test-kit.sh` (AGENTS.md <= 10 Ko, renvois <= 600 o, current-state <= 40 lignes).
 
----
+## 3. Décisions en Attente
+- Conseil d'arbitrage ADR (inspiré de `aiwithremy/claude-skills-llm-council`, sans licence : réécriture obligatoire). Déclenchement : demande explicite, critères objectifs (irréversible, dépendance structurante, schéma, zone sensible, contrat public, options multiples, >= 3 modules), garde-fou par script sur le diff. Modes rapide et complet.
+- Compression de `AGENTS.md` sous 4 Ko (explications déplacées dans `core/RULES.md`).
 
-## 3. Prochaine Étape
-- Validation finale git, commit sur `feature/renforcement-premier-reflexe-et-install`.
-- Fusion propre par merge commit (`--no-ff`) sur `developp`.
-- Maintien de l'interdiction de merge ou push direct sur `main`.
+## 4. Prochaine Étape
+- Validation utilisateur, merge `--no-ff` sur `developp`, puis branche `feature/conseil-arbitrage-adr`.

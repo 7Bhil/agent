@@ -144,6 +144,23 @@ test_adapters_sync() {
 }
 check_test "Synchronisation déterministe des adapters IA avec core/RULES.md" test_adapters_sync
 
+# 6b. Budget de contexte (tokens chargés à chaque tour)
+test_context_budget() {
+  python3 -c "
+import sys, os
+limits = {'AGENTS.md': 10240, 'GEMINI.md': 600, 'CLAUDE.md': 600}
+for path, max_bytes in limits.items():
+    if os.path.getsize(path) > max_bytes:
+        print(f'{path} dépasse {max_bytes} octets', file=sys.stderr)
+        sys.exit(1)
+with open('.agent/memory/current-state.md', encoding='utf-8') as f:
+    if len(f.readlines()) > 40:
+        print('current-state.md dépasse 40 lignes', file=sys.stderr)
+        sys.exit(1)
+"
+}
+check_test "Budget de contexte (adapters et mémoire courante)" test_context_budget
+
 # 7. Exécution du Banc d'Évaluation des Agents (Agent Evals Runner)
 test_agent_evals() {
   python3 scripts/run-evals.py >/dev/null 2>&1
