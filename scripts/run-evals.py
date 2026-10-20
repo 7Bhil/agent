@@ -47,25 +47,25 @@ def check_anti_slop():
     return res.returncode == 0, res.stdout + res.stderr
 
 def check_fintech_money():
-    path = os.path.join(ROOT_DIR, "stacks", "fintech.md")
+    path = os.path.join(ROOT_DIR, ".agent", "stacks", "fintech.md")
     with open(path, "r", encoding="utf-8") as f:
         c = f.read().lower()
     return "unités mineures" in c and "float" in c, "Règles sur les unités mineures absentes"
 
 def check_fintech_ledger():
-    path = os.path.join(ROOT_DIR, "stacks", "fintech.md")
+    path = os.path.join(ROOT_DIR, ".agent", "stacks", "fintech.md")
     with open(path, "r", encoding="utf-8") as f:
         c = f.read().lower()
     return "double-entry ledger" in c and "immuabilité" in c, "Principes du grand livre à double entrée absents"
 
 def check_fintech_idempotence():
-    path = os.path.join(ROOT_DIR, "stacks", "fintech.md")
+    path = os.path.join(ROOT_DIR, ".agent", "stacks", "fintech.md")
     with open(path, "r", encoding="utf-8") as f:
         c = f.read()
     return "Idempotency-Key" in c, "Clé d'idempotence absente"
 
 def check_fintech_hmac():
-    path = os.path.join(ROOT_DIR, "stacks", "fintech.md")
+    path = os.path.join(ROOT_DIR, ".agent", "stacks", "fintech.md")
     with open(path, "r", encoding="utf-8") as f:
         c = f.read()
     return "timingSafeEqual" in c and "HMAC" in c, "Vérification HMAC en temps constant absente"
@@ -83,19 +83,19 @@ def check_semgrep_jwt():
     return "forbid-hardcoded-jwt-secrets" in c, "Règle Semgrep de secrets JWT absente"
 
 def check_security_handbook_owasp():
-    path = os.path.join(ROOT_DIR, "guides", "security-handbook.md")
+    path = os.path.join(ROOT_DIR, ".agent", "guides", "security-handbook.md")
     with open(path, "r", encoding="utf-8") as f:
         c = f.read()
     return "BOLA" in c and "SSRF" in c and "IDOR" in c, "Principes BOLA, SSRF et IDOR absents"
 
 def check_phase0_onboarding():
-    path = os.path.join(ROOT_DIR, "guides", "onboard-codebase.md")
+    path = os.path.join(ROOT_DIR, ".agent", "guides", "onboard-codebase.md")
     with open(path, "r", encoding="utf-8") as f:
         c = f.read()
     return "CODEMAP.md" in c and "tests de caractérisation" in c.lower(), "Protocole d'onboarding incomplet"
 
 def check_test_lifecycle():
-    path = os.path.join(ROOT_DIR, "guides", "testing-strategy.md")
+    path = os.path.join(ROOT_DIR, ".agent", "guides", "testing-strategy.md")
     with open(path, "r", encoding="utf-8") as f:
         c = f.read().lower()
     return "quand en ajouter" in c and "quand en supprimer" in c, "Directives de cycle de vie des tests absentes"

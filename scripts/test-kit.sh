@@ -38,7 +38,7 @@ check_test "Parité stricte racine vs templates" test_template_parity
 # 2. Test Anti-Slop & Sobriété Rédactionnelle
 test_anti_slop() {
   python3 scripts/audit-slop.py README.md DESIGN.md CONTRIBUTING.md \
-    guides/*.md checklists/*.md stacks/*.md docs/decisions/*.md tests/evals/*.md >/dev/null 2>&1
+    .agent/guides/*.md .agent/checklists/*.md .agent/stacks/*.md docs/decisions/*.md tests/evals/*.md >/dev/null 2>&1
 }
 check_test "Audit anti-slop sans déchet textuel" test_anti_slop
 
@@ -47,7 +47,7 @@ test_zero_emoji() {
   python3 -c "
 import sys, glob
 
-files = glob.glob('guides/*.md') + glob.glob('checklists/*.md') + glob.glob('stacks/*.md') + ['AGENTS.md', 'GEMINI.md', 'CLAUDE.md', 'DESIGN.md', 'CONTRIBUTING.md']
+files = glob.glob('.agent/guides/*.md') + glob.glob('.agent/checklists/*.md') + glob.glob('.agent/stacks/*.md') + ['AGENTS.md', 'GEMINI.md', 'CLAUDE.md', 'DESIGN.md', 'CONTRIBUTING.md']
 has_emoji = False
 
 for f in files:
@@ -85,9 +85,9 @@ test_install_script() {
   test -f AGENTS.md && \
   test -f core/RULES.md && \
   test -f .agent/memory/project.md && \
-  test -d guides && \
-  test -d checklists && \
-  test -d stacks && \
+  test -d .agent/guides && \
+  test -d .agent/checklists && \
+  test -d .agent/stacks && \
   test -f .semgrep.yml && \
   test -f .agent/config.yml || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
 

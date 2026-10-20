@@ -132,7 +132,7 @@ safe_deploy_file ".agent/memory/current-state.md" ".agent/memory/current-state.m
 safe_deploy_file "DESIGN.md" "DESIGN.md"
 safe_deploy_file "DESIGN-SYSTEM.md" "DESIGN-SYSTEM.md"
 
-# 5. Guides d'Ingénierie Senior
+# 5. Guides d'Ingénierie Senior (Confinés sous .agent/)
 GUIDES=(
   "architecture-and-design.md"
   "clean-code-node.md"
@@ -145,11 +145,10 @@ GUIDES=(
   "testing-strategy.md"
 )
 for guide in "${GUIDES[@]}"; do
-  safe_deploy_file "guides/${guide}" "guides/${guide}"
-  safe_deploy_file "guides/${guide}" ".agent/guides/${guide}"
+  safe_deploy_file ".agent/guides/${guide}" ".agent/guides/${guide}"
 done
 
-# 6. Checklists d'Auto-Revue
+# 6. Checklists d'Auto-Revue (Confinées sous .agent/)
 CHECKLISTS=(
   "01-architecture-et-conception.md:01-architecture.md"
   "02-qualite-et-clean-code.md:02-clean-code.md"
@@ -162,13 +161,12 @@ CHECKLISTS=(
 )
 for entry in "${CHECKLISTS[@]}"; do
   src="${entry%%:*}"
-  dest="${entry##*:}"
-  safe_deploy_file "checklists/${src}" "checklists/${src}"
-  safe_deploy_file "checklists/${src}" ".agent/checklists/${dest}"
+  safe_deploy_file ".agent/checklists/${src}" ".agent/checklists/${src}"
 done
 
-# 7. Stacks Techniques Ciblées
+# 7. Stacks Techniques Ciblées (Confinées sous .agent/)
 STACKS=(
+  "client-server-admin.md"
   "cpp.md"
   "database-management.md"
   "docker-containerization.md"
@@ -180,8 +178,7 @@ STACKS=(
   "react-nextjs.md"
 )
 for stack in "${STACKS[@]}"; do
-  safe_deploy_file "stacks/${stack}" "stacks/${stack}"
-  safe_deploy_file "stacks/${stack}" ".agent/stacks/${stack}"
+  safe_deploy_file ".agent/stacks/${stack}" ".agent/stacks/${stack}"
 done
 
 # 8. Outillage Déterministe d'Ingénierie & Anti-Slop
