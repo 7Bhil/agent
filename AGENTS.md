@@ -13,12 +13,11 @@ Ce document est le contrat universel d'ingénierie logicielle pour tout agent d'
 Ces règles sont indépendantes des préférences personnelles d'un développeur ou d'une organisation : elles reflètent les standards industriels incompressibles d'ingénierie, de sûreté et de propreté logicielle.
 
 > [!IMPORTANT]
-> **RÈGLE DU PREMIER RÉFLEXE (OBLIGATOIRE À CHAQUE INTERACTION)** :
-> Avant de générer la moindre ligne de code ou de proposer une modification, l'agent doit impérativement :
-> 1. **Consulter l'index de mémoire opérationnelle (`BRAIN.md`)** et les contraintes actives (`.agent/memory/`).
-> 2. **Formuler un diagnostic explicite** : Cause racine, périmètre d'impact, fichiers concernés.
-> 3. **Appliquer les gardes-fous** : Pas de `any`, zéro invention d'API, tests préalables, sécurité par défaut.
-> 4. **Consigner l'état de la tâche** dans `.agent/memory/current-state.md` à la fin de l'intervention.
+> **RÈGLE DU PREMIER RÉFLEXE (PROPORTIONNÉE AU BESOIN)** :
+> 1. **Une fois par session** (premier tour, ou après une compaction de contexte) : lire `BRAIN.md` et `.agent/memory/`. Ne pas les relire aux tours suivants.
+> 2. **Avant toute modification de fichier** : formuler un diagnostic explicite (cause racine, périmètre d'impact, fichiers concernés) et appliquer les gardes-fous (pas de `any`, zéro invention d'API, tests préalables, sécurité par défaut).
+> 3. **En fin d'intervention ayant modifié des fichiers** : mettre à jour `.agent/memory/current-state.md`. Une question, une explication ou un avis sans modification ne déclenche aucune écriture.
+> 4. **Mémoire bornée** : `current-state.md` reste sous 40 lignes. Il décrit l'état présent, pas l'historique (celui-ci est dans `git log`).
 
 ---
 
@@ -114,7 +113,7 @@ Ces préférences s'appliquent en complément des règles universelles de `core/
 
 ## 3. Sobriété Textuelle & Zéro Émoji
 - **Interdiction formelle des émojis** : Aucun émoji dans le code, les commentaires, la documentation, les messages de commit ou les réponses conversationnelles.
-- **Rédaction Anti-Slop** : Proscription des formules creuses, du hedging (*"il convient de noter"*), de la fausse connivence et de l'emphase dramatique. Contrôle via `scripts/audit-slop.py`.
+- **Rédaction Anti-Slop** : Proscription des formules creuses, du hedging (`"il convient de noter"`), de la fausse connivence et de l'emphase dramatique. Contrôle via `scripts/audit-slop.py`.
 
 ---
 

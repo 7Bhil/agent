@@ -2,6 +2,9 @@
 """
 Générateur déterministe d'instructions pour agents IA à partir de core/RULES.md et presets/.
 Génère ou met à jour AGENTS.md, GEMINI.md, CLAUDE.md, .cursorrules et .github/copilot-instructions.md.
+AGENTS.md porte le contenu complet. GEMINI.md et CLAUDE.md sont des renvois courts vers AGENTS.md :
+certains outils (Antigravity) injectent plusieurs de ces fichiers à chaque tour, un contenu dupliqué
+y serait facturé deux fois.
 Usage:
     python3 scripts/build-adapters.py [--check]
 """
@@ -36,7 +39,17 @@ def read_file(path: str) -> str:
     with open(path, "r", encoding="utf-8") as f:
         return f.read().strip()
 
+# Fichiers réduits à un renvoi vers AGENTS.md (évite la double injection de contexte).
+POINTER_TARGETS = {
+    # Claude Code ne lit pas AGENTS.md nativement : la syntaxe d'import @fichier l'inclut.
+    "CLAUDE.md": "@AGENTS.md\n",
+    # Antigravity et Gemini CLI chargent AGENTS.md ; ce fichier ne doit rien dupliquer.
+    "GEMINI.md": "Règles du projet : voir `AGENTS.md` (source complète). Lire ce fichier s'il n'est pas déjà chargé dans le contexte.\n",
+}
+
 def build_content(target_name: str, core_text: str, preset_text: str) -> str:
+    if target_name in POINTER_TARGETS:
+        return HEADER_TEMPLATE + "\n" + POINTER_TARGETS[target_name]
     target_info = ADAPTER_TARGETS.get(target_name, target_name)
     content = [
         HEADER_TEMPLATE,

@@ -100,10 +100,25 @@ test_install_script() {
   "${OLDPWD}/install.sh" --force >/dev/null 2>&1
   test -f AGENTS.md.bak || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
 
+  # Test mise à jour sélective mémoire (--memory-only) sans toucher à un AGENTS.md préexistant
+  echo "CUSTOM AGENTS SPEC" > AGENTS.md
+  rm -f .agent/memory/project.md
+  # Simulation dry-run memory-only
+  local mem_dry
+  mem_dry=$("${OLDPWD}/install.sh" --memory-only --dry-run)
+  echo "$mem_dry" | grep -q "MODE DRY-RUN ACTIF" || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+  test ! -f .agent/memory/project.md || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+
+  # Exécution réelle memory-only
+  "${OLDPWD}/install.sh" --memory-only >/dev/null 2>&1
+  test -f .agent/memory/project.md || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+  test -f BRAIN.md || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+  grep -q "CUSTOM AGENTS SPEC" AGENTS.md || { cd - >/dev/null; rm -rf /tmp/agent-test-run; return 1; }
+
   cd - >/dev/null
   rm -rf /tmp/agent-test-run
 }
-check_test "Déploiement complet, dry-run et gestion des conflits via install.sh" test_install_script
+check_test "Déploiement complet, dry-run, mise à jour mémoire et gestion des conflits via install.sh" test_install_script
 
 # 5. Test de Numérotation Séquentielle des ADR
 test_adr_sequencing() {
@@ -128,6 +143,23 @@ test_adapters_sync() {
   python3 scripts/build-adapters.py --check >/dev/null 2>&1
 }
 check_test "Synchronisation déterministe des adapters IA avec core/RULES.md" test_adapters_sync
+
+# 6b. Budget de contexte (tokens chargés à chaque tour)
+test_context_budget() {
+  python3 -c "
+import sys, os
+limits = {'AGENTS.md': 10240, 'GEMINI.md': 600, 'CLAUDE.md': 600}
+for path, max_bytes in limits.items():
+    if os.path.getsize(path) > max_bytes:
+        print(f'{path} dépasse {max_bytes} octets', file=sys.stderr)
+        sys.exit(1)
+with open('.agent/memory/current-state.md', encoding='utf-8') as f:
+    if len(f.readlines()) > 40:
+        print('current-state.md dépasse 40 lignes', file=sys.stderr)
+        sys.exit(1)
+"
+}
+check_test "Budget de contexte (adapters et mémoire courante)" test_context_budget
 
 # 7. Exécution du Banc d'Évaluation des Agents (Agent Evals Runner)
 test_agent_evals() {
