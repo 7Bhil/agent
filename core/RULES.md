@@ -15,7 +15,7 @@ Ces règles sont indépendantes des préférences personnelles d'un développeur
 ## 1. Protocole d'Exécution en 5 Phases
 
 ### Phase 0 : Exploration & Onboarding (Prise en Main de l'Existant)
-- **Consulter le protocole d'onboarding** : Appliquer [guides/onboard-codebase.md](guides/onboard-codebase.md).
+- **Consulter le protocole d'onboarding** : Appliquer [.agent/guides/onboard-codebase.md](.agent/guides/onboard-codebase.md).
 - **Ligne de base & Caractérisation** : Exécuter la suite de tests et de linters existante avant toute modification. Écrire des tests de caractérisation en l'absence de couverture suffisante avant tout refactoring.
 - **Respect de l'existant** : Se conformer aux conventions locales en place. Inspecter `git log` et `git blame` pour appréhender les raisons d'être historiques (Règle de Chesterton).
 
@@ -37,7 +37,7 @@ Ces règles sont indépendantes des préférences personnelles d'un développeur
 - **Zéro dette technique** : Pas de code mort, pas de commentaires de code obsolètes, pas de hacks temporaires non documentés.
 
 ### Phase 4 : Validation & Auto-Revue
-- **Tests Automatisés** : Ajouter ou mettre à jour les tests (unitaires, intégration) couvrant le cas nominal et les cas d'erreur. Suivre les règles du cycle de vie des tests ([guides/testing-strategy.md](guides/testing-strategy.md)).
+- **Tests Automatisés** : Ajouter ou mettre à jour les tests (unitaires, intégration) couvrant le cas nominal et les cas d'erreur. Suivre les règles du cycle de vie des tests ([.agent/guides/testing-strategy.md](.agent/guides/testing-strategy.md)).
 - **Checklist Sécurité & Confidentialité** :
   - Les entrées utilisateurs sont-elles assainies et validées ?
   - Aucune information sensible (token, mot de passe, PII/RGPD) n'apparaît dans les logs ou les réponses d'erreurs ?

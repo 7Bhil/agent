@@ -5,17 +5,16 @@
 ---
 
 ## 1. Tâche Actuelle
-- **Objectif** : Réduction du coût en tokens du kit.
-- **Branche Active** : `refactor/economie-tokens`.
+- **Objectif** : Restructuration de la racine du kit (confinement dans `.agent/`) et standard Client/Server/Admin avec dossier `shared/`.
+- **Branche Active** : `feature/restructuration-racine-et-shared`.
 
 ## 2. Actions Complétées
-- [x] `GEMINI.md` et `CLAUDE.md` réduits à des renvois vers `AGENTS.md` (`CLAUDE.md` via import `@AGENTS.md`). Supprime la double injection sous Antigravity (~2 600 tokens par tour).
-- [x] Règle du premier réflexe proportionnée : lecture mémoire une fois par session, écriture de `current-state.md` seulement après modification de fichiers, mémoire bornée à 40 lignes.
-- [x] Test de budget de contexte ajouté à `scripts/test-kit.sh` (AGENTS.md <= 10 Ko, renvois <= 600 o, current-state <= 40 lignes).
+- [x] Confinement propre sous `.agent/` de `guides/`, `checklists/` et `stacks/`. La racine est désormais épurée.
+- [x] Création de `.agent/stacks/client-server-admin.md` : contrat partagé Zod, alias `@shared`, zéro URL en dur.
+- [x] Mise à jour des références dans `core/RULES.md` et régénération déterministe des adapters via `build-adapters.py`.
+- [x] Adaptation de `install.sh`, `scripts/test-kit.sh` et `scripts/run-evals.py` pour valider les nouveaux chemins.
+- [x] Formalisation de l'ADR `docs/decisions/0005-restructuration-racine-et-client-server-admin.md`.
+- [x] Banc d'intégrité `./scripts/test-kit.sh` (8/8 SUCCÈS) et banc `run-evals.py` (4/4 PASS) validés sans émoji ni slop.
 
-## 3. Décisions en Attente
-- Conseil d'arbitrage ADR (inspiré de `aiwithremy/claude-skills-llm-council`, sans licence : réécriture obligatoire). Déclenchement : demande explicite, critères objectifs (irréversible, dépendance structurante, schéma, zone sensible, contrat public, options multiples, >= 3 modules), garde-fou par script sur le diff. Modes rapide et complet.
-- Compression de `AGENTS.md` sous 4 Ko (explications déplacées dans `core/RULES.md`).
-
-## 4. Prochaine Étape
-- Validation utilisateur, merge `--no-ff` sur `developp`, puis branche `feature/conseil-arbitrage-adr`.
+## 3. Prochaine Étape
+- Validation finale, commit sur `feature/restructuration-racine-et-shared` et fusion propre (`--no-ff`) sur `developp`.

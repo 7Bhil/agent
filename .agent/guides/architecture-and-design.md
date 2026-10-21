@@ -79,3 +79,38 @@ async function getProductById(id: string): Promise<Product> {
 Tout appel vers un service tiers ou API externe doit disposer :
 - D'un **Timeout strict** (ex: 3 000 ms).
 - D'un **mécanisme de repli** lorsque le service externe tombe, afin de ne pas bloquer les requêtes utilisateurs locales.
+
+### 2.4 Pattern Outbox Transactionnel (Événements Fiables)
+Ne jamais publier directement sur un broker (Kafka, RabbitMQ) au milieu d'une transaction SQL : si le broker échoue, la transaction est corrompue ou le message perdu.
+- Enregistrer le message métier dans une table SQL `outbox` dans la même transaction ACID que la mutation.
+- Un worker asynchrone distinct dépile la table `outbox`, publie vers le broker, puis marque le message comme traité.
+
+```typescript
+// Transaction ACID atomique : donnée métier + événement outbox
+await db.$transaction(async (tx) => {
+  const order = await tx.order.create({ data: orderData });
+  await tx.outbox.create({
+    data: {
+      eventType: 'ORDER_CREATED',
+      payload: JSON.stringify({ orderId: order.id, total: order.total }),
+      status: 'PENDING'
+    }
+  });
+});
+```
+
+### 2.5 Limitation de Débit (Rate Limiting Applicatif)
+Protéger les routes d'authentification et de paiement via un algorithme à fenêtre glissante ou Token Bucket appuyé sur Redis.
+
+```typescript
+export async function assertRateLimit(identifier: string, limit = 10, windowSec = 60) {
+  const key = `ratelimit:${identifier}`;
+  const current = await redis.incr(key);
+  if (current === 1) {
+    await redis.expire(key, windowSec);
+  }
+  if (current > limit) {
+    throw new TooManyRequestsError('Limite de requêtes atteinte. Réessayez plus tard.');
+  }
+}
+```
