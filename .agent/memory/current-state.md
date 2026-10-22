@@ -5,16 +5,15 @@
 ---
 
 ## 1. Tâche Actuelle
-- **Objectif** : Restructuration de la racine du kit (confinement dans `.agent/`) et standard Client/Server/Admin avec dossier `shared/`.
-- **Branche Active** : `feature/restructuration-racine-et-shared`.
+- **Objectif** : Formalisation du protocole de cadrage contradictoire (grill-me) dans le Core et la checklist d'architecture.
+- **Branche Active** : `feature/cadrage-contradictoire-grill`.
 
 ## 2. Actions Complétées
-- [x] Confinement propre sous `.agent/` de `guides/`, `checklists/` et `stacks/`. La racine est désormais épurée.
-- [x] Création de `.agent/stacks/client-server-admin.md` : contrat partagé Zod, alias `@shared`, zéro URL en dur.
-- [x] Mise à jour des références dans `core/RULES.md` et régénération déterministe des adapters via `build-adapters.py`.
-- [x] Adaptation de `install.sh`, `scripts/test-kit.sh` et `scripts/run-evals.py` pour valider les nouveaux chemins.
-- [x] Formalisation de l'ADR `docs/decisions/0005-restructuration-racine-et-client-server-admin.md`.
-- [x] Banc d'intégrité `./scripts/test-kit.sh` (8/8 SUCCÈS) et banc `run-evals.py` (4/4 PASS) validés sans émoji ni slop.
+- [x] Ajout de l'injonction de cadrage contradictoire préalable dans `core/RULES.md` (Phase 2).
+- [x] Régénération déterministe de l'ensemble des adapters via `scripts/build-adapters.py`.
+- [x] Intégration de la section "Protocole de Cadrage Contradictoire" dans `.agent/checklists/01-architecture-et-conception.md`.
+- [x] Consignation de l'ADR `docs/decisions/0005-cadrage-contradictoire-grill-me.md`.
+- [x] Validation intégrale du harnais de test `./scripts/test-kit.sh` (8/8 SUCCÈS).
 
 ## 3. Prochaine Étape
-- Validation finale, commit sur `feature/restructuration-racine-et-shared` et fusion propre (`--no-ff`) sur `developp`.
+- Validation finale par l'utilisateur, commit sur la branche et fusion `--no-ff` sur `developp`.
