@@ -34,6 +34,7 @@ Ces règles sont indépendantes des préférences personnelles d'un développeur
 - **Évaluer les impacts** : Identifier les modules, tests ou contrats d'API impactés par le changement envisagé.
 
 ### Phase 2 : Planification & Arbitrage Architectural
+- **Cadrage contradictoire préalable** : Sur tout sujet complexe ou ambigu, interviewer l'utilisateur (questions courtes, résolution des zones d'ombre et du hors-périmètre) avant d'écrire du code.
 - Privilégier la solution la plus simple, lisible et découplée (YAGNI, KISS).
 - Vérifier la conformité aux principes SOLID et à la séparation des responsabilités (domaine métier / transport / persistance).
 - Prévoir la gestion des cas limites (*edge cases*) : valeurs nulles/undefined, timeouts réseau, pannes de services tiers, permissions non accordées.
