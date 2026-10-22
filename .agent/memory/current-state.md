@@ -5,15 +5,15 @@
 ---
 
 ## 1. Tâche Actuelle
-- **Objectif** : Formalisation du protocole de cadrage contradictoire (grill-me) dans le Core et la checklist d'architecture.
-- **Branche Active** : `feature/cadrage-contradictoire-grill`.
+- **Objectif** : Fusion du conseil d'arbitrage d'architecture et du cadrage contradictoire sur developp.
+- **Branche Active** : `developp`.
 
 ## 2. Actions Complétées
-- [x] Ajout de l'injonction de cadrage contradictoire préalable dans `core/RULES.md` (Phase 2).
-- [x] Régénération déterministe de l'ensemble des adapters via `scripts/build-adapters.py`.
-- [x] Intégration de la section "Protocole de Cadrage Contradictoire" dans `.agent/checklists/01-architecture-et-conception.md`.
-- [x] Consignation de l'ADR `docs/decisions/0005-cadrage-contradictoire-grill-me.md`.
-- [x] Validation intégrale du harnais de test `./scripts/test-kit.sh` (8/8 SUCCÈS).
+- [x] Confinement de `decision-council.md` sous `.agent/guides/`.
+- [x] Intégration du conseil d'arbitrage et du mot-clé ("passe au conseil") dans `core/RULES.md` et `.agent/guides/decision-council.md`.
+- [x] Ajout du script garde-fou `scripts/check-decision-gate.py` et intégration dans `scripts/test-kit.sh`.
+- [x] Numérotation séquentielle des ADR (0005 pour le conseil d'arbitrage, 0006 pour le cadrage contradictoire).
+- [x] Synchronisation déterministe des adapters via `scripts/build-adapters.py`.
 
 ## 3. Prochaine Étape
-- Validation finale par l'utilisateur, commit sur la branche et fusion `--no-ff` sur `developp`.
+- Validation finale du banc de tests `./scripts/test-kit.sh` et finalisation du commit de merge.

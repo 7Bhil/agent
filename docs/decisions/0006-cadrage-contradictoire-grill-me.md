@@ -1,4 +1,4 @@
-# ADR 0005 : Intégration du Cadrage Contradictoire (Grill-Me) dans la Phase de Conception
+# ADR 0006 : Intégration du Cadrage Contradictoire (Grill-Me) dans la Phase de Conception
 
 - **Statut** : Accepté
 - **Date** : 2026-10-22

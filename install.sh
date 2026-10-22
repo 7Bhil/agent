@@ -186,6 +186,7 @@ safe_deploy_file "scripts/audit-slop.py" "scripts/audit-slop.py"
 safe_deploy_file "scripts/setup-git-hooks.sh" "scripts/setup-git-hooks.sh"
 safe_deploy_file "scripts/test-kit.sh" "scripts/test-kit.sh"
 safe_deploy_file "scripts/build-adapters.py" "scripts/build-adapters.py"
+safe_deploy_file "scripts/check-decision-gate.py" "scripts/check-decision-gate.py"
 safe_deploy_file "scripts/run-evals.py" "scripts/run-evals.py"
 
 # 9. Bancs d'Évaluation Déterministe (Agent Evals)
