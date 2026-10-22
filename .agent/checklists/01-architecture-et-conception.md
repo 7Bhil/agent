@@ -1,8 +1,24 @@
 # Checklist 01 : Architecture Logicielle & Conception de Systèmes
 
-*Sources d'inspiration : `references/system-design-primer`, `references/bulletproof-react`*
+*Sources d'inspiration : `references/system-design-primer`, `references/bulletproof-react`, `mattpocock/skills`*
 
 Cette checklist permet de s'assurer que chaque décision de conception respecte les standards d'évolutivité, de découplage et de maintenabilité à long terme.
+
+---
+
+## 0. Protocole de Cadrage Contradictoire (Grill-Me & Alignement Préalable)
+
+Avant d'écrire la moindre ligne de code sur une fonctionnalité ou un refactoring non trivial :
+
+- [ ] **Phase d'Interview Ciblée (Interdiction de coder à l'aveugle)** :
+  - L'agent pose des questions courtes et ciblées (1 à 3 questions maximum par échange) pour clarifier l'intention réelle, les contraintes et les non-dits.
+  - Identification formelle du périmètre d'exclusion (*out of scope*) : ce que la fonctionnalité **ne doit pas** faire.
+- [ ] **Résolution des Branches de Décision & Cas Limites** :
+  - Clarification du modèle de données, des états limites (timeout, déconnexion, permissions manquantes, conflits de concurrence).
+  - Validation des termes du domaine métier (ubiquitous language) pour bannir les ambiguïtés sémantiques.
+- [ ] **Alignement & Enregistrement des Arbitrages** :
+  - Résumé d'alignement validé par l'utilisateur avant le passage à l'implémentation.
+  - Consignation immédiate d'un ADR dans `docs/decisions/` si le choix impacte l'architecture, les dépendances ou les contrats structurants.
 
 ---
 

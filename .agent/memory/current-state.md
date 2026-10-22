@@ -5,16 +5,15 @@
 ---
 
 ## 1. Tâche Actuelle
-- **Objectif** : Restructuration de la racine du kit (confinement dans `.agent/`) et standard Client/Server/Admin avec dossier `shared/`.
-- **Branche Active** : `feature/restructuration-racine-et-shared`.
+- **Objectif** : Fusion du conseil d'arbitrage d'architecture et du cadrage contradictoire sur developp.
+- **Branche Active** : `developp`.
 
 ## 2. Actions Complétées
-- [x] Confinement propre sous `.agent/` de `guides/`, `checklists/` et `stacks/`. La racine est désormais épurée.
-- [x] Création de `.agent/stacks/client-server-admin.md` : contrat partagé Zod, alias `@shared`, zéro URL en dur.
-- [x] Mise à jour des références dans `core/RULES.md` et régénération déterministe des adapters via `build-adapters.py`.
-- [x] Adaptation de `install.sh`, `scripts/test-kit.sh` et `scripts/run-evals.py` pour valider les nouveaux chemins.
-- [x] Formalisation de l'ADR `docs/decisions/0005-restructuration-racine-et-client-server-admin.md`.
-- [x] Banc d'intégrité `./scripts/test-kit.sh` (8/8 SUCCÈS) et banc `run-evals.py` (4/4 PASS) validés sans émoji ni slop.
+- [x] Confinement de `decision-council.md` sous `.agent/guides/`.
+- [x] Intégration du conseil d'arbitrage et du mot-clé ("passe au conseil") dans `core/RULES.md` et `.agent/guides/decision-council.md`.
+- [x] Ajout du script garde-fou `scripts/check-decision-gate.py` et intégration dans `scripts/test-kit.sh`.
+- [x] Numérotation séquentielle des ADR (0005 pour le conseil d'arbitrage, 0006 pour le cadrage contradictoire).
+- [x] Synchronisation déterministe des adapters via `scripts/build-adapters.py`.
 
 ## 3. Prochaine Étape
-- Validation finale, commit sur `feature/restructuration-racine-et-shared` et fusion propre (`--no-ff`) sur `developp`.
+- Validation finale du banc de tests `./scripts/test-kit.sh` et finalisation du commit de merge.
