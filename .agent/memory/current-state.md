@@ -5,15 +5,15 @@
 ---
 
 ## 1. Tâche Actuelle
-- **Objectif** : Fusion du conseil d'arbitrage d'architecture et du cadrage contradictoire sur developp.
-- **Branche Active** : `developp`.
+- **Objectif** : Intégration du pentesting automatisé dynamique via Strix (DAST).
+- **Branche Active** : `feature/integration-strix-securite-dynamique`.
 
 ## 2. Actions Complétées
-- [x] Confinement de `decision-council.md` sous `.agent/guides/`.
-- [x] Intégration du conseil d'arbitrage et du mot-clé ("passe au conseil") dans `core/RULES.md` et `.agent/guides/decision-council.md`.
-- [x] Ajout du script garde-fou `scripts/check-decision-gate.py` et intégration dans `scripts/test-kit.sh`.
-- [x] Numérotation séquentielle des ADR (0005 pour le conseil d'arbitrage, 0006 pour le cadrage contradictoire).
-- [x] Synchronisation déterministe des adapters via `scripts/build-adapters.py`.
+- [x] Création du workflow GitHub Actions de pentest dynamique `templates/.github/workflows/strix-security.yml`.
+- [x] Mise à jour du script de déploiement `install.sh` pour supporter Strix.
+- [x] Enrichissement de `.agent/guides/security-handbook.md` et `.agent/checklists/03-securite-applicative-et-api.md`.
+- [x] Rédaction et validation de l'ADR `docs/decisions/0007-integration-strix-dast.md`.
+- [x] Validation intégrale de la suite d'intégrité `./scripts/test-kit.sh` (9/9 SUCCÈS).
 
 ## 3. Prochaine Étape
-- Validation finale du banc de tests `./scripts/test-kit.sh` et finalisation du commit de merge.
+- Fusion propre (`--no-ff`) sur `developp` et push distant.

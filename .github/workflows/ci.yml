@@ -59,7 +59,7 @@ jobs:
       - name: Audit de Rédaction Technique & Détection Anti-Slop IA
         run: |
           if [ -f "scripts/audit-slop.py" ]; then
-            python3 scripts/audit-slop.py README.md guides/*.md checklists/*.md stacks/*.md
+            python3 scripts/audit-slop.py README.md .agent/guides/*.md .agent/checklists/*.md .agent/stacks/*.md
           fi
 
       - name: Contrôle de Parité des Instructions d'Agents (Racine vs Templates)

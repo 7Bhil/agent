@@ -1,0 +1,43 @@
+name: Strix Dynamic Security Scan
+
+on:
+  pull_request:
+    branches: [main, developp]
+  workflow_dispatch:
+
+jobs:
+  strix-scan:
+    name: Strix AI Penetration Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperation du code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verification du secret LLM
+        id: check-secret
+        run: |
+          if [ -z "${{ secrets.STRIX_LLM_API_KEY }}" ] && [ -z "${{ secrets.OPENAI_API_KEY }}" ] && [ -z "${{ secrets.ANTHROPIC_API_KEY }}" ]; then
+            echo "Avertissement: Aucune cle API LLM detectee pour Strix. Scan ignore en mode securise."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Installation de Strix CLI
+        if: steps.check-secret.outputs.skip == 'false'
+        run: |
+          curl -sSL https://strix.ai/install | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Execution du test d intrusion dynamique Strix
+        if: steps.check-secret.outputs.skip == 'false'
+        env:
+          STRIX_LLM: ${{ vars.STRIX_LLM || 'anthropic/claude-3-5-sonnet-20241022' }}
+          LLM_API_KEY: ${{ secrets.STRIX_LLM_API_KEY || secrets.ANTHROPIC_API_KEY || secrets.OPENAI_API_KEY }}
+        run: |
+          BASE_BRANCH="${{ github.base_ref }}"
+          DIFF_BASE="origin/${BASE_BRANCH:-developp}"
+          strix -n -t ./ --scan-mode quick --scope-mode diff --diff-base "$DIFF_BASE" --max-budget 10

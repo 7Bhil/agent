@@ -201,6 +201,7 @@ fi
 
 # 9. Intégration Continue (GitHub Actions & GitLab CI adaptées au client)
 safe_deploy_file "templates/.github/workflows/ci.yml" ".github/workflows/ci.yml"
+safe_deploy_file "templates/.github/workflows/strix-security.yml" ".github/workflows/strix-security.yml"
 safe_deploy_file "templates/.gitlab-ci.yml" ".gitlab-ci.yml"
 
 # 10. Gabarit Secrets, Config Débrayable & Semgrep

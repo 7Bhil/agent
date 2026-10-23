@@ -41,3 +41,12 @@
   - Cookies de session configurés avec les flags `HttpOnly`, `Secure`, `SameSite=Strict` ou `Lax`.
 - [ ] **Protection contre les attaques par force brute** :
   - Rate limiting sur les endpoints d'authentification (`/login`, `/register`, `/reset-password`).
+
+---
+
+## 4. Audit Dynamique & Pentesting Automatisé (Strix DAST)
+
+- [ ] **Détection proactive de Proof-of-Concept (PoC)** :
+  - Déclenchement automatique de tests d'intrusion dynamiques lors des pull requests (`strix-security.yml`).
+  - Validation que les failles de logique métier et d'autorisation BOLA sont testées dynamiquement avant mise en staging ou production.
+  - Résolution immédiate de tout PoC d'exploitation découvert sans ignorer les alertes critiques.
