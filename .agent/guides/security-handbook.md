@@ -160,3 +160,17 @@ app.use(cors({
   });
   ```
 - **Gestion des Secrets** : Valider toutes les variables d'environnement critiques au démarrage de l'application via un schéma (ex: `zod` ou `envalid`) et planter immédiatement si une variable manque (*Fail Fast*).
+
+---
+
+## 4. Tests d'Intrusion Dynamiques par Agents (Strix)
+
+En complément des analyses statiques (Semgrep, linters) qui analysent le code source à froid, un agent d'ingénierie senior intègre des tests d'intrusion dynamiques (DAST) via **Strix** :
+
+1. **Reconnaissance et exploitation réelle (PoC)** :
+   - Strix exécute des agents autonomes pour cartographier la surface d'attaque et valider concrètement l'exploitabilité des failles (BOLA, injection, CSRF) via des Proofs-of-Concept exécutables.
+2. **Exécution dans le cycle CI/CD (`.github/workflows/strix-security.yml`)** :
+   - Exécution ciblée sur le différentiel (`--scope-mode diff`) lors de chaque pull request.
+   - Isolation stricte des tests dans des environnements conteneurisés éphémères.
+3. **Traitement prioritaire** :
+   - Tout rapport généré sous `agent_runs/` avec une vulnérabilité confirmée doit être résolu avant la fusion du code sur `developp`.
