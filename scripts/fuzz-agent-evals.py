@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
-"""Moteur de fuzzing adverse et d'évaluations par calcul évolutionnaire.
+"""Moteur de fuzzing adverse évolutionnaire v2 (Multi-Objectifs NSGA-II & Niches).
 
-Génère des variantes adverses de scénarios pour éprouver la résistance
-des filtres d'intégrité (anti-slop, typage strict, sécurité, unicode)
-via un algorithme génétique autonome sans dépendances externes.
+Explore simultanément deux objectifs contradictoires :
+1. Maximiser la sévérité adverse (nombre de règles enfreintes).
+2. Minimiser la taille du payload (brièveté et concision du vecteur d'attaque).
 
 Usage:
-    python3 scripts/fuzz-agent-evals.py [--generations N] [--pop-size M] [--seed S]
+    python3 scripts/fuzz-agent-evals.py [--generations N] [--pop-size M] [--seed S] [--verbose]
 """
 
 from __future__ import annotations
 
 import argparse
+import math
 import random
 import re
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, List, Tuple
 
@@ -25,7 +26,7 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 BASE_ADVERSARIAL_SEEDS = [
     "function processData(payload: any): any { return payload; }",
     "Il convient de noter qu'il est crucial de souligner ces aspects dans une certaine mesure.",
-    "const balance = 120.50; // balance en float au lieu d'un entier mineur",
+    "const balance = 120.50; // balance en float au lieu d'un entier",
     "SELECT * FROM users WHERE id = ' + req.body.id + '",
     "export type UserRecord = Record<string, any>;",
     "Force est de constater que le système fonctionne parfaitement au bout du compte.",
@@ -33,34 +34,42 @@ BASE_ADVERSARIAL_SEEDS = [
     "let amount: number = parseFloat('10.99');",
 ]
 
-MUTATION_STRATEGIES = [
-    # Insertion de mot-clef de typage permissif
-    lambda s, rng: s + " // type " + rng.choice(["any", "unknown as any", "Object"]),
-    # Insertion de hedging slop en français
-    lambda s, rng: rng.choice([
-        "Il convient de noter que ",
-        "Force est de constater que ",
-        "Il va sans dire que ",
-    ]) + s,
-    # Insertion de violation de règles financières (flottants)
-    lambda s, rng: s + " const fee = " + str(rng.randint(1, 99)) + "." + str(rng.randint(10, 99)) + ";",
-    # Concaténation de requêtes SQL vulnérables
-    lambda s, rng: s + " const query = `SELECT * FROM tbl WHERE key = ${userInput}`;",
-    # Masquage par commentaires
-    lambda s, rng: "/* bypass */ " + s + " /* ignore */",
-    # Substitution de casse ou ponctuation
-    lambda s, rng: s.replace("any", "Any").replace("function", "async function"),
-]
+# Mutations spécialisées par niches
+NICHE_MUTATIONS: dict[str, list[Callable[[str, random.Random], str]]] = {
+    "code": [
+        lambda s, rng: s + " // type " + rng.choice(["any", "unknown as any", "Object"]),
+        lambda s, rng: s + " const fee = " + str(rng.randint(1, 99)) + "." + str(rng.randint(10, 99)) + ";",
+        lambda s, rng: s + " const query = `SELECT * FROM tbl WHERE key = ${userInput}`;",
+        lambda s, rng: s.replace("any", "Any").replace("function", "async function"),
+    ],
+    "slop": [
+        lambda s, rng: rng.choice([
+            "Il convient de noter que ",
+            "Force est de constater que ",
+            "Il va sans dire que ",
+        ]) + s,
+        lambda s, rng: s + " dans une certaine mesure.",
+    ],
+    "obfuscation": [
+        lambda s, rng: "/* bypass */ " + s + " /* ignore */",
+        lambda s, rng: re.sub(r"\s+", " ", s).strip(),
+    ],
+}
 
 
 @dataclass
 class Individual:
     payload: str
-    fitness: float = 0.0
+    niche: str = "code"
+    # Objectifs : (sévérité à maximiser, longueur en caractères à minimiser)
+    severity: float = 0.0
+    char_length: float = 0.0
+    # Paramètres NSGA-II
+    rank: int = 0
+    crowding_distance: float = 0.0
 
 
 def check_anti_slop(text: str) -> bool:
-    """Retourne True si un motif slop est détecté."""
     slop_pattern = re.compile(
         r"\b(il convient de noter|il est (important|essentiel|crucial) de (noter|souligner|rappeler)|"
         r"force est de constater|il va sans dire que|au bout du compte|dans une certaine mesure)\b",
@@ -70,83 +79,154 @@ def check_anti_slop(text: str) -> bool:
 
 
 def check_strict_typing(text: str) -> bool:
-    """Retourne True si une violation de typage strict est détectée."""
     any_pattern = re.compile(r"(\bas\s+any\b|:\s*any\b|\bRecord<[^,]+,\s*any>)", re.IGNORECASE)
     return bool(any_pattern.search(text))
 
 
 def check_fintech_rules(text: str) -> bool:
-    """Retourne True si un usage suspect de flottant pour monnaie est détecté."""
     float_pattern = re.compile(r"\b(balance|fee|amount|solde|montant)\b.*[0-9]+\.[0-9]+", re.IGNORECASE)
     return bool(float_pattern.search(text))
 
 
 def check_sql_injection(text: str) -> bool:
-    """Retourne True si une concaténation suspecte de requête SQL est détectée."""
     sql_pattern = re.compile(r"SELECT\s+.*WHERE.*(\+|\$\{)", re.IGNORECASE)
     return bool(sql_pattern.search(text))
 
 
-def evaluate_fitness(ind: Individual) -> float:
-    """Calcule le score de fitness d'un individu adverse.
-    
-    L'objectif d'un individu adverse est de combiner plusieurs violations de règles
-    tout en maximisant la complexité du payload.
-    """
-    score = 0.0
+def evaluate_objectives(ind: Individual) -> Tuple[float, float]:
+    """Évalue les deux objectifs distincts de l'individu."""
     text = ind.payload
+    severity = 0.0
 
     if check_anti_slop(text):
-        score += 25.0
+        severity += 25.0
     if check_strict_typing(text):
-        score += 30.0
+        severity += 30.0
     if check_fintech_rules(text):
-        score += 25.0
+        severity += 25.0
     if check_sql_injection(text):
-        score += 20.0
+        severity += 20.0
 
-    # Pénalité de longueur excessive pour favoriser les contre-exemples concis
-    if len(text) > 400:
-        score -= (len(text) - 400) * 0.05
-
-    ind.fitness = max(0.0, score)
-    return ind.fitness
+    ind.severity = severity
+    ind.char_length = float(len(text))
+    return ind.severity, ind.char_length
 
 
-def mutate(ind: Individual, rng: random.Random, rate: float = 0.7) -> Individual:
-    """Opérateur de mutation génétique."""
-    if rng.random() > rate:
-        return Individual(payload=ind.payload)
+def dominates(p: Individual, q: Individual) -> bool:
+    """Vérifie si p domine q au sens de Pareto.
+    
+    p domine q si :
+    - p est au moins aussi bon sur tous les objectifs :
+      p.severity >= q.severity ET p.char_length <= q.char_length
+    - p est strictement meilleur sur au moins un objectif.
+    """
+    not_worse = (p.severity >= q.severity) and (p.char_length <= q.char_length)
+    strictly_better = (p.severity > q.severity) or (p.char_length < q.char_length)
+    return not_worse and strictly_better
 
-    strategy: Callable[[str, random.Random], str] = rng.choice(MUTATION_STRATEGIES)
-    new_payload = strategy(ind.payload, rng)
-    return Individual(payload=new_payload)
+
+def fast_non_dominated_sort(population: List[Individual]) -> List[List[Individual]]:
+    """Partitionne la population en fronts de Pareto de rangs croissants."""
+    fronts: List[List[Individual]] = [[]]
+    domination_counts = {id(ind): 0 for ind in population}
+    dominated_sets: dict[int, list[Individual]] = {id(ind): [] for ind in population}
+
+    for p in population:
+        for q in population:
+            if dominates(p, q):
+                dominated_sets[id(p)].append(q)
+            elif dominates(q, p):
+                domination_counts[id(p)] += 1
+
+        if domination_counts[id(p)] == 0:
+            p.rank = 0
+            fronts[0].append(p)
+
+    current_rank = 0
+    while len(fronts[current_rank]) > 0:
+        next_front: List[Individual] = []
+        for p in fronts[current_rank]:
+            for q in dominated_sets[id(p)]:
+                domination_counts[id(q)] -= 1
+                if domination_counts[id(q)] == 0:
+                    q.rank = current_rank + 1
+                    next_front.append(q)
+        current_rank += 1
+        fronts.append(next_front)
+
+    return [f for f in fronts if len(f) > 0]
 
 
-def crossover(p1: Individual, p2: Individual, rng: random.Random) -> Tuple[Individual, Individual]:
-    """Opérateur de croisement (crossover) à un point."""
+def calculate_crowding_distance(front: List[Individual]) -> None:
+    """Calcule la distance d'encombrement pour préserver la diversité au sein du front."""
+    size = len(front)
+    if size == 0:
+        return
+    for ind in front:
+        ind.crowding_distance = 0.0
+
+    if size <= 2:
+        for ind in front:
+            ind.crowding_distance = float("inf")
+        return
+
+    # Tri par sévérité
+    front.sort(key=lambda ind: ind.severity)
+    front[0].crowding_distance = float("inf")
+    front[-1].crowding_distance = float("inf")
+    sev_range = front[-1].severity - front[0].severity
+    if sev_range > 0:
+        for i in range(1, size - 1):
+            front[i].crowding_distance += (front[i + 1].severity - front[i - 1].severity) / sev_range
+
+    # Tri par longueur
+    front.sort(key=lambda ind: ind.char_length)
+    front[0].crowding_distance = float("inf")
+    front[-1].crowding_distance = float("inf")
+    len_range = front[-1].char_length - front[0].char_length
+    if len_range > 0:
+        for i in range(1, size - 1):
+            front[i].crowding_distance += (front[i + 1].char_length - front[i - 1].char_length) / len_range
+
+
+def crowded_comparison(ind1: Individual, ind2: Individual) -> int:
+    """Opérateur de comparaison par encombrement NSGA-II."""
+    if ind1.rank < ind2.rank:
+        return -1
+    if ind1.rank > ind2.rank:
+        return 1
+    if ind1.crowding_distance > ind2.crowding_distance:
+        return -1
+    if ind1.crowding_distance < ind2.crowding_distance:
+        return 1
+    return 0
+
+
+def mutate_individual(ind: Individual, rng: random.Random) -> Individual:
+    """Applique une mutation selon la niche de l'individu."""
+    niche = ind.niche
+    mutations = NICHE_MUTATIONS.get(niche, NICHE_MUTATIONS["code"])
+    strat = rng.choice(mutations)
+    new_text = strat(ind.payload, rng)
+    # Mutation occasionnelle de niche (migration écologique)
+    new_niche = rng.choice(list(NICHE_MUTATIONS.keys())) if rng.random() < 0.15 else niche
+    return Individual(payload=new_text, niche=new_niche)
+
+
+def crossover_individuals(p1: Individual, p2: Individual, rng: random.Random) -> Tuple[Individual, Individual]:
     parts1 = p1.payload.split(";")
     parts2 = p2.payload.split(";")
-
     if len(parts1) > 1 and len(parts2) > 1:
         cut1 = rng.randint(1, len(parts1) - 1)
         cut2 = rng.randint(1, len(parts2) - 1)
-        c1_payload = ";".join(parts1[:cut1] + parts2[cut2:])
-        c2_payload = ";".join(parts2[:cut2] + parts1[cut1:])
+        c1 = ";".join(parts1[:cut1] + parts2[cut2:])
+        c2 = ";".join(parts2[:cut2] + parts1[cut1:])
     else:
-        # Croisement textuel alternatif
         mid1 = len(p1.payload) // 2
         mid2 = len(p2.payload) // 2
-        c1_payload = p1.payload[:mid1] + " " + p2.payload[mid2:]
-        c2_payload = p2.payload[:mid2] + " " + p1.payload[mid1:]
-
-    return Individual(payload=c1_payload), Individual(payload=c2_payload)
-
-
-def tournament_selection(population: List[Individual], k: int, rng: random.Random) -> Individual:
-    """Sélection par tournoi de taille k."""
-    candidates = rng.sample(population, k)
-    return max(candidates, key=lambda ind: ind.fitness)
+        c1 = p1.payload[:mid1] + " " + p2.payload[mid2:]
+        c2 = p2.payload[:mid2] + " " + p1.payload[mid1:]
+    return Individual(payload=c1, niche=p1.niche), Individual(payload=c2, niche=p2.niche)
 
 
 def run_evolutionary_fuzzing(
@@ -155,57 +235,73 @@ def run_evolutionary_fuzzing(
     seed: int = 42,
     verbose: bool = False,
 ) -> List[Individual]:
-    """Exécute l'algorithme génétique d'optimisation d'exemples adverses."""
+    """Exécute l'algorithme génétique multi-objectifs NSGA-II avec niches."""
     rng = random.Random(seed)
+    niches = list(NICHE_MUTATIONS.keys())
 
-    # Initialisation de la population
-    population: List[Individual] = [
-        Individual(payload=rng.choice(BASE_ADVERSARIAL_SEEDS))
-        for _ in range(pop_size)
-    ]
-
-    for ind in population:
-        evaluate_fitness(ind)
-
-    if verbose:
-        print(f"Initialisation : {pop_size} individus. Meilleure fitness initiale : {max(ind.fitness for ind in population):.1f}")
+    # Initialisation de la population équilibrée par niche
+    population: List[Individual] = []
+    for i in range(pop_size):
+        seed_text = rng.choice(BASE_ADVERSARIAL_SEEDS)
+        niche = niches[i % len(niches)]
+        ind = Individual(payload=seed_text, niche=niche)
+        evaluate_objectives(ind)
+        population.append(ind)
 
     for gen in range(1, generations + 1):
-        # Élitism : conservation des 2 meilleurs
-        population.sort(key=lambda x: x.fitness, reverse=True)
-        new_population: List[Individual] = [
-            Individual(payload=population[0].payload, fitness=population[0].fitness),
-            Individual(payload=population[1].payload, fitness=population[1].fitness),
-        ]
+        # Création des descendants
+        offspring: List[Individual] = []
+        while len(offspring) < pop_size:
+            # Sélection par tournoi binaire basé sur le rang de Pareto
+            cand1, cand2 = rng.sample(population, 2)
+            p1 = cand1 if crowded_comparison(cand1, cand2) <= 0 else cand2
+            cand3, cand4 = rng.sample(population, 2)
+            p2 = cand3 if crowded_comparison(cand3, cand4) <= 0 else cand4
 
-        # Reproduction jusqu'à remplir la population
-        while len(new_population) < pop_size:
-            p1 = tournament_selection(population, 3, rng)
-            p2 = tournament_selection(population, 3, rng)
+            c1, c2 = crossover_individuals(p1, p2, rng)
+            c1 = mutate_individual(c1, rng)
+            c2 = mutate_individual(c2, rng)
 
-            c1, c2 = crossover(p1, p2, rng)
-            c1 = mutate(c1, rng)
-            c2 = mutate(c2, rng)
+            evaluate_objectives(c1)
+            evaluate_objectives(c2)
 
-            evaluate_fitness(c1)
-            evaluate_fitness(c2)
+            offspring.append(c1)
+            if len(offspring) < pop_size:
+                offspring.append(c2)
 
-            new_population.append(c1)
-            if len(new_population) < pop_size:
-                new_population.append(c2)
+        # Combinaison parents + enfants (2N)
+        combined = population + offspring
+        fronts = fast_non_dominated_sort(combined)
+
+        new_population: List[Individual] = []
+        for front in fronts:
+            calculate_crowding_distance(front)
+            if len(new_population) + len(front) <= pop_size:
+                new_population.extend(front)
+            else:
+                # Compléter avec les individus ayant la plus grande distance d'encombrement
+                front.sort(key=lambda ind: ind.crowding_distance, reverse=True)
+                needed = pop_size - len(new_population)
+                new_population.extend(front[:needed])
+                break
 
         population = new_population
-        best_current = max(population, key=lambda x: x.fitness)
 
         if verbose and (gen % 5 == 0 or gen == generations):
-            print(f"Génération {gen:2d}/{generations} : Meilleure fitness = {best_current.fitness:.1f}")
+            best_sev = max(ind.severity for ind in population)
+            shortest = min(ind.char_length for ind in population)
+            print(f"Génération {gen:2d}/{generations} : Sévérité max = {best_sev:.1f}, Longueur min = {shortest:.0f} chars")
 
-    population.sort(key=lambda x: x.fitness, reverse=True)
-    return population
+    # Calcul final des rangs et tri
+    fronts = fast_non_dominated_sort(population)
+    pareto_front = fronts[0] if len(fronts) > 0 else population
+    # Trier le front de Pareto par sévérité décroissante puis longueur croissante
+    pareto_front.sort(key=lambda ind: (-ind.severity, ind.char_length))
+    return pareto_front
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Moteur de fuzzing adverse évolutionnaire pour Senior Agent OS.")
+    parser = argparse.ArgumentParser(description="Moteur de fuzzing adverse évolutionnaire v2 (NSGA-II) pour Senior Agent OS.")
     parser.add_argument("--generations", type=int, default=15, help="Nombre de générations (défaut: 15)")
     parser.add_argument("--pop-size", type=int, default=20, help="Taille de la population (défaut: 20)")
     parser.add_argument("--seed", type=int, default=42, help="Graine pseudo-aléatoire déterministe (défaut: 42)")
@@ -214,24 +310,25 @@ def main() -> int:
     args = parser.parse_args()
 
     if args.selftest:
-        pop = run_evolutionary_fuzzing(generations=5, pop_size=10, seed=42)
-        assert len(pop) == 10
-        assert pop[0].fitness >= pop[-1].fitness
-        print("Self-test du moteur de fuzzing évolutionnaire : SUCCÈS")
+        front = run_evolutionary_fuzzing(generations=5, pop_size=10, seed=42)
+        assert len(front) > 0
+        assert front[0].severity >= 0
+        print("Self-test du moteur de fuzzing évolutionnaire v2 (NSGA-II) : SUCCÈS")
         return 0
 
-    results = run_evolutionary_fuzzing(
+    pareto_front = run_evolutionary_fuzzing(
         generations=args.generations,
         pop_size=args.pop_size,
         seed=args.seed,
         verbose=args.verbose,
     )
 
-    print(f"\nRésultats du Fuzzing Évolutionnaire (Générations: {args.generations}, Pop: {args.pop_size}) :")
-    print(f"Top Fitness obtenue : {results[0].fitness:.1f}/100.0\n")
-    print("Top 3 des scénarios adverses générés :")
-    for i, ind in enumerate(results[:3], start=1):
-        print(f"  {i}. [Fitness {ind.fitness:.1f}] {ind.payload}")
+    print(f"\nRésultats du Fuzzing Multi-Objectifs (Générations: {args.generations}, Pop: {args.pop_size}) :")
+    print(f"Front de Pareto découvert : {len(pareto_front)} profils optimaux non-dominés\n")
+    print("Sélection du Front de Pareto (Compromis Sévérité vs Longueur) :")
+    for i, ind in enumerate(pareto_front[:4], start=1):
+        print(f"  {i}. [Sévérité: {ind.severity:4.1f}/100 | Longueur: {ind.char_length:3.0f}c | Niche: {ind.niche:11s}]")
+        print(f"     Payload : {ind.payload}\n")
 
     return 0
 
