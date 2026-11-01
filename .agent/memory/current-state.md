@@ -5,15 +5,14 @@
 ---
 
 ## 1. Tâche Actuelle
-- **Objectif** : Intégration du pentesting automatisé dynamique via Strix (DAST).
-- **Branche Active** : `feature/integration-strix-securite-dynamique`.
+- **Objectif** : Intégration du calcul évolutionnaire dans le Senior Agent OS.
+- **Périmètre** : Fuzzing adverse, guide d'ingénierie et optimiseur de prompts.
 
 ## 2. Actions Complétées
-- [x] Création du workflow GitHub Actions de pentest dynamique `templates/.github/workflows/strix-security.yml`.
-- [x] Mise à jour du script de déploiement `install.sh` pour supporter Strix.
-- [x] Enrichissement de `.agent/guides/security-handbook.md` et `.agent/checklists/03-securite-applicative-et-api.md`.
-- [x] Rédaction et validation de l'ADR `docs/decisions/0007-integration-strix-dast.md`.
-- [x] Validation intégrale de la suite d'intégrité `./scripts/test-kit.sh` (9/9 SUCCÈS).
+- [x] Moteur de fuzzing évolutionnaire adverse `scripts/fuzz-agent-evals.py` implémenté et testé.
+- [x] Guide d'ingénierie senior `.agent/guides/evolutionary-computation.md` créé (patterns TS/Python déterministes).
+- [x] Optimiseur génétique de prompts/règles `scripts/optimize-prompts-ea.py` implémenté et testé.
+- [x] Intégration de la suite évolutionnaire dans `./scripts/test-kit.sh` (10/10 SUCCÈS au vert).
 
 ## 3. Prochaine Étape
-- Fusion propre (`--no-ff`) sur `developp` et push distant.
+- Définition de scénarios d'application métier ou de règles spécifiques complémentaires si souhaité.

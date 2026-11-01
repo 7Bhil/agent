@@ -173,6 +173,13 @@ test_agent_evals() {
 }
 check_test "Exécution et conformité du banc d'évaluations (run-evals.py)" test_agent_evals
 
+# 8. Test du Moteur de Fuzzing et d'Optimisation Évolutionnaire
+test_evolutionary_suite() {
+  python3 scripts/fuzz-agent-evals.py --selftest >/dev/null 2>&1 && \
+  python3 scripts/optimize-prompts-ea.py --selftest >/dev/null 2>&1
+}
+check_test "Intégrité de la suite de calcul évolutionnaire (fuzzing & optimiseur)" test_evolutionary_suite
+
 echo "---------------------------------------------------------"
 if [ $FAILED -eq 0 ]; then
   echo -e "${GREEN}${BOLD}Tous les tests d'intégrité sont validés au vert.${RESET}"
